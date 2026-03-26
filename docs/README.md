@@ -20,7 +20,7 @@ If your followed all the given instructions correctly, your repository will be a
 A HTML template integrated with the given GitHub repository templates, based on github.com/cepdnaclk/eYY-project-theme . If you like to remove this default theme and make your own web page, you can remove the file, docs/_config.yml and create the site using HTML. -->
 
 # Project Title
-
+Digital Student ID Using Soulbound Tokens
 ---
 
 ## Team
@@ -238,8 +238,8 @@ Each Soulbound Token includes:
 
 ## Links
 
-- [Project Repository](https://github.com/cepdnaclk/e23-co2060-University-Digital-ID-sbt/{{ page.repository-name }}){:target="_blank"}
-- [Project Page](https://cepdnaclk.github.io/{{ page.repository-name}}){:target="_blank"}
+- [Project Repository](https://github.com/cepdnaclk/e23-co2060-University-Digital-ID-sbt/)
+- [Project Page](https://cepdnaclk.github.io/)
 - [Department of Computer Engineering](http://www.ce.pdn.ac.lk/)
 - [University of Peradeniya](https://eng.pdn.ac.lk/)
 
