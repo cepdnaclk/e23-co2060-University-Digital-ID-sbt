@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Admin Requests</title>
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-inner">
+    <span>University Digital Identity Prototype</span>
+    <span>Faculty of Engineering | Blockchain MVP</span>
+  </div>
+</div>
+<header class="site-header">
+  <nav class="navbar">
+    <a class="brand" href="../index.html">
+      <div class="brand-mark">PS</div>
+      <div class="brand-text">
+        <strong>PeraSoul</strong>
+        <span>Digital Student Identity</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="about.html">University</a>
+      <a href="contact.html">Contact</a>
+      <a href="feedback.html">Feedback</a>
+      <a href="student-register.html">Register</a>
+      <a href="student-login.html">Student Login</a>
+      <a class="btn btn-primary" href="admin-login.html">Admin Login</a>
+    </div>
+  </nav>
+</header>
+
+
+<section class="page-hero"><div class="page-hero-inner"><h1>Student Requests</h1><p>Review token issuance requests, wallet change requests, and complaints separately.</p></div></section>
+<main class="dashboard-wrap">
+
+<aside class="sidebar">
+  <div class="sidebar-title">Admin Panel</div>
+  <a href="admin-dashboard.html">📊 Overview</a>
+  <a href="admin-mint.html">🪪 Mint Token</a>
+  <a href="admin-temporary-revoke.html">⏳ Temporary Revoke</a>
+  <a href="admin-burn.html">🔥 Permanent Burn</a>
+  <a href="admin-replace-wallet.html">🔁 Replace Wallet</a>
+  <a href="admin-requests.html">📥 Requests</a>
+  <a href="../index.html">🚪 Logout</a>
+</aside>
+
+<section class="dashboard-main">
+  <a class="btn btn-outline back-link" href="admin-dashboard.html">← Back to Admin Dashboard</a>
+
+  <div class="grid grid-3">
+    <a class="card link-card" href="#token-requests"><h2>Token Requests</h2><p>Review student token issuance requests.</p></a>
+    <a class="card link-card" href="#wallet-requests"><h2>Wallet Requests</h2><p>Review student wallet replacement requests.</p></a>
+    <a class="card link-card" href="#complaints"><h2>Complaints</h2><p>Review complaints and support issues.</p></a>
+  </div>
+
+  <div id="token-requests" class="card">
+    <h2>Token Issuance Requests</h2>
+    <div class="table-wrap"><table class="table">
+      <tr><th>ID</th><th>Student</th><th>Wallet</th><th>Status</th><th>Action</th></tr>
+      <tr><td>REQ-T-1001</td><td>E/23/054</td><td>0x7428...</td><td><span class="badge badge-warning">Pending</span></td><td><button class="btn btn-primary">Approve</button></td></tr>
+    </table></div>
+  </div>
+
+  <div id="wallet-requests" class="card">
+    <h2>Wallet Change Requests</h2>
+    <div class="table-wrap"><table class="table">
+      <tr><th>ID</th><th>Student</th><th>Old Wallet</th><th>New Wallet</th><th>Action</th></tr>
+      <tr><td>REQ-W-1002</td><td>E/23/071</td><td>0x111...</td><td>0x222...</td><td><button class="btn btn-primary">Review</button></td></tr>
+    </table></div>
+  </div>
+
+  <div id="complaints" class="card">
+    <h2>Complaints</h2>
+    <div class="table-wrap"><table class="table">
+      <tr><th>ID</th><th>Student</th><th>Type</th><th>Status</th><th>Action</th></tr>
+      <tr><td>REQ-C-1003</td><td>E/23/101</td><td>Profile issue</td><td><span class="badge badge-success">Reviewed</span></td><td><button class="btn btn-outline">View</button></td></tr>
+    </table></div>
+  </div>
+</section>
+</main>
+
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <h3>PeraSoul Digital ID</h3>
+      <p>A university digital identity MVP using wallet-based authentication and Soulbound Token concepts.</p>
+    </div>
+    <div>
+      <h3>Quick Links</h3>
+      <p><a href="student-register.html">Student Registration</a></p>
+      <p><a href="student-login.html">Student Login</a></p>
+      <p><a href="admin-login.html">Administrator Login</a></p>
+    </div>
+    <div>
+      <h3>Project Status</h3>
+      <p>MVP prototype interface</p>
+      <p>Smart contract integration planned</p>
+    </div>
+  </div>
+  <div class="footer-bottom">PeraSoul Digital Identity System - MVP Prototype</div>
+</footer>
+<script src="../js/main.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+<script src="../js/blockchain.js"></script>
+
+</body>
+</html>

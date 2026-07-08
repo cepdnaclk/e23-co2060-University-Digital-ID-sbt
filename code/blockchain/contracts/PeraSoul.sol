@@ -43,7 +43,7 @@ contract PeraSoul is ERC721, ERC721Burnable, Ownable {
     }
 
     function burn(address _student) external onlyOwner validStudent(_student) {
-        require(hasToken[_student],"Token Not Found");
+        require(hasToken[_student]==true,"Token Not Found");
 
         uint256 tokenId=studentToken[_student];
         hasToken[_student]=false;

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>PeraSoul Digital Identity</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <span>University Digital Identity Prototype</span>
+    <span>Faculty of Engineering | Blockchain MVP</span>
+  </div>
+</div>
+<header class="site-header">
+  <nav class="navbar">
+    <a class="brand" href="index.html">
+      <div class="brand-mark">PS</div>
+      <div class="brand-text">
+        <strong>PeraSoul</strong>
+        <span>Digital Student Identity</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="pages/about.html">University</a>
+      <a href="pages/contact.html">Contact</a>
+      <a href="pages/feedback.html">Feedback</a>
+      <a href="pages/student-register.html">Register</a>
+      <a href="pages/student-login.html">Student Login</a>
+      <a class="btn btn-primary" href="pages/admin-login.html">Admin Login</a>
+    </div>
+  </nav>
+</header>
+
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <span class="eyebrow">Blockchain-based university identity platform</span>
+      <h1>Secure student identity through Soulbound Tokens</h1>
+      <p>PeraSoul is an MVP digital identity system that connects a student's university profile with a blockchain wallet. It supports wallet-based login, token verification, QR identity checks, and administrator-controlled student identity management.</p>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="pages/student-register.html">Register as Student</a>
+        <a class="btn btn-outline" href="pages/student-login.html">Student Login</a>
+        <a class="btn btn-dark" href="pages/admin-login.html">Administrator Portal</a>
+      </div>
+    </div>
+
+    <div class="hero-panel">
+      <div class="id-card">
+        <div class="id-card-header">
+          <strong>PeraSoul Student ID</strong>
+          <span class="badge badge-success">Verified</span>
+        </div>
+        <div class="id-card-body">
+          <div class="avatar">🎓</div>
+          <h3>Demo Student</h3>
+          <p style="color:var(--muted); margin-bottom:16px;">Faculty of Engineering</p>
+          <div class="id-row"><span>Student ID</span><strong>E/23/054</strong></div>
+          <div class="id-row"><span>Token Type</span><strong>ERC721 SBT</strong></div>
+          <div class="id-row"><span>Wallet</span><strong>0x7428...A91B</strong></div>
+          <div class="id-row"><span>Status</span><strong>Active</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main>
+  <section class="container">
+    <div class="section-head">
+      <div class="section-label">System Features</div>
+      <h2 class="section-title">A realistic MVP flow for student identity management</h2>
+      <p class="section-text">This prototype demonstrates the pages and workflows required for student registration, wallet login, admin actions, token requests, QR verification, and complaint handling.</p>
+    </div>
+
+    <div class="grid grid-4">
+      <a class="card feature-card link-card" href="pages/student-register.html"><div class="feature-icon">🎓</div><h3>Student Registration</h3><p>Students submit basic details and connect a wallet to their profile.</p></a>
+      <div class="card feature-card"><div class="feature-icon">🔐</div><h3>Wallet Login</h3><p>Authentication is designed around wallet verification instead of password storage.</p></div>
+      <a class="card feature-card link-card" href="pages/admin-dashboard.html"><div class="feature-icon">🪪</div><h3>Soulbound Token</h3><p>Admin issues a non-transferable ERC721 identity token to the student wallet.</p></a>
+      <a class="card feature-card link-card" href="pages/student-qr.html"><div class="feature-icon">📱</div><h3>QR Verification</h3><p>Students can generate a QR preview for identity verification workflows.</p></a>
+    </div>
+  </section>
+
+  <section class="container">
+    <div class="section-head">
+      <div class="section-label">Workflow</div>
+      <h2 class="section-title">How the MVP is expected to work</h2>
+    </div>
+    <div class="grid grid-3 workflow">
+      <div class="card step-card"><h3>Register</h3><p>Student fills basic information and connects a wallet address.</p></div>
+      <div class="card step-card"><h3>Review</h3><p>Administrator checks requests and issues the identity token.</p></div>
+      <div class="card step-card"><h3>Verify</h3><p>Student uses dashboard, token details, and QR verification features.</p></div>
+    </div>
+  </section>
+</main>
+
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <h3>PeraSoul Digital ID</h3>
+      <p>A university digital identity MVP using wallet-based authentication and Soulbound Token concepts.</p>
+    </div>
+    <div>
+      <h3>Quick Links</h3>
+      <p><a href="pages/student-register.html">Student Registration</a></p>
+      <p><a href="pages/student-login.html">Student Login</a></p>
+      <p><a href="pages/admin-login.html">Administrator Login</a></p>
+    </div>
+    <div>
+      <h3>Project Status</h3>
+      <p>MVP prototype interface</p>
+      <p>Smart contract integration planned</p>
+    </div>
+  </div>
+  <div class="footer-bottom">PeraSoul Digital Identity System - MVP Prototype</div>
+</footer>
+
+<script src="js/main.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+<script src="js/blockchain.js"></script>
+
+</body>
+</html>

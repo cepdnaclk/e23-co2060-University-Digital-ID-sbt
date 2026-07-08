@@ -51,6 +51,7 @@ contract PeraSoulManager is Ownable {
         uint256 tokenId = peraSoul.studentToken(student);
 
         permanentlyRevoked[tokenId] = true;
+        delete temporarilyRevokedUntil[tokenId];
 
         peraSoul.burn(student);
 
@@ -101,6 +102,8 @@ contract PeraSoulManager is Ownable {
     require(!peraSoul.hasToken(newWallet), "New wallet already has token");
 
     uint256 oldTokenId = peraSoul.studentToken(oldWallet);
+    permanentlyRevoked[oldTokenId]=true;
+    delete temporarilyRevokedUntil[oldTokenId];
 
     // Burn old token
     peraSoul.burn(oldWallet);

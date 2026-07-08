@@ -1,0 +1,6 @@
+{
+  "network": "sepolia",
+  "deployer": "0x74289cEC373F992C7f5fFEaC08656a7ee11eCb95",
+  "peraSoul": "0xB2E3d251ebdAfcFA53FE1e3459C378d6ae6D815a",
+  "peraSoulManager": "0xef6fbd44ade664a2eF9739011cF51219Ac97f212"
+}

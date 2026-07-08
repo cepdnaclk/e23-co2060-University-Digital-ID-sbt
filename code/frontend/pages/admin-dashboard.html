@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Admin Dashboard</title>
+<link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <span>University Digital Identity Prototype</span>
+    <span>Faculty of Engineering | Blockchain MVP</span>
+  </div>
+</div>
+<header class="site-header">
+  <nav class="navbar">
+    <a class="brand" href="../index.html">
+      <div class="brand-mark">PS</div>
+      <div class="brand-text">
+        <strong>PeraSoul</strong>
+        <span>Digital Student Identity</span>
+      </div>
+    </a>
+    <div class="nav-links">
+      <a href="../pages/about.html">University</a>
+      <a href="../pages/contact.html">Contact</a>
+      <a href="../pages/feedback.html">Feedback</a>
+      <a href="../pages/student-register.html">Register</a>
+      <a href="../pages/student-login.html">Student Login</a>
+      <a class="btn btn-primary" href="../pages/admin-login.html">Admin Login</a>
+    </div>
+  </nav>
+</header>
+
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <h1>Administrator Dashboard</h1>
+    <p>Manage identity tokens, review student requests, and control revocation workflows.</p>
+  </div>
+</section>
+
+<main class="dashboard-wrap">
+  <aside class="sidebar">
+    <div class="sidebar-title">Admin Panel</div>
+    <a href="admin-dashboard.html">📊 Overview</a>
+    <a href="admin-mint.html">🪪 Mint Token</a>
+    <a href="admin-temporary-revoke.html">⏳ Temporary Revoke</a>
+    <a href="admin-burn.html">🔥 Permanent Burn</a>
+    <a href="admin-replace-wallet.html">🔁 Replace Wallet</a>
+    <a href="admin-requests.html">📥 Requests</a>
+    <a href="../index.html">🚪 Logout</a>
+  </aside>
+
+  <section class="dashboard-main">
+    <div id="overview" class="dashboard-head">
+      <div>
+        <h1>University Identity Control Center</h1>
+        <p>Prototype interface for PeraSoulManager smart contract workflows.</p>
+      </div>
+      <span class="badge badge-blue">Admin Mode</span>
+    </div>
+
+    <div class="notice"><strong>MVP Notice:</strong> These controls currently demonstrate the workflow. Later they will call PeraSoulManager smart contract functions and backend APIs.</div>
+
+    <div class="grid grid-4">
+      <div class="metric-card"><small>Issued Tokens</small><h2>128</h2></div>
+      <div class="metric-card"><small>Pending Requests</small><h2>18</h2></div>
+      <div class="metric-card"><small>Temp Revoked</small><h2>04</h2></div>
+      <div class="metric-card"><small>Complaints</small><h2>07</h2></div>
+    </div>
+
+    <div class="grid grid-2">
+      <div id="mint" class="card">
+        <h2>Mint Student Token</h2>
+        <div class="form-group"><label>Student Wallet Address</label><input placeholder="0x..."></div>
+        <div class="form-group"><label>Student ID Reference</label><input placeholder="E/XX/000"></div>
+        <a class="btn btn-primary" href="admin-mint.html">Mint Token</a>
+      </div>
+
+      <div id="revoke" class="card">
+        <h2>Temporary Revoke</h2>
+        <div class="form-group"><label>Student Wallet Address</label><input placeholder="0x..."></div>
+        <div class="form-group"><label>Countdown Seconds</label><input id="countdownSeconds" type="number" placeholder="Example: 60"></div>
+        <a class="btn btn-dark" href="admin-temporary-revoke.html">Temporary Revoke</a>
+        <div id="countdownOutput" class="status">Countdown appears here.</div>
+      </div>
+
+      <div id="burn" class="card">
+        <h2>Permanent Revoke / Burn</h2>
+        <div class="form-group"><label>Student Wallet Address</label><input placeholder="0x..."></div>
+        <div class="form-group"><label>Reason</label><textarea placeholder="Reason for permanent revocation"></textarea></div>
+        <a class="btn btn-danger" href="admin-burn.html">Burn Token</a>
+      </div>
+
+      <div id="replace" class="card">
+        <h2>Replace Student Wallet</h2>
+        <div class="form-group"><label>Previous Wallet</label><input placeholder="Old wallet address"></div>
+        <div class="form-group"><label>New Wallet</label><input placeholder="New wallet address"></div>
+        <a class="btn btn-primary" href="admin-replace-wallet.html">Replace Wallet</a>
+      </div>
+    </div>
+
+    <div id="adminStatus" class="status">Admin action status appears here.</div>
+
+    <div id="requests" class="card">
+      <h2>Student Requests</h2>
+      <div class="table-wrap">
+        <table class="table">
+          <tr><th>Request ID</th><th>Type</th><th>Student</th><th>Status</th><th>Action</th></tr>
+          <tr><td>REQ-1001</td><td>Token Issuance</td><td>E/23/054</td><td><span class="badge badge-warning">Pending</span></td><td><a class="btn btn-outline" href="admin-requests.html">Review</a></td></tr>
+          <tr><td>REQ-1002</td><td>Wallet Change</td><td>E/23/071</td><td><span class="badge badge-warning">Pending</span></td><td><a class="btn btn-outline" href="admin-requests.html">Review</a></td></tr>
+          <tr><td>REQ-1003</td><td>Complaint</td><td>E/23/101</td><td><span class="badge badge-success">Reviewed</span></td><td><a class="btn btn-outline" href="admin-requests.html">View</a></td></tr>
+        </table>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <h3>PeraSoul Digital ID</h3>
+      <p>A university digital identity MVP using wallet-based authentication and Soulbound Token concepts.</p>
+    </div>
+    <div>
+      <h3>Quick Links</h3>
+      <p><a href="student-register.html">Student Registration</a></p>
+      <p><a href="student-login.html">Student Login</a></p>
+      <p><a href="admin-login.html">Administrator Login</a></p>
+    </div>
+    <div>
+      <h3>Project Status</h3>
+      <p>MVP prototype interface</p>
+      <p>Smart contract integration planned</p>
+    </div>
+  </div>
+  <div class="footer-bottom">PeraSoul Digital Identity System - MVP Prototype</div>
+</footer>
+
+<script src="../js/main.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
+<script src="../js/blockchain.js"></script>
+
+</body>
+</html>
