@@ -1,84 +1,191 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Registration Success</title>
-<link rel="stylesheet" href="../css/styles.css">
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Registration Submitted | PeraSoul</title>
+
+  <link rel="stylesheet" href="../css/styles.css">
 </head>
+
 <body>
 
 <div class="topbar">
   <div class="topbar-inner">
-    <span>University Digital Identity Prototype</span>
-    <span>Faculty of Engineering | Blockchain MVP</span>
+    <span>University Digital Identity System</span>
+    <span>Faculty of Engineering | Blockchain Prototype</span>
   </div>
 </div>
+
 <header class="site-header">
   <nav class="navbar">
+
     <a class="brand" href="../index.html">
       <div class="brand-mark">PS</div>
+
       <div class="brand-text">
         <strong>PeraSoul</strong>
         <span>Digital Student Identity</span>
       </div>
     </a>
+
     <div class="nav-links">
       <a href="../pages/about.html">University</a>
       <a href="../pages/contact.html">Contact</a>
       <a href="../pages/feedback.html">Feedback</a>
       <a href="../pages/student-register.html">Register</a>
       <a href="../pages/student-login.html">Student Login</a>
-      <a class="btn btn-primary" href="../pages/admin-login.html">Admin Login</a>
+
+      <a
+        class="btn btn-primary"
+        href="../pages/admin-login.html"
+      >
+        Admin Login
+      </a>
     </div>
+
   </nav>
 </header>
 
-
 <section class="page-hero">
   <div class="page-hero-inner">
+
     <h1>Registration Submitted</h1>
-    <p>Your registration has been submitted successfully in prototype mode.</p>
+
+    <p>
+      Your student registration has been saved successfully
+      and is waiting for university approval.
+    </p>
+
   </div>
 </section>
 
 <main class="container">
+
   <div class="card success-panel">
+
     <div class="success-icon">✓</div>
-    <h2>Student profile request created</h2>
-    <p>The university administrator will review your details and issue the Soulbound Token after verification.</p>
-    <br>
-    <a class="btn btn-primary" href="student-login.html">Go to Student Login</a>
-    <a class="btn btn-outline" href="../index.html">Back to Home</a>
+
+    <h2>Student registration request created</h2>
+
+    <p>
+      Your details have been submitted to the university administration.
+      Your account must be approved before you can request a digital
+      student identity token.
+    </p>
+
+    <div class="registration-summary">
+
+      <div class="summary-row">
+        <strong>Name</strong>
+        <span id="registeredStudentName">-</span>
+      </div>
+
+      <div class="summary-row">
+        <strong>Student Number</strong>
+        <span id="registeredStudentNumber">-</span>
+      </div>
+
+      <div class="summary-row">
+        <strong>Wallet Address</strong>
+        <span id="registeredStudentWallet">-</span>
+      </div>
+
+      <div class="summary-row">
+        <strong>User ID</strong>
+        <span id="registeredStudentId">-</span>
+      </div>
+
+      <div class="summary-row">
+        <strong>Account Status</strong>
+
+        <span
+          id="registeredStudentStatus"
+          class="badge badge-warning"
+        >
+          Pending
+        </span>
+      </div>
+
+    </div>
+
+    <div id="registrationSuccessMessage" class="status">
+      A university administrator will review your registration.
+    </div>
+
+    <div class="success-actions">
+
+      <a
+        class="btn btn-primary"
+        href="student-login.html"
+      >
+        Go to Student Login
+      </a>
+
+      <a
+        class="btn btn-outline"
+        href="../index.html"
+      >
+        Back to Home
+      </a>
+
+    </div>
+
   </div>
+
 </main>
 
-
 <footer class="footer">
+
   <div class="footer-inner">
+
     <div>
       <h3>PeraSoul Digital ID</h3>
-      <p>A university digital identity MVP using wallet-based authentication and Soulbound Token concepts.</p>
+
+      <p>
+        A blockchain-based university digital identity system
+        using wallet authentication and Soulbound Tokens.
+      </p>
     </div>
+
     <div>
       <h3>Quick Links</h3>
-      <p><a href="student-register.html">Student Registration</a></p>
-      <p><a href="student-login.html">Student Login</a></p>
-      <p><a href="admin-login.html">Administrator Login</a></p>
+
+      <p>
+        <a href="student-register.html">Student Registration</a>
+      </p>
+
+      <p>
+        <a href="student-login.html">Student Login</a>
+      </p>
+
+      <p>
+        <a href="admin-login.html">Administrator Login</a>
+      </p>
     </div>
+
     <div>
-      <h3>Project Status</h3>
-      <p>MVP prototype interface</p>
-      <p>Smart contract integration planned</p>
+      <h3>System Status</h3>
+
+      <p>Backend integration active</p>
+      <p>University approval required</p>
     </div>
+
   </div>
-  <div class="footer-bottom">PeraSoul Digital Identity System - MVP Prototype</div>
+
+  <div class="footer-bottom">
+    PeraSoul Digital Identity System
+  </div>
+
 </footer>
 
 <script src="../js/main.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
-<script src="../js/blockchain.js"></script>
+<script src="../js/registration-success.js"></script>
 
 </body>
 </html>

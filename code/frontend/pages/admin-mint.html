@@ -1,90 +1,319 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Mint Token</title>
-<link rel="stylesheet" href="../css/styles.css">
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Mint Student Token | PeraSoul</title>
+
+  <link rel="stylesheet" href="../css/styles.css">
 </head>
+
 <body>
+
 <div class="topbar">
   <div class="topbar-inner">
-    <span>University Digital Identity Prototype</span>
-    <span>Faculty of Engineering | Blockchain MVP</span>
+    <span>University Digital Identity System</span>
+    <span>Faculty of Engineering | Blockchain Prototype</span>
   </div>
 </div>
+
 <header class="site-header">
   <nav class="navbar">
+
     <a class="brand" href="../index.html">
       <div class="brand-mark">PS</div>
+
       <div class="brand-text">
         <strong>PeraSoul</strong>
         <span>Digital Student Identity</span>
       </div>
     </a>
+
     <div class="nav-links">
-      <a href="about.html">University</a>
-      <a href="contact.html">Contact</a>
-      <a href="feedback.html">Feedback</a>
-      <a href="student-register.html">Register</a>
-      <a href="student-login.html">Student Login</a>
-      <a class="btn btn-primary" href="admin-login.html">Admin Login</a>
+      <span id="loggedAdminName">Administrator</span>
+
+      <button
+        type="button"
+        id="topLogoutButton"
+        class="btn btn-outline"
+      >
+        Logout
+      </button>
     </div>
+
   </nav>
 </header>
 
+<section class="page-hero">
+  <div class="page-hero-inner">
 
-<section class="page-hero"><div class="page-hero-inner"><h1>Mint Student Token</h1><p>Issue a Soulbound Token to a verified student wallet.</p></div></section>
-<main class="dashboard-wrap">
+    <h1>Mint Student Token</h1>
 
-<aside class="sidebar">
-  <div class="sidebar-title">Admin Panel</div>
-  <a href="admin-dashboard.html">📊 Overview</a>
-  <a href="admin-mint.html">🪪 Mint Token</a>
-  <a href="admin-temporary-revoke.html">⏳ Temporary Revoke</a>
-  <a href="admin-burn.html">🔥 Permanent Burn</a>
-  <a href="admin-replace-wallet.html">🔁 Replace Wallet</a>
-  <a href="admin-requests.html">📥 Requests</a>
-  <a href="../index.html">🚪 Logout</a>
-</aside>
+    <p>
+      Review a pending token request and issue a Soulbound Token
+      to the approved student wallet.
+    </p>
 
-<section class="dashboard-main">
-  <a class="btn btn-outline back-link" href="admin-dashboard.html">← Back to Admin Dashboard</a>
-  <div class="card">
-    <h2>Mint Token Form</h2>
-    <div class="form-group"><label>Student Wallet Address</label><input placeholder="0x..."></div>
-    <div class="form-group"><label>Student ID Reference</label><input placeholder="E/XX/000"></div>
-    <button class="btn btn-primary" onclick="demoAction('mintStatus','Mint token')">Mint Token</button>
-    <div id="mintStatus" class="status">Mint status appears here.</div>
   </div>
 </section>
+
+<main class="dashboard-wrap">
+
+  <aside class="sidebar">
+
+    <div class="sidebar-title">
+      Admin Panel
+    </div>
+
+    <a href="admin-dashboard.html">
+      📊 Overview
+    </a>
+
+    <a
+      class="active"
+      href="admin-mint.html"
+    >
+      🪪 Mint Token
+    </a>
+
+    <a href="admin-temporary-revoke.html">
+      ⏳ Temporary Revoke
+    </a>
+
+    <a href="admin-burn.html">
+      🔥 Permanent Revoke
+    </a>
+
+    <a href="admin-replace-wallet.html">
+      🔁 Replace Wallet
+    </a>
+
+    <a href="admin-requests.html">
+      📥 Requests
+    </a>
+
+    <button
+      type="button"
+      id="sidebarLogoutButton"
+      class="sidebar-logout"
+    >
+      🚪 Logout
+    </button>
+
+  </aside>
+
+  <section class="dashboard-main">
+
+    <a
+      class="btn btn-outline back-link"
+      href="admin-dashboard.html"
+    >
+      ← Back to Admin Dashboard
+    </a>
+
+    <div
+      id="mintPageMessage"
+      class="status"
+      aria-live="polite"
+    >
+      Verifying administrator session...
+    </div>
+
+    <div class="grid grid-2">
+
+      <div class="card">
+
+        <div class="table-header">
+
+          <div>
+            <h2>Pending Token Requests</h2>
+
+            <p>
+              Select a pending request before minting the token.
+            </p>
+          </div>
+
+          <button
+            type="button"
+            id="refreshRequestsButton"
+            class="btn btn-outline"
+          >
+            Refresh
+          </button>
+
+        </div>
+
+        <div class="table-wrap">
+
+          <table class="table">
+
+            <thead>
+              <tr>
+                <th>Request ID</th>
+                <th>User ID</th>
+                <th>Wallet</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody id="mintRequestsTableBody">
+
+              <tr>
+                <td colspan="5">
+                  Loading pending token requests...
+                </td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+      <div class="card">
+
+        <h2>Selected Request</h2>
+
+        <div class="profile-table">
+
+          <div class="profile-row">
+            <strong>Request ID</strong>
+            <span id="selectedRequestId">-</span>
+          </div>
+
+          <div class="profile-row">
+            <strong>Student User ID</strong>
+            <span id="selectedStudentUserId">-</span>
+          </div>
+
+          <div class="profile-row">
+            <strong>Wallet Address</strong>
+
+            <span
+              id="selectedWalletAddress"
+              class="wallet-value"
+            >
+              -
+            </span>
+          </div>
+
+          <div class="profile-row">
+            <strong>Request Note</strong>
+            <span id="selectedRequestNote">-</span>
+          </div>
+
+          <div class="profile-row">
+            <strong>Request Status</strong>
+
+            <span
+              id="selectedRequestStatus"
+              class="badge badge-warning"
+            >
+              Not Selected
+            </span>
+          </div>
+
+        </div>
+
+        <button
+          type="button"
+          id="mintSelectedRequestButton"
+          class="btn btn-primary"
+          disabled
+        >
+          Approve and Mint Token
+        </button>
+
+        <div
+          id="mintStatus"
+          class="status"
+        >
+          Select a pending token request.
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <h2>Minting Process</h2>
+
+      <div class="info-list">
+
+        <div class="info-item">
+          The backend confirms that the request is still pending.
+        </div>
+
+        <div class="info-item">
+          The backend checks the student and wallet information.
+        </div>
+
+        <div class="info-item">
+          The technical wallet signs the Sepolia blockchain transaction.
+        </div>
+
+        <div class="info-item">
+          The smart contract issues a non-transferable Soulbound Token.
+        </div>
+
+        <div class="info-item">
+          The transaction hash and token status are saved in the database.
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
 </main>
 
-
 <footer class="footer">
+
   <div class="footer-inner">
+
     <div>
       <h3>PeraSoul Digital ID</h3>
-      <p>A university digital identity MVP using wallet-based authentication and Soulbound Token concepts.</p>
-    </div>
-    <div>
-      <h3>Quick Links</h3>
-      <p><a href="student-register.html">Student Registration</a></p>
-      <p><a href="student-login.html">Student Login</a></p>
-      <p><a href="admin-login.html">Administrator Login</a></p>
-    </div>
-    <div>
-      <h3>Project Status</h3>
-      <p>MVP prototype interface</p>
-      <p>Smart contract integration planned</p>
-    </div>
-  </div>
-  <div class="footer-bottom">PeraSoul Digital Identity System - MVP Prototype</div>
-</footer>
-<script src="../js/main.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
-<script src="../js/blockchain.js"></script>
+      <p>
+        A blockchain-based university digital student identity system.
+      </p>
+    </div>
+
+    <div>
+      <h3>Administrator Features</h3>
+
+      <p>Student approval</p>
+      <p>Token request management</p>
+      <p>Blockchain token issuance</p>
+    </div>
+
+    <div>
+      <h3>System Status</h3>
+
+      <p>FastAPI backend connected</p>
+      <p>Sepolia blockchain connected</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    PeraSoul Digital Identity System
+  </div>
+
+</footer>
+
+<script src="../js/main.js"></script>
+<script src="../js/admin-mint.js"></script>
 
 </body>
 </html>

@@ -1,94 +1,196 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Student Login</title>
-<link rel="stylesheet" href="../css/styles.css">
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Student Login | PeraSoul</title>
+
+  <link rel="stylesheet" href="../css/styles.css">
 </head>
+
 <body>
 
 <div class="topbar">
   <div class="topbar-inner">
-    <span>University Digital Identity Prototype</span>
-    <span>Faculty of Engineering | Blockchain MVP</span>
+    <span>University Digital Identity System</span>
+    <span>Faculty of Engineering | Blockchain Prototype</span>
   </div>
 </div>
+
 <header class="site-header">
   <nav class="navbar">
+
     <a class="brand" href="../index.html">
       <div class="brand-mark">PS</div>
+
       <div class="brand-text">
         <strong>PeraSoul</strong>
         <span>Digital Student Identity</span>
       </div>
     </a>
+
     <div class="nav-links">
       <a href="../pages/about.html">University</a>
       <a href="../pages/contact.html">Contact</a>
       <a href="../pages/feedback.html">Feedback</a>
       <a href="../pages/student-register.html">Register</a>
       <a href="../pages/student-login.html">Student Login</a>
-      <a class="btn btn-primary" href="../pages/admin-login.html">Admin Login</a>
+
+      <a
+        class="btn btn-primary"
+        href="../pages/admin-login.html"
+      >
+        Admin Login
+      </a>
     </div>
+
   </nav>
 </header>
 
-
 <section class="page-hero">
   <div class="page-hero-inner">
+
     <h1>Student Wallet Login</h1>
-    <p>Login using your connected wallet instead of a password.</p>
+
+    <p>
+      Connect your registered MetaMask wallet and prove ownership
+      by signing a secure login message.
+    </p>
+
   </div>
 </section>
 
 <main class="container">
+
   <div class="form-shell">
+
     <aside class="info-panel">
-      <h2>Passwordless access</h2>
-      <p>The final version will verify wallet ownership using a wallet signature. This prototype uses a mock connection.</p>
+
+      <h2>Secure passwordless access</h2>
+
+      <p>
+        PeraSoul uses MetaMask signatures instead of usernames and
+        passwords for student authentication.
+      </p>
+
       <div class="info-list">
-        <div class="info-item">No password database needed.</div>
-        <div class="info-item">Wallet address links the student profile and token.</div>
-        <div class="info-item">Smart contract verification can be added later.</div>
+
+        <div class="info-item">
+          Your private key never leaves MetaMask.
+        </div>
+
+        <div class="info-item">
+          The backend generates a unique nonce for every login.
+        </div>
+
+        <div class="info-item">
+          MetaMask signs the login message securely.
+        </div>
+
+        <div class="info-item">
+          The backend verifies that the signature belongs to your wallet.
+        </div>
+
       </div>
+
     </aside>
 
-    <form class="form-card" onsubmit="loginStudent(event)">
-      <div class="form-group"><label>Wallet Address</label><input id="loginWallet" placeholder="Connect wallet or enter demo address"></div>
-      <button type="button" class="btn btn-outline" onclick="connectWallet('loginWallet')">Connect Wallet</button>
-      <button class="btn btn-primary">Login to Dashboard</button>
-      <div id="status" class="status">Wallet login status appears here.</div>
+    <form class="form-card" id="studentLoginForm">
+
+      <h2>Student Login</h2>
+
+      <div class="form-group">
+        <label for="loginWallet">Connected Wallet</label>
+
+        <input
+          type="text"
+          id="loginWallet"
+          readonly
+          placeholder="Connect your registered MetaMask wallet"
+          required
+        >
+      </div>
+
+      <button
+        type="button"
+        id="connectLoginWalletButton"
+        class="btn btn-outline"
+      >
+        Connect MetaMask Wallet
+      </button>
+
+      <button
+        type="submit"
+        id="studentLoginButton"
+        class="btn btn-primary"
+      >
+        Sign Message and Login
+      </button>
+
+      <div
+        id="studentLoginStatus"
+        class="status"
+        aria-live="polite"
+      >
+        Connect your registered MetaMask wallet to continue.
+      </div>
+
     </form>
+
   </div>
+
 </main>
 
-
 <footer class="footer">
+
   <div class="footer-inner">
+
     <div>
       <h3>PeraSoul Digital ID</h3>
-      <p>A university digital identity MVP using wallet-based authentication and Soulbound Token concepts.</p>
+
+      <p>
+        A blockchain-based university digital identity system
+        using MetaMask authentication and Soulbound Tokens.
+      </p>
     </div>
+
     <div>
       <h3>Quick Links</h3>
-      <p><a href="student-register.html">Student Registration</a></p>
-      <p><a href="student-login.html">Student Login</a></p>
-      <p><a href="admin-login.html">Administrator Login</a></p>
+
+      <p>
+        <a href="student-register.html">Student Registration</a>
+      </p>
+
+      <p>
+        <a href="student-login.html">Student Login</a>
+      </p>
+
+      <p>
+        <a href="admin-login.html">Administrator Login</a>
+      </p>
     </div>
+
     <div>
-      <h3>Project Status</h3>
-      <p>MVP prototype interface</p>
-      <p>Smart contract integration planned</p>
+      <h3>System Status</h3>
+
+      <p>Wallet signature authentication active</p>
+      <p>FastAPI backend connected</p>
     </div>
+
   </div>
-  <div class="footer-bottom">PeraSoul Digital Identity System - MVP Prototype</div>
+
+  <div class="footer-bottom">
+    PeraSoul Digital Identity System
+  </div>
+
 </footer>
 
 <script src="../js/main.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
-<script src="../js/blockchain.js"></script>
+<script src="../js/student-login.js"></script>
 
 </body>
 </html>

@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Administrator Login</title>
-<link rel="stylesheet" href="../css/styles.css">
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Administrator Login | PeraSoul</title>
+
+  <link rel="stylesheet" href="../css/styles.css">
 </head>
+
 <body>
 
 <div class="topbar">
@@ -14,80 +20,180 @@
     <span>Faculty of Engineering | Blockchain MVP</span>
   </div>
 </div>
+
 <header class="site-header">
   <nav class="navbar">
+
     <a class="brand" href="../index.html">
       <div class="brand-mark">PS</div>
+
       <div class="brand-text">
         <strong>PeraSoul</strong>
         <span>Digital Student Identity</span>
       </div>
     </a>
+
     <div class="nav-links">
       <a href="../pages/about.html">University</a>
       <a href="../pages/contact.html">Contact</a>
       <a href="../pages/feedback.html">Feedback</a>
       <a href="../pages/student-register.html">Register</a>
       <a href="../pages/student-login.html">Student Login</a>
-      <a class="btn btn-primary" href="../pages/admin-login.html">Admin Login</a>
+
+      <a
+        class="btn btn-primary"
+        href="../pages/admin-login.html"
+      >
+        Admin Login
+      </a>
     </div>
+
   </nav>
 </header>
 
-
 <section class="page-hero">
   <div class="page-hero-inner">
+
     <h1>Administrator Portal</h1>
-    <p>Access administrative controls for token issuance, revocation, wallet replacement, and request review.</p>
+
+    <p>
+      Access administrative controls for student approval,
+      token issuance, temporary revocation, and request review.
+    </p>
+
   </div>
 </section>
 
 <main class="container">
+
   <div class="form-shell">
+
     <aside class="info-panel">
+
       <h2>Admin responsibilities</h2>
-      <p>The administrator controls identity token operations through the manager contract in the final version.</p>
+
+      <p>
+        Authorized university administrators can review student
+        registrations, approve token requests, issue digital identities,
+        and manage temporary revocations.
+      </p>
+
       <div class="info-list">
-        <div class="info-item">Mint student identity tokens.</div>
-        <div class="info-item">Handle temporary and permanent revocations.</div>
-        <div class="info-item">Review student requests and complaints.</div>
+        <div class="info-item">
+          Review and approve pending student registrations.
+        </div>
+
+        <div class="info-item">
+          Review student token requests and mint identity tokens.
+        </div>
+
+        <div class="info-item">
+          Temporarily revoke student identities when required.
+        </div>
+
+        <div class="info-item">
+          View blockchain transactions and system statistics.
+        </div>
       </div>
+
     </aside>
 
-    <form class="form-card" onsubmit="loginAdmin(event)">
-      <div class="form-group"><label>Administrator ID</label><input placeholder="Enter demo admin ID"></div>
-      <div class="form-group"><label>Access Code</label><input type="password" placeholder="Enter demo access code"></div>
-      <button class="btn btn-primary">Enter Admin Dashboard</button>
+    <form class="form-card" id="adminLoginForm">
+
+      <h2>Administrator Login</h2>
+
+      <div class="form-group">
+        <label for="adminUsername">Username</label>
+
+        <input
+          type="text"
+          id="adminUsername"
+          name="username"
+          placeholder="Enter administrator username"
+          autocomplete="username"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="adminPassword">Password</label>
+
+        <input
+          type="password"
+          id="adminPassword"
+          name="password"
+          placeholder="Enter administrator password"
+          autocomplete="current-password"
+          required
+        >
+      </div>
+
+      <div
+        id="loginMessage"
+        class="form-message"
+        aria-live="polite"
+      ></div>
+
+      <button
+        type="submit"
+        id="adminLoginButton"
+        class="btn btn-primary"
+      >
+        Enter Admin Dashboard
+      </button>
+
     </form>
+
   </div>
+
 </main>
 
-
 <footer class="footer">
+
   <div class="footer-inner">
+
     <div>
       <h3>PeraSoul Digital ID</h3>
-      <p>A university digital identity MVP using wallet-based authentication and Soulbound Token concepts.</p>
+
+      <p>
+        A university digital identity system using secure authentication
+        and Soulbound Token technology.
+      </p>
     </div>
+
     <div>
       <h3>Quick Links</h3>
-      <p><a href="student-register.html">Student Registration</a></p>
-      <p><a href="student-login.html">Student Login</a></p>
-      <p><a href="admin-login.html">Administrator Login</a></p>
+
+      <p>
+        <a href="student-register.html">Student Registration</a>
+      </p>
+
+      <p>
+        <a href="student-login.html">Student Login</a>
+      </p>
+
+      <p>
+        <a href="admin-login.html">Administrator Login</a>
+      </p>
     </div>
+
     <div>
       <h3>Project Status</h3>
-      <p>MVP prototype interface</p>
-      <p>Smart contract integration planned</p>
+
+      <p>Backend and blockchain integration active</p>
+      <p>Frontend demonstration interface</p>
     </div>
+
   </div>
-  <div class="footer-bottom">PeraSoul Digital Identity System - MVP Prototype</div>
+
+  <div class="footer-bottom">
+    PeraSoul Digital Identity System
+  </div>
+
 </footer>
 
 <script src="../js/main.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
-<script src="../js/blockchain.js"></script>
+<script src="../js/admin-login.js"></script>
 
 </body>
 </html>

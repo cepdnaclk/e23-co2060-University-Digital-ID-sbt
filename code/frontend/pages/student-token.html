@@ -1,104 +1,328 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Student Token Details</title>
-<link rel="stylesheet" href="../css/styles.css">
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Student Token Details | PeraSoul</title>
+
+  <link rel="stylesheet" href="../css/styles.css">
 </head>
+
 <body>
+
 <div class="topbar">
   <div class="topbar-inner">
-    <span>University Digital Identity Prototype</span>
-    <span>Faculty of Engineering | Blockchain MVP</span>
+    <span>University Digital Identity System</span>
+    <span>Faculty of Engineering | Blockchain Prototype</span>
   </div>
 </div>
+
 <header class="site-header">
   <nav class="navbar">
+
     <a class="brand" href="../index.html">
       <div class="brand-mark">PS</div>
+
       <div class="brand-text">
         <strong>PeraSoul</strong>
         <span>Digital Student Identity</span>
       </div>
     </a>
+
     <div class="nav-links">
-      <a href="about.html">University</a>
-      <a href="contact.html">Contact</a>
-      <a href="feedback.html">Feedback</a>
-      <a href="student-register.html">Register</a>
-      <a href="student-login.html">Student Login</a>
-      <a class="btn btn-primary" href="admin-login.html">Admin Login</a>
+      <span id="loggedStudentName">Student</span>
+
+      <button
+        type="button"
+        id="topStudentLogoutButton"
+        class="btn btn-outline"
+      >
+        Logout
+      </button>
     </div>
+
   </nav>
 </header>
 
-
 <section class="page-hero">
   <div class="page-hero-inner">
+
     <h1>Student Token Details</h1>
-    <p>View token information and send a token issuance request to the administrator.</p>
+
+    <p>
+      View your digital student identity request, token status,
+      blockchain validity, and latest transaction information.
+    </p>
+
   </div>
 </section>
+
 <main class="dashboard-wrap">
 
-<aside class="sidebar">
-  <div class="sidebar-title">Student Panel</div>
-  <a href="student-dashboard.html">👤 Profile Overview</a>
-  <a href="student-token.html">🪪 Token Details</a>
-  <a href="student-qr.html">📱 QR Verification</a>
-  <a href="student-wallet-change.html">🔁 Wallet Change</a>
-  <a href="student-complaint.html">💬 Complaint</a>
-  <a href="../index.html">🚪 Logout</a>
-</aside>
+  <aside class="sidebar">
 
-<section class="dashboard-main">
-  <a class="btn btn-outline back-link" href="student-dashboard.html">← Back to Dashboard</a>
-  <div class="grid grid-2">
-    <div class="card">
-      <h2>Token Information</h2>
-      <div class="profile-table">
-        <div class="profile-row"><strong>Token ID</strong><span>Not issued yet</span></div>
-        <div class="profile-row"><strong>Token Type</strong><span>ERC721 Soulbound Token</span></div>
-        <div class="profile-row"><strong>Status</strong><span class="badge badge-warning">Pending</span></div>
-        <div class="profile-row"><strong>Transferable</strong><span>No</span></div>
+    <div class="sidebar-title">
+      Student Panel
+    </div>
+
+    <a href="student-dashboard.html">
+      👤 Profile Overview
+    </a>
+
+    <a
+      class="active"
+      href="student-token.html"
+    >
+      🪪 Token Details
+    </a>
+
+    <a href="student-qr.html">
+      📱 QR Verification
+    </a>
+
+    <a href="student-wallet-change.html">
+      🔁 Wallet Change
+    </a>
+
+    <a href="student-complaint.html">
+      💬 Complaint
+    </a>
+
+    <button
+      type="button"
+      id="sidebarStudentLogoutButton"
+      class="sidebar-logout"
+    >
+      🚪 Logout
+    </button>
+
+  </aside>
+
+  <section class="dashboard-main">
+
+    <a
+      class="btn btn-outline back-link"
+      href="student-dashboard.html"
+    >
+      ← Back to Dashboard
+    </a>
+
+    <div
+      id="tokenPageMessage"
+      class="status"
+      aria-live="polite"
+    >
+      Loading token information...
+    </div>
+
+    <div class="grid grid-2">
+
+      <div class="card">
+
+        <h2>Token Information</h2>
+
+        <div class="profile-table">
+
+          <div class="profile-row">
+            <strong>Token Type</strong>
+            <span>ERC-721 Soulbound Token</span>
+          </div>
+
+          <div class="profile-row">
+            <strong>Transferable</strong>
+            <span>No</span>
+          </div>
+
+          <div class="profile-row">
+            <strong>Account Status</strong>
+
+            <span
+              id="accountStatus"
+              class="badge badge-warning"
+            >
+              Loading
+            </span>
+          </div>
+
+          <div class="profile-row">
+            <strong>Request Status</strong>
+
+            <span
+              id="tokenRequestStatus"
+              class="badge badge-warning"
+            >
+              Loading
+            </span>
+          </div>
+
+          <div class="profile-row">
+            <strong>Token Status</strong>
+
+            <span
+              id="tokenStatus"
+              class="badge badge-warning"
+            >
+              Loading
+            </span>
+          </div>
+
+          <div class="profile-row">
+            <strong>Blockchain Validity</strong>
+
+            <span id="blockchainValidity">
+              Loading
+            </span>
+          </div>
+
+          <div class="profile-row">
+            <strong>Remaining Revocation Time</strong>
+
+            <span id="remainingRevocationTime">
+              -
+            </span>
+          </div>
+
+          <div class="profile-row">
+            <strong>Student Wallet</strong>
+
+            <span
+              id="studentWallet"
+              class="wallet-value"
+            >
+              -
+            </span>
+          </div>
+
+          <div class="profile-row">
+            <strong>Latest Transaction</strong>
+
+            <span
+              id="latestTransaction"
+              class="wallet-value"
+            >
+              No transaction
+            </span>
+          </div>
+
+        </div>
+
       </div>
+
+      <div class="card">
+
+        <h2>Request Digital Student ID</h2>
+
+        <p class="muted-text">
+          Only active students without an existing token or pending
+          request can submit a new token issuance request.
+        </p>
+
+        <div class="form-group">
+          <label for="tokenRequestNote">
+            Request Note
+          </label>
+
+          <textarea
+            id="tokenRequestNote"
+            placeholder="Example: Requesting my digital student identity token"
+          ></textarea>
+        </div>
+
+        <button
+          type="button"
+          id="sendTokenRequestButton"
+          class="btn btn-primary"
+        >
+          Send Token Request
+        </button>
+
+        <div
+          id="tokenActionStatus"
+          class="status"
+        >
+          Token request status appears here.
+        </div>
+
+      </div>
+
     </div>
+
     <div class="card">
-      <h2>Request Token</h2>
-      <p style="color:var(--muted); margin-bottom:16px;">Send a request to the admin for SBT issuance.</p>
-      <button class="btn btn-primary" onclick="demoAction('tokenStatus','Token issuance request')">Send Token Request</button>
-      <div id="tokenStatus" class="status">Token action status appears here.</div>
+
+      <h2>Token Status Explanation</h2>
+
+      <div class="info-list">
+
+        <div class="info-item">
+          <strong>Pending:</strong>
+          Your request is waiting for university administrator approval.
+        </div>
+
+        <div class="info-item">
+          <strong>Minted:</strong>
+          Your Soulbound Token has been issued on the blockchain.
+        </div>
+
+        <div class="info-item">
+          <strong>Temporarily Revoked:</strong>
+          Your token exists but is invalid until the revocation period ends.
+        </div>
+
+        <div class="info-item">
+          <strong>Valid:</strong>
+          Your digital student identity is currently active on-chain.
+        </div>
+
+      </div>
+
     </div>
-  </div>
-</section>
+
+  </section>
+
 </main>
 
-
 <footer class="footer">
+
   <div class="footer-inner">
+
     <div>
       <h3>PeraSoul Digital ID</h3>
-      <p>A university digital identity MVP using wallet-based authentication and Soulbound Token concepts.</p>
-    </div>
-    <div>
-      <h3>Quick Links</h3>
-      <p><a href="student-register.html">Student Registration</a></p>
-      <p><a href="student-login.html">Student Login</a></p>
-      <p><a href="admin-login.html">Administrator Login</a></p>
-    </div>
-    <div>
-      <h3>Project Status</h3>
-      <p>MVP prototype interface</p>
-      <p>Smart contract integration planned</p>
-    </div>
-  </div>
-  <div class="footer-bottom">PeraSoul Digital Identity System - MVP Prototype</div>
-</footer>
-<script src="../js/main.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
-<script src="../js/blockchain.js"></script>
+      <p>
+        A blockchain-based university digital student identity system.
+      </p>
+    </div>
+
+    <div>
+      <h3>Student Features</h3>
+
+      <p>Wallet authentication</p>
+      <p>Token request management</p>
+      <p>Blockchain verification</p>
+    </div>
+
+    <div>
+      <h3>System Status</h3>
+
+      <p>Backend integration active</p>
+      <p>Sepolia blockchain connected</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    PeraSoul Digital Identity System
+  </div>
+
+</footer>
+
+<script src="../js/main.js"></script>
+<script src="../js/student-token.js"></script>
 
 </body>
 </html>

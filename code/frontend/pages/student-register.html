@@ -1,11 +1,18 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Student Registration</title>
-<link rel="stylesheet" href="../css/styles.css">
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Student Registration | PeraSoul</title>
+
+  <link rel="stylesheet" href="../css/styles.css">
 </head>
+
 <body>
 
 <div class="topbar">
@@ -14,86 +21,272 @@
     <span>Faculty of Engineering | Blockchain MVP</span>
   </div>
 </div>
+
 <header class="site-header">
   <nav class="navbar">
+
     <a class="brand" href="../index.html">
       <div class="brand-mark">PS</div>
+
       <div class="brand-text">
         <strong>PeraSoul</strong>
         <span>Digital Student Identity</span>
       </div>
     </a>
+
     <div class="nav-links">
       <a href="../pages/about.html">University</a>
       <a href="../pages/contact.html">Contact</a>
       <a href="../pages/feedback.html">Feedback</a>
       <a href="../pages/student-register.html">Register</a>
       <a href="../pages/student-login.html">Student Login</a>
-      <a class="btn btn-primary" href="../pages/admin-login.html">Admin Login</a>
+
+      <a
+        class="btn btn-primary"
+        href="../pages/admin-login.html"
+      >
+        Admin Login
+      </a>
     </div>
+
   </nav>
 </header>
 
-
 <section class="page-hero">
   <div class="page-hero-inner">
+
     <h1>Student Registration</h1>
-    <p>Create a student identity profile and connect your wallet for future token issuance and wallet-based authentication.</p>
+
+    <p>
+      Create a student identity profile and connect your MetaMask wallet.
+      Your registration will remain pending until approved by a university
+      administrator.
+    </p>
+
   </div>
 </section>
 
 <main class="container">
+
   <div class="form-shell">
+
     <aside class="info-panel">
+
       <h2>Before you register</h2>
-      <p>This MVP registration form demonstrates how students will enter basic details and connect their wallet.</p>
+
+      <p>
+        Submit your university details and connect the MetaMask wallet
+        that will be linked to your digital student identity.
+      </p>
+
       <div class="info-list">
-        <div class="info-item">Wallet address will be used for login.</div>
-        <div class="info-item">Student data will later be stored in a backend database.</div>
-        <div class="info-item">The administrator will issue the Soulbound Token after review.</div>
+
+        <div class="info-item">
+          Your connected wallet will be used for secure student login.
+        </div>
+
+        <div class="info-item">
+          Your registration will first be saved with a pending status.
+        </div>
+
+        <div class="info-item">
+          A university administrator must approve your account.
+        </div>
+
+        <div class="info-item">
+          After approval, you can request your Soulbound Token.
+        </div>
+
       </div>
+
     </aside>
 
-    <form class="form-card" onsubmit="registerStudent(event)">
-      <div class="form-group"><label>Full Name</label><input placeholder="Enter full name"></div>
-      <div class="form-group"><label>Student Registration Number</label><input placeholder="E/XX/000"></div>
-      <div class="form-group"><label>Faculty / Department</label><input placeholder="Faculty of Engineering"></div>
-      <div class="form-group"><label>University Email</label><input type="email" placeholder="student@university.ac.lk"></div>
-      <div class="form-group"><label>Academic Year</label><select><option>First Year</option><option>Second Year</option><option>Third Year</option><option>Final Year</option></select></div>
-      <div class="form-group"><label>Connected Wallet</label><input id="walletAddress" readonly placeholder="Connect your wallet"></div>
-      <button type="button" class="btn btn-outline" onclick="connectWallet('walletAddress')">Connect Wallet</button>
-      <button class="btn btn-primary">Submit Registration</button>
-      <div id="status" class="status">Wallet connection status appears here.</div>
+    <form class="form-card" id="studentRegistrationForm">
+
+      <h2>Registration Details</h2>
+
+      <div class="form-group">
+        <label for="fullName">Full Name</label>
+
+        <input
+          type="text"
+          id="fullName"
+          placeholder="Enter full name"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="studentNumber">
+          Student Registration Number
+        </label>
+
+        <input
+          type="text"
+          id="studentNumber"
+          placeholder="E/23/054"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="faculty">Faculty</label>
+
+        <input
+          type="text"
+          id="faculty"
+          placeholder="Faculty of Engineering"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="department">Department</label>
+
+        <input
+          type="text"
+          id="department"
+          placeholder="Computer Engineering"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="batch">Batch</label>
+
+        <input
+          type="text"
+          id="batch"
+          placeholder="E23"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="universityEmail">University Email</label>
+
+        <input
+          type="email"
+          id="universityEmail"
+          placeholder="student@eng.pdn.ac.lk"
+          required
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone Number</label>
+
+        <input
+          type="tel"
+          id="phone"
+          placeholder="07XXXXXXXX"
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="academicYear">Academic Year</label>
+
+        <select id="academicYear" required>
+          <option value="">Select academic year</option>
+          <option value="First Year">First Year</option>
+          <option value="Second Year">Second Year</option>
+          <option value="Third Year">Third Year</option>
+          <option value="Final Year">Final Year</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="walletAddress">Connected Wallet</label>
+
+        <input
+          type="text"
+          id="walletAddress"
+          readonly
+          placeholder="Connect your MetaMask wallet"
+          required
+        >
+      </div>
+
+      <button
+        type="button"
+        id="connectWalletButton"
+        class="btn btn-outline"
+      >
+        Connect MetaMask Wallet
+      </button>
+
+      <button
+        type="submit"
+        id="registrationButton"
+        class="btn btn-primary"
+      >
+        Submit Registration
+      </button>
+
+      <div
+        id="registrationStatus"
+        class="status"
+        aria-live="polite"
+      >
+        Connect your wallet and complete the form.
+      </div>
+
     </form>
+
   </div>
+
 </main>
 
-
 <footer class="footer">
+
   <div class="footer-inner">
+
     <div>
       <h3>PeraSoul Digital ID</h3>
-      <p>A university digital identity MVP using wallet-based authentication and Soulbound Token concepts.</p>
+
+      <p>
+        A blockchain-based university digital student identity system
+        using MetaMask authentication and Soulbound Tokens.
+      </p>
     </div>
+
     <div>
       <h3>Quick Links</h3>
-      <p><a href="student-register.html">Student Registration</a></p>
-      <p><a href="student-login.html">Student Login</a></p>
-      <p><a href="admin-login.html">Administrator Login</a></p>
+
+      <p>
+        <a href="student-register.html">Student Registration</a>
+      </p>
+
+      <p>
+        <a href="student-login.html">Student Login</a>
+      </p>
+
+      <p>
+        <a href="admin-login.html">Administrator Login</a>
+      </p>
     </div>
+
     <div>
       <h3>Project Status</h3>
-      <p>MVP prototype interface</p>
-      <p>Smart contract integration planned</p>
+
+      <p>Backend integration active</p>
+      <p>Sepolia blockchain connected</p>
     </div>
+
   </div>
-  <div class="footer-bottom">PeraSoul Digital Identity System - MVP Prototype</div>
+
+  <div class="footer-bottom">
+    PeraSoul Digital Identity System
+  </div>
+
 </footer>
 
 <script src="../js/main.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
-<script src="../js/blockchain.js"></script>
+
+<script src="../js/student-register.js"></script>
 
 </body>
 </html>
+```
