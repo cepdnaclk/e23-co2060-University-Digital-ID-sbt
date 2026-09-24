@@ -3,6 +3,9 @@ node_modules/
 
 # Environment variables
 .env
+.env.*
+__pycache__/
+*.pyc 
 .env.local
 .env.*.local
 
