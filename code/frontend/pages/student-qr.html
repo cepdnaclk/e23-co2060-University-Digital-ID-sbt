@@ -1,94 +1,2200 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Student QR Verification</title>
-<link rel="stylesheet" href="../css/styles.css">
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    QR Verification | PeraSoul
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="../css/styles.css"
+  >
+
+  <link
+    rel="icon"
+    href="../assets/favicon.svg"
+    type="image/svg+xml"
+  >
+
+
+  <!-- ======================================================
+       PAGE-SPECIFIC QR STYLES
+  ======================================================= -->
+
+  <style>
+
+    .live-qr-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+
+    .live-qr-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+
+    .live-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      background: #eef8f4;
+      color: #28765d;
+      white-space: nowrap;
+    }
+
+
+    .live-indicator-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      animation: qrPulse 1.4s infinite;
+    }
+
+
+    @keyframes qrPulse {
+
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.45;
+        transform: scale(0.75);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+    }
+
+
+    .secure-qr-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      min-height: 390px;
+
+      padding: 28px;
+
+      border: 1px solid #dbe4ee;
+      border-radius: 24px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #ffffff,
+          #f8fafc
+        );
+
+      text-align: center;
+    }
+
+
+    .qr-code-frame {
+      position: relative;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: 270px;
+      height: 270px;
+
+      padding: 18px;
+
+      background: #ffffff;
+
+      border: 1px solid #dbe4ee;
+      border-radius: 20px;
+
+      box-shadow:
+        0 12px 35px rgba(
+          15,
+          38,
+          65,
+          0.08
+        );
+    }
+
+
+    #studentQrCode {
+      width: 230px;
+      height: 230px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+
+    #studentQrCode img,
+    #studentQrCode canvas {
+      max-width: 230px !important;
+      max-height: 230px !important;
+    }
+
+
+    .qr-placeholder-text {
+      max-width: 210px;
+      color: #66768b;
+      line-height: 1.5;
+    }
+
+
+    .qr-countdown-area {
+      width: 100%;
+      max-width: 360px;
+      margin-top: 24px;
+    }
+
+
+    .qr-countdown-label {
+      font-size: 0.82rem;
+      color: #66768b;
+      margin-bottom: 5px;
+    }
+
+
+    .qr-countdown-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #17385e;
+      line-height: 1;
+    }
+
+
+    .qr-countdown-unit {
+      font-size: 0.8rem;
+      color: #66768b;
+      margin-top: 3px;
+    }
+
+
+    .qr-progress {
+      width: 100%;
+      height: 7px;
+
+      margin-top: 14px;
+
+      background: #e8edf3;
+
+      border-radius: 999px;
+
+      overflow: hidden;
+    }
+
+
+    .qr-progress-fill {
+      width: 100%;
+      height: 100%;
+
+      background: #4d927c;
+
+      border-radius: inherit;
+
+      transition:
+        width 1s linear;
+    }
+
+
+    .qr-security-message {
+      margin-top: 15px;
+      font-size: 0.82rem;
+      color: #66768b;
+      line-height: 1.5;
+    }
+
+
+    .qr-action-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+
+    .qr-link-preview {
+      margin-top: 18px;
+
+      padding: 13px 15px;
+
+      border-radius: 12px;
+
+      background: #f5f8fb;
+
+      font-size: 0.78rem;
+      color: #637188;
+
+      word-break: break-all;
+    }
+
+
+    .qr-link-preview strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #233b58;
+    }
+
+
+    .qr-security-card {
+      margin-top: 22px;
+    }
+
+
+    .qr-security-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+
+    .qr-security-item {
+      padding: 18px;
+
+      border: 1px solid #e1e7ef;
+      border-radius: 16px;
+
+      background: #fafbfd;
+    }
+
+
+    .qr-security-item strong {
+      display: block;
+      margin-bottom: 7px;
+      color: #1d3859;
+    }
+
+
+    .qr-security-item p {
+      margin: 0;
+      font-size: 0.88rem;
+      color: #68778b;
+      line-height: 1.5;
+    }
+
+
+    @media (
+      max-width: 900px
+    ) {
+
+      .qr-security-grid {
+        grid-template-columns: 1fr;
+      }
+
+
+      .live-qr-header {
+        flex-direction: column;
+      }
+
+    }
+
+
+    @media (
+      max-width: 520px
+    ) {
+
+      .secure-qr-container {
+        padding: 18px;
+      }
+
+
+      .qr-code-frame {
+        width: 235px;
+        height: 235px;
+      }
+
+
+      #studentQrCode {
+        width: 200px;
+        height: 200px;
+      }
+
+
+      #studentQrCode img,
+      #studentQrCode canvas {
+        max-width: 200px !important;
+        max-height: 200px !important;
+      }
+
+    }
+
+
+    @media (
+      prefers-reduced-motion: reduce
+    ) {
+
+      .live-indicator-dot {
+        animation: none;
+      }
+
+
+      .qr-progress-fill {
+        transition: none;
+      }
+
+    }
+
+  </style>
+
 </head>
-<body>
+
+
+<body class="page-student-qr">
+
+
+<!-- =========================================================
+     TOP BAR
+========================================================= -->
+
 <div class="topbar">
+
   <div class="topbar-inner">
-    <span>University Digital Identity Prototype</span>
-    <span>Faculty of Engineering | Blockchain MVP</span>
+
+    <span>
+      PeraSoul Digital Student Identity System
+    </span>
+
+    <span>
+      Student Portal | Ethereum Sepolia
+    </span>
+
   </div>
+
 </div>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
 <header class="site-header">
+
   <nav class="navbar">
-    <a class="brand" href="../index.html">
-      <div class="brand-mark">PS</div>
-      <div class="brand-text">
-        <strong>PeraSoul</strong>
-        <span>Digital Student Identity</span>
+
+    <a
+      class="brand"
+      href="../index.html"
+    >
+
+      <div class="brand-mark">
+        PS
       </div>
+
+      <div class="brand-text">
+
+        <strong>
+          PeraSoul
+        </strong>
+
+        <span>
+          Digital Student Identity
+        </span>
+
+      </div>
+
     </a>
+
+
     <div class="nav-links">
-      <a href="about.html">University</a>
-      <a href="contact.html">Contact</a>
-      <a href="feedback.html">Feedback</a>
-      <a href="student-register.html">Register</a>
-      <a href="student-login.html">Student Login</a>
-      <a class="btn btn-primary" href="admin-login.html">Admin Login</a>
+
+      <span id="loggedStudentName">
+        Student
+      </span>
+
+      <small id="loggedStudentWallet">
+        Wallet not loaded
+      </small>
+
+      <button
+        type="button"
+        id="topStudentLogoutButton"
+        class="btn btn-outline"
+      >
+        Logout
+      </button>
+
     </div>
+
   </nav>
+
 </header>
 
 
+<!-- =========================================================
+     PAGE HERO
+========================================================= -->
+
 <section class="page-hero">
+
   <div class="page-hero-inner">
-    <h1>QR Verification</h1>
-    <p>Generate a verification QR preview for the student identity token.</p>
+
+    <span class="section-label">
+      PERASOUL / LIVE IDENTITY VERIFICATION
+    </span>
+
+    <h1>
+      QR Identity Verification
+    </h1>
+
+    <p>
+      Display a short-lived QR code that allows another
+      device to verify the current status of your
+      PeraSoul Digital Student ID.
+    </p>
+
   </div>
+
 </section>
+
+
+<!-- =========================================================
+     DASHBOARD
+========================================================= -->
+
 <main class="dashboard-wrap">
 
-<aside class="sidebar">
-  <div class="sidebar-title">Student Panel</div>
-  <a href="student-dashboard.html">👤 Profile Overview</a>
-  <a href="student-token.html">🪪 Token Details</a>
-  <a href="student-qr.html">📱 QR Verification</a>
-  <a href="student-wallet-change.html">🔁 Wallet Change</a>
-  <a href="student-complaint.html">💬 Complaint</a>
-  <a href="../index.html">🚪 Logout</a>
-</aside>
 
-<section class="dashboard-main">
-  <a class="btn btn-outline back-link" href="student-dashboard.html">← Back to Dashboard</a>
-  <div class="card qr-card">
-    <h2>Generate Verification QR</h2>
-    <p style="color:var(--muted);">In the final system, this QR can include verification data or a secure verification URL.</p>
-    <button class="btn btn-primary" onclick="generateQR()">Generate QR</button>
-    <div id="qrBox" class="qr-box">QR Preview</div>
-    <div id="studentStatus" class="status">QR status appears here.</div>
-  </div>
-</section>
+  <!-- =======================================================
+       SIDEBAR
+  ======================================================== -->
+
+  <aside class="sidebar">
+
+    <div class="sidebar-title">
+      Student Panel
+    </div>
+
+
+    <a href="student-dashboard.html">
+      👤 Profile Overview
+    </a>
+
+
+    <a href="student-token.html">
+      🪪 Token Details
+    </a>
+
+
+    <a href="student-dashboard.html#digital-id-section">
+      🎓 Digital Student ID
+    </a>
+
+
+    <a
+      class="active"
+      href="student-qr.html"
+    >
+      📱 QR Verification
+    </a>
+
+
+    <a href="student-wallet-change.html">
+      🔁 Wallet Replacement
+    </a>
+
+
+    <a
+      href="../verify.html"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      ✅ Public Verification
+    </a>
+
+
+    <button
+      type="button"
+      id="sidebarStudentLogoutButton"
+      class="sidebar-logout"
+    >
+      🚪 Logout
+    </button>
+
+  </aside>
+
+
+  <!-- =======================================================
+       MAIN CONTENT
+  ======================================================== -->
+
+  <section class="dashboard-main">
+
+
+    <a
+      class="btn btn-outline back-link"
+      href="student-dashboard.html"
+    >
+      ← Back to Dashboard
+    </a>
+
+
+    <!-- =====================================================
+         PAGE MESSAGE
+    ====================================================== -->
+
+    <div
+      id="qrPageMessage"
+      class="status"
+      aria-live="polite"
+    >
+      Loading Digital Student ID...
+    </div>
+
+
+    <!-- =====================================================
+         QR + IDENTITY SUMMARY
+    ====================================================== -->
+
+    <div class="grid grid-2">
+
+
+      <!-- ===================================================
+           LIVE QR
+      ==================================================== -->
+
+      <div class="card qr-card live-qr-card">
+
+
+        <div class="live-qr-header">
+
+          <div>
+
+            <h2>
+              Live Verification QR
+            </h2>
+
+            <p class="muted-text">
+              Scan this code from another device to
+              verify the current Digital Student ID.
+            </p>
+
+          </div>
+
+
+          <div
+            id="qrLiveIndicator"
+            class="live-indicator"
+            hidden
+          >
+
+            <span class="live-indicator-dot"></span>
+
+            Live
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="qrBox"
+          class="secure-qr-container"
+        >
+
+
+          <!-- ===============================================
+               QR FRAME
+          ================================================ -->
+
+          <div class="qr-code-frame">
+
+            <div id="studentQrCode">
+            </div>
+
+
+            <span
+              id="qrPlaceholderText"
+              class="qr-placeholder-text"
+            >
+              QR code will appear after an
+              identity token is issued.
+            </span>
+
+          </div>
+
+
+          <!-- ===============================================
+               COUNTDOWN
+          ================================================ -->
+
+          <div
+            id="qrCountdownArea"
+            class="qr-countdown-area"
+            hidden
+          >
+
+            <div class="qr-countdown-label">
+              QR expires in
+            </div>
+
+
+            <div
+              id="qrCountdown"
+              class="qr-countdown-number"
+            >
+              10
+            </div>
+
+
+            <div class="qr-countdown-unit">
+              seconds
+            </div>
+
+
+            <div class="qr-progress">
+
+              <div
+                id="qrProgressFill"
+                class="qr-progress-fill"
+              ></div>
+
+            </div>
+
+
+            <div
+              id="qrExpiryText"
+              class="qr-security-message"
+            >
+              A new secure verification QR will
+              automatically appear when this one expires.
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             QR ACTIONS
+        ================================================== -->
+
+        <div class="qr-action-group">
+
+
+          <button
+            type="button"
+            id="refreshQrButton"
+            class="btn btn-outline"
+            disabled
+          >
+            Generate New QR
+          </button>
+
+
+          <a
+            id="openVerificationLink"
+            class="btn btn-primary"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            hidden
+          >
+            Open Public Verification
+          </a>
+
+
+        </div>
+
+
+        <!-- =================================================
+             VERIFICATION URL PREVIEW
+        ================================================== -->
+
+        <div
+          id="qrLinkPreview"
+          class="qr-link-preview"
+          hidden
+        >
+
+          <strong>
+            QR Verification Link
+          </strong>
+
+          <span id="qrVerificationUrl">
+            -
+          </span>
+
+        </div>
+
+
+      </div>
+
+
+      <!-- ===================================================
+           IDENTITY SUMMARY
+      ==================================================== -->
+
+      <div class="card">
+
+
+        <div class="table-header">
+
+          <div>
+
+            <h2>
+              Identity Summary
+            </h2>
+
+            <p>
+              Current information associated with
+              this Digital Student ID.
+            </p>
+
+          </div>
+
+
+          <span
+            id="qrValidityBadge"
+            class="badge badge-blue"
+          >
+            Loading
+          </span>
+
+        </div>
+
+
+        <div class="profile-table">
+
+
+          <div class="profile-row">
+
+            <strong>
+              Student Number
+            </strong>
+
+            <span id="qrStudentNumber">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="profile-row">
+
+            <strong>
+              Token ID
+            </strong>
+
+            <span id="qrTokenId">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="profile-row">
+
+            <strong>
+              Token Status
+            </strong>
+
+            <span id="qrTokenStatus">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="profile-row">
+
+            <strong>
+              Current Validity
+            </strong>
+
+            <span id="qrValidity">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="profile-row">
+
+            <strong>
+              QR Security
+            </strong>
+
+            <span>
+              10-second signed code
+            </span>
+
+          </div>
+
+
+          <div class="profile-row">
+
+            <strong>
+              Network
+            </strong>
+
+            <span>
+              Ethereum Sepolia
+            </span>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         SECURITY INFORMATION
+    ====================================================== -->
+
+    <div class="card qr-security-card">
+
+
+      <div class="table-header">
+
+        <div>
+
+          <h2>
+            Secure QR Verification
+          </h2>
+
+          <p>
+            The QR contains a short-lived signed verification
+            reference rather than embedding private student data.
+          </p>
+
+        </div>
+
+
+        <span class="badge badge-blue">
+          Short-Lived Verification
+        </span>
+
+      </div>
+
+
+      <div class="qr-security-grid">
+
+
+        <div class="qr-security-item">
+
+          <strong>
+            ⏱ 10-Second Validity
+          </strong>
+
+          <p>
+            Each QR code remains valid for only
+            ten seconds before the backend rejects it.
+          </p>
+
+        </div>
+
+
+        <div class="qr-security-item">
+
+          <strong>
+            🔐 Signed Reference
+          </strong>
+
+          <p>
+            The QR contains a cryptographically signed
+            verification token rather than editable
+            student information.
+          </p>
+
+        </div>
+
+
+        <div class="qr-security-item">
+
+          <strong>
+            ⛓ Current Blockchain Status
+          </strong>
+
+          <p>
+            Scanning the QR retrieves the current
+            identity state from PeraSoul and Ethereum
+            Sepolia at verification time.
+          </p>
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         DEVICE INFORMATION
+    ====================================================== -->
+
+    <div class="card">
+
+      <h2>
+        Scan From Another Device
+      </h2>
+
+      <p class="muted-text">
+        For mobile-phone scanning during a local demonstration,
+        the phone and computer must be able to reach the same
+        frontend server. If the system is opened using
+        <strong>127.0.0.1</strong> or
+        <strong>localhost</strong>, another device cannot access
+        that address.
+      </p>
+
+      <div
+        id="qrNetworkWarning"
+        class="status"
+        hidden
+      >
+      </div>
+
+    </div>
+
+
+  </section>
+
+
 </main>
 
 
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
 <footer class="footer">
+
   <div class="footer-inner">
+
+
     <div>
-      <h3>PeraSoul Digital ID</h3>
-      <p>A university digital identity MVP using wallet-based authentication and Soulbound Token concepts.</p>
+
+      <h3>
+        PeraSoul Digital ID
+      </h3>
+
+      <p>
+        A blockchain-based university Digital Student
+        Identity System using MetaMask authentication
+        and non-transferable Soulbound Tokens.
+      </p>
+
     </div>
+
+
     <div>
-      <h3>Quick Links</h3>
-      <p><a href="student-register.html">Student Registration</a></p>
-      <p><a href="student-login.html">Student Login</a></p>
-      <p><a href="admin-login.html">Administrator Login</a></p>
+
+      <h3>
+        Core Services
+      </h3>
+
+      <p>
+        <a href="student-register.html">
+          Student Registration
+        </a>
+      </p>
+
+      <p>
+        <a href="student-login.html">
+          Student Wallet Login
+        </a>
+      </p>
+
+      <p>
+        <a href="../verify.html">
+          Public Verification
+        </a>
+      </p>
+
     </div>
+
+
     <div>
-      <h3>Project Status</h3>
-      <p>MVP prototype interface</p>
-      <p>Smart contract integration planned</p>
+
+      <h3>
+        System
+      </h3>
+
+      <p>
+        FastAPI + SQLite application layer
+      </p>
+
+      <p>
+        Ethereum Sepolia blockchain integration
+      </p>
+
+      <p>
+        10-second signed QR verification
+      </p>
+
     </div>
+
+
   </div>
-  <div class="footer-bottom">PeraSoul Digital Identity System - MVP Prototype</div>
+
+
+  <div class="footer-bottom">
+    PeraSoul Digital Student Identity System |
+    University of Peradeniya
+  </div>
+
 </footer>
+
+
+<!-- =========================================================
+     QR CODE LIBRARY
+========================================================= -->
+
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+></script>
+
+
+<!-- =========================================================
+     APPLICATION JAVASCRIPT
+========================================================= -->
+
 <script src="../js/main.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
-<script src="../js/blockchain.js"></script>
+<script src="../js/student-qr.js"></script>
+
+<script
+  src="../js/visuals.js"
+  defer
+></script>
+
 
 </body>
+
+</html><!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    QR Verification | PeraSoul
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="../css/styles.css"
+  >
+
+  <link
+    rel="icon"
+    href="../assets/favicon.svg"
+    type="image/svg+xml"
+  >
+
+
+  <!-- ======================================================
+       PAGE-SPECIFIC QR STYLES
+  ======================================================= -->
+
+  <style>
+
+    .live-qr-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+
+    .live-qr-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+
+    .live-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 13px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      background: #eef8f4;
+      color: #28765d;
+      white-space: nowrap;
+    }
+
+
+    .live-indicator-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: currentColor;
+      animation: qrPulse 1.4s infinite;
+    }
+
+
+    @keyframes qrPulse {
+
+      0% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.45;
+        transform: scale(0.75);
+      }
+
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+    }
+
+
+    .secure-qr-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      min-height: 390px;
+
+      padding: 28px;
+
+      border: 1px solid #dbe4ee;
+      border-radius: 24px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #ffffff,
+          #f8fafc
+        );
+
+      text-align: center;
+    }
+
+
+    .qr-code-frame {
+      position: relative;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: 270px;
+      height: 270px;
+
+      padding: 18px;
+
+      background: #ffffff;
+
+      border: 1px solid #dbe4ee;
+      border-radius: 20px;
+
+      box-shadow:
+        0 12px 35px rgba(
+          15,
+          38,
+          65,
+          0.08
+        );
+    }
+
+
+    #studentQrCode {
+      width: 230px;
+      height: 230px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+
+    #studentQrCode img,
+    #studentQrCode canvas {
+      max-width: 230px !important;
+      max-height: 230px !important;
+    }
+
+
+    .qr-placeholder-text {
+      max-width: 210px;
+      color: #66768b;
+      line-height: 1.5;
+    }
+
+
+    .qr-countdown-area {
+      width: 100%;
+      max-width: 360px;
+      margin-top: 24px;
+    }
+
+
+    .qr-countdown-label {
+      font-size: 0.82rem;
+      color: #66768b;
+      margin-bottom: 5px;
+    }
+
+
+    .qr-countdown-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #17385e;
+      line-height: 1;
+    }
+
+
+    .qr-countdown-unit {
+      font-size: 0.8rem;
+      color: #66768b;
+      margin-top: 3px;
+    }
+
+
+    .qr-progress {
+      width: 100%;
+      height: 7px;
+
+      margin-top: 14px;
+
+      background: #e8edf3;
+
+      border-radius: 999px;
+
+      overflow: hidden;
+    }
+
+
+    .qr-progress-fill {
+      width: 100%;
+      height: 100%;
+
+      background: #4d927c;
+
+      border-radius: inherit;
+
+      transition:
+        width 1s linear;
+    }
+
+
+    .qr-security-message {
+      margin-top: 15px;
+      font-size: 0.82rem;
+      color: #66768b;
+      line-height: 1.5;
+    }
+
+
+    .qr-action-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+
+    .qr-link-preview {
+      margin-top: 18px;
+
+      padding: 13px 15px;
+
+      border-radius: 12px;
+
+      background: #f5f8fb;
+
+      font-size: 0.78rem;
+      color: #637188;
+
+      word-break: break-all;
+    }
+
+
+    .qr-link-preview strong {
+      display: block;
+      margin-bottom: 5px;
+      color: #233b58;
+    }
+
+
+    .qr-security-card {
+      margin-top: 22px;
+    }
+
+
+    .qr-security-grid {
+      display: grid;
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+
+    .qr-security-item {
+      padding: 18px;
+
+      border: 1px solid #e1e7ef;
+      border-radius: 16px;
+
+      background: #fafbfd;
+    }
+
+
+    .qr-security-item strong {
+      display: block;
+      margin-bottom: 7px;
+      color: #1d3859;
+    }
+
+
+    .qr-security-item p {
+      margin: 0;
+      font-size: 0.88rem;
+      color: #68778b;
+      line-height: 1.5;
+    }
+
+
+    @media (
+      max-width: 900px
+    ) {
+
+      .qr-security-grid {
+        grid-template-columns: 1fr;
+      }
+
+
+      .live-qr-header {
+        flex-direction: column;
+      }
+
+    }
+
+
+    @media (
+      max-width: 520px
+    ) {
+
+      .secure-qr-container {
+        padding: 18px;
+      }
+
+
+      .qr-code-frame {
+        width: 235px;
+        height: 235px;
+      }
+
+
+      #studentQrCode {
+        width: 200px;
+        height: 200px;
+      }
+
+
+      #studentQrCode img,
+      #studentQrCode canvas {
+        max-width: 200px !important;
+        max-height: 200px !important;
+      }
+
+    }
+
+
+    @media (
+      prefers-reduced-motion: reduce
+    ) {
+
+      .live-indicator-dot {
+        animation: none;
+      }
+
+
+      .qr-progress-fill {
+        transition: none;
+      }
+
+    }
+    .page-student-qr .phone-frame {
+      display: contents !important;
+    }
+
+    .page-student-qr .phone-frame::before {
+      display: none !important;
+    }
+
+  </style>
+
+</head>
+
+
+<body class="page-student-qr">
+
+
+<!-- =========================================================
+     TOP BAR
+========================================================= -->
+
+<div class="topbar">
+
+  <div class="topbar-inner">
+
+    <span>
+      PeraSoul Digital Student Identity System
+    </span>
+
+    <span>
+      Student Portal | Ethereum Sepolia
+    </span>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="site-header">
+
+  <nav class="navbar">
+
+    <a
+      class="brand"
+      href="../index.html"
+    >
+
+      <div class="brand-mark">
+        PS
+      </div>
+
+      <div class="brand-text">
+
+        <strong>
+          PeraSoul
+        </strong>
+
+        <span>
+          Digital Student Identity
+        </span>
+
+      </div>
+
+    </a>
+
+
+    <div class="nav-links">
+
+      <span id="loggedStudentName">
+        Student
+      </span>
+
+      <small id="loggedStudentWallet">
+        Wallet not loaded
+      </small>
+
+      <button
+        type="button"
+        id="topStudentLogoutButton"
+        class="btn btn-outline"
+      >
+        Logout
+      </button>
+
+    </div>
+
+  </nav>
+
+</header>
+
+
+<!-- =========================================================
+     PAGE HERO
+========================================================= -->
+
+<section class="page-hero">
+
+  <div class="page-hero-inner">
+
+    <span class="section-label">
+      PERASOUL / LIVE IDENTITY VERIFICATION
+    </span>
+
+    <h1>
+      QR Identity Verification
+    </h1>
+
+    <p>
+      Display a short-lived QR code that allows another
+      device to verify the current status of your
+      PeraSoul Digital Student ID.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     DASHBOARD
+========================================================= -->
+
+<main class="dashboard-wrap">
+
+
+  <!-- =======================================================
+       SIDEBAR
+  ======================================================== -->
+
+  <aside class="sidebar">
+
+    <div class="sidebar-title">
+      Student Panel
+    </div>
+
+
+    <a href="student-dashboard.html">
+      👤 Profile Overview
+    </a>
+
+
+    <a href="student-token.html">
+      🪪 Token Details
+    </a>
+
+
+    <a href="student-dashboard.html#digital-id-section">
+      🎓 Digital Student ID
+    </a>
+
+
+    <a
+      class="active"
+      href="student-qr.html"
+    >
+      📱 QR Verification
+    </a>
+
+
+    <a href="student-wallet-change.html">
+      🔁 Wallet Replacement
+    </a>
+
+
+    <a
+      href="../verify.html"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      ✅ Public Verification
+    </a>
+
+
+    <button
+      type="button"
+      id="sidebarStudentLogoutButton"
+      class="sidebar-logout"
+    >
+      🚪 Logout
+    </button>
+
+  </aside>
+
+
+  <!-- =======================================================
+       MAIN CONTENT
+  ======================================================== -->
+
+  <section class="dashboard-main">
+
+
+    <a
+      class="btn btn-outline back-link"
+      href="student-dashboard.html"
+    >
+      ← Back to Dashboard
+    </a>
+
+
+    <!-- =====================================================
+         PAGE MESSAGE
+    ====================================================== -->
+
+    <div
+      id="qrPageMessage"
+      class="status"
+      aria-live="polite"
+    >
+      Loading Digital Student ID...
+    </div>
+
+
+    <!-- =====================================================
+         QR + IDENTITY SUMMARY
+    ====================================================== -->
+
+    <div class="grid grid-2">
+
+
+      <!-- ===================================================
+           LIVE QR
+      ==================================================== -->
+
+      <div class="card qr-card live-qr-card">
+
+
+        <div class="live-qr-header">
+
+          <div>
+
+            <h2>
+              Live Verification QR
+            </h2>
+
+            <p class="muted-text">
+              Scan this code from another device to
+              verify the current Digital Student ID.
+            </p>
+
+          </div>
+
+
+          <div
+            id="qrLiveIndicator"
+            class="live-indicator"
+            hidden
+          >
+
+            <span class="live-indicator-dot"></span>
+
+            Live
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="qrBox"
+          class="secure-qr-container"
+        >
+
+
+          <!-- ===============================================
+               QR FRAME
+          ================================================ -->
+
+          <div class="qr-code-frame">
+
+            <div id="studentQrCode">
+            </div>
+
+
+            <span
+              id="qrPlaceholderText"
+              class="qr-placeholder-text"
+            >
+              QR code will appear after an
+              identity token is issued.
+            </span>
+
+          </div>
+
+
+          <!-- ===============================================
+               COUNTDOWN
+          ================================================ -->
+
+          <div
+            id="qrCountdownArea"
+            class="qr-countdown-area"
+            hidden
+          >
+
+            <div class="qr-countdown-label">
+              QR expires in
+            </div>
+
+
+            <div
+              id="qrCountdown"
+              class="qr-countdown-number"
+            >
+              10
+            </div>
+
+
+            <div class="qr-countdown-unit">
+              seconds
+            </div>
+
+
+            <div class="qr-progress">
+
+              <div
+                id="qrProgressFill"
+                class="qr-progress-fill"
+              ></div>
+
+            </div>
+
+
+            <div
+              id="qrExpiryText"
+              class="qr-security-message"
+            >
+              A new secure verification QR will
+              automatically appear when this one expires.
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             QR ACTIONS
+        ================================================== -->
+
+        <div class="qr-action-group">
+
+
+          <button
+            type="button"
+            id="refreshQrButton"
+            class="btn btn-outline"
+            disabled
+          >
+            Generate New QR
+          </button>
+
+
+          <a
+            id="openVerificationLink"
+            class="btn btn-primary"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            hidden
+          >
+            Open Public Verification
+          </a>
+
+
+        </div>
+
+
+        <!-- =================================================
+             VERIFICATION URL PREVIEW
+        ================================================== -->
+
+        <div
+          id="qrLinkPreview"
+          class="qr-link-preview"
+          hidden
+        >
+
+          <strong>
+            QR Verification Link
+          </strong>
+
+          <span id="qrVerificationUrl">
+            -
+          </span>
+
+        </div>
+
+
+      </div>
+
+
+      <!-- ===================================================
+           IDENTITY SUMMARY
+      ==================================================== -->
+
+      <div class="card">
+
+
+        <div class="table-header">
+
+          <div>
+
+            <h2>
+              Identity Summary
+            </h2>
+
+            <p>
+              Current information associated with
+              this Digital Student ID.
+            </p>
+
+          </div>
+
+
+          <span
+            id="qrValidityBadge"
+            class="badge badge-blue"
+          >
+            Loading
+          </span>
+
+        </div>
+
+
+        <div class="profile-table">
+
+
+          <div class="profile-row">
+
+            <strong>
+              Student Number
+            </strong>
+
+            <span id="qrStudentNumber">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="profile-row">
+
+            <strong>
+              Token ID
+            </strong>
+
+            <span id="qrTokenId">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="profile-row">
+
+            <strong>
+              Token Status
+            </strong>
+
+            <span id="qrTokenStatus">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="profile-row">
+
+            <strong>
+              Current Validity
+            </strong>
+
+            <span id="qrValidity">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="profile-row">
+
+            <strong>
+              QR Security
+            </strong>
+
+            <span>
+              10-second signed code
+            </span>
+
+          </div>
+
+
+          <div class="profile-row">
+
+            <strong>
+              Network
+            </strong>
+
+            <span>
+              Ethereum Sepolia
+            </span>
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         SECURITY INFORMATION
+    ====================================================== -->
+
+    <div class="card qr-security-card">
+
+
+      <div class="table-header">
+
+        <div>
+
+          <h2>
+            Secure QR Verification
+          </h2>
+
+          <p>
+            The QR contains a short-lived signed verification
+            reference rather than embedding private student data.
+          </p>
+
+        </div>
+
+
+        <span class="badge badge-blue">
+          Short-Lived Verification
+        </span>
+
+      </div>
+
+
+      <div class="qr-security-grid">
+
+
+        <div class="qr-security-item">
+
+          <strong>
+            ⏱ 10-Second Validity
+          </strong>
+
+          <p>
+            Each QR code remains valid for only
+            ten seconds before the backend rejects it.
+          </p>
+
+        </div>
+
+
+        <div class="qr-security-item">
+
+          <strong>
+            🔐 Signed Reference
+          </strong>
+
+          <p>
+            The QR contains a cryptographically signed
+            verification token rather than editable
+            student information.
+          </p>
+
+        </div>
+
+
+        <div class="qr-security-item">
+
+          <strong>
+            ⛓ Current Blockchain Status
+          </strong>
+
+          <p>
+            Scanning the QR retrieves the current
+            identity state from PeraSoul and Ethereum
+            Sepolia at verification time.
+          </p>
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         DEVICE INFORMATION
+    ====================================================== -->
+
+    <div class="card">
+
+      <h2>
+        Scan From Another Device
+      </h2>
+
+      <p class="muted-text">
+        For mobile-phone scanning during a local demonstration,
+        the phone and computer must be able to reach the same
+        frontend server. If the system is opened using
+        <strong>127.0.0.1</strong> or
+        <strong>localhost</strong>, another device cannot access
+        that address.
+      </p>
+
+      <div
+        id="qrNetworkWarning"
+        class="status"
+        hidden
+      >
+      </div>
+
+    </div>
+
+
+  </section>
+
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+  <div class="footer-inner">
+
+
+    <div>
+
+      <h3>
+        PeraSoul Digital ID
+      </h3>
+
+      <p>
+        A blockchain-based university Digital Student
+        Identity System using MetaMask authentication
+        and non-transferable Soulbound Tokens.
+      </p>
+
+    </div>
+
+
+    <div>
+
+      <h3>
+        Core Services
+      </h3>
+
+      <p>
+        <a href="student-register.html">
+          Student Registration
+        </a>
+      </p>
+
+      <p>
+        <a href="student-login.html">
+          Student Wallet Login
+        </a>
+      </p>
+
+      <p>
+        <a href="../verify.html">
+          Public Verification
+        </a>
+      </p>
+
+    </div>
+
+
+    <div>
+
+      <h3>
+        System
+      </h3>
+
+      <p>
+        FastAPI + SQLite application layer
+      </p>
+
+      <p>
+        Ethereum Sepolia blockchain integration
+      </p>
+
+      <p>
+        10-second signed QR verification
+      </p>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="footer-bottom">
+    PeraSoul Digital Student Identity System |
+    University of Peradeniya
+  </div>
+
+</footer>
+
+
+<!-- =========================================================
+     QR CODE LIBRARY
+========================================================= -->
+
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+></script>
+
+
+<!-- =========================================================
+     APPLICATION JAVASCRIPT
+========================================================= -->
+
+<script src="../js/main.js"></script>
+
+<script src="../js/student-qr.js"></script>
+
+
+
+</body>
+
 </html>

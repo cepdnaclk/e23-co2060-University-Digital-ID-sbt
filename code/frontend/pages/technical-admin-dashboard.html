@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Technical Administrator Dashboard | PeraSoul
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="../css/styles.css"
+  >
+
+  <link
+    rel="icon"
+    href="../assets/favicon.svg"
+    type="image/svg+xml"
+  >
+</head>
+
+
+<body class="page-admin-dashboard">
+
+
+<!-- =========================================================
+     TOP INFORMATION BAR
+========================================================= -->
+
+<div class="topbar">
+
+  <div class="topbar-inner">
+
+    <span>
+      PeraSoul Digital Student Identity System
+    </span>
+
+    <span>
+      Technical Administration | University of Peradeniya
+    </span>
+
+  </div>
+
+</div>
+
+
+<!-- =========================================================
+     MAIN HEADER
+========================================================= -->
+
+<header class="site-header">
+
+  <nav class="navbar">
+
+    <a
+      class="brand"
+      href="../index.html"
+    >
+
+      <div class="brand-mark">
+        PS
+      </div>
+
+      <div class="brand-text">
+
+        <strong>
+          PeraSoul
+        </strong>
+
+        <span>
+          Digital Student Identity
+        </span>
+
+      </div>
+
+    </a>
+
+
+    <div class="nav-links">
+
+      <div class="admin-header-user">
+
+        <span id="loggedTechnicalAdminName">
+          Technical Administrator
+        </span>
+
+        <small id="loggedTechnicalAdminWallet">
+          Wallet not loaded
+        </small>
+
+      </div>
+
+
+      <button
+        type="button"
+        id="topLogoutButton"
+        class="btn btn-outline"
+      >
+        Logout
+      </button>
+
+    </div>
+
+  </nav>
+
+</header>
+
+
+<!-- =========================================================
+     PAGE HERO
+========================================================= -->
+
+<section class="page-hero">
+
+  <div class="page-hero-inner">
+
+    <span class="section-label">
+      PERASOUL / TECHNICAL ADMINISTRATION
+    </span>
+
+    <h1>
+      Technical Administrator Dashboard
+    </h1>
+
+    <p>
+      Manage University Administrator accounts,
+      control administrator access and maintain
+      authorized administrator wallets.
+    </p>
+
+  </div>
+
+</section>
+
+
+<!-- =========================================================
+     MAIN DASHBOARD
+========================================================= -->
+
+<main class="dashboard-wrap">
+
+
+  <!-- =======================================================
+       SIDEBAR
+  ======================================================== -->
+
+  <aside class="sidebar">
+
+    <div class="sidebar-title">
+      Technical Admin Panel
+    </div>
+
+
+    <a href="technical-admin-dashboard.html">
+      📊 Overview
+    </a>
+
+
+    <a href="#create-admin-section">
+      ➕ Create University Admin
+    </a>
+
+
+    <a href="#admin-list-section">
+      👥 University Administrators
+    </a>
+
+
+    <a
+      href="../verify.html"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      ✅ Public Verification
+    </a>
+
+
+    <button
+      type="button"
+      id="sidebarLogoutButton"
+      class="sidebar-logout"
+    >
+      🚪 Logout
+    </button>
+
+  </aside>
+
+
+  <!-- =======================================================
+       DASHBOARD CONTENT
+  ======================================================== -->
+
+  <section class="dashboard-main">
+
+
+    <!-- =====================================================
+         DASHBOARD HEADER
+    ====================================================== -->
+
+    <div class="dashboard-head">
+
+      <div>
+
+        <h1>
+          Administrator Access Control Center
+        </h1>
+
+        <p>
+          Create and manage University Administrator
+          accounts without exposing the institution's
+          blockchain signing key.
+        </p>
+
+      </div>
+
+
+      <span class="badge badge-blue">
+        Technical Administrator
+      </span>
+
+    </div>
+
+
+    <!-- =====================================================
+         GLOBAL MESSAGE
+    ====================================================== -->
+
+    <div
+      id="technicalAdminMessage"
+      class="status"
+      aria-live="polite"
+    >
+      Verifying Technical Administrator session...
+    </div>
+
+
+    <!-- =====================================================
+         STATISTICS
+    ====================================================== -->
+
+    <div class="grid grid-4">
+
+
+      <div class="metric-card">
+
+        <small>
+          Total University Admins
+        </small>
+
+        <h2 id="totalUniversityAdmins">
+          —
+        </h2>
+
+      </div>
+
+
+      <div class="metric-card">
+
+        <small>
+          Active Admins
+        </small>
+
+        <h2 id="activeUniversityAdmins">
+          —
+        </h2>
+
+      </div>
+
+
+      <div class="metric-card">
+
+        <small>
+          Disabled Admins
+        </small>
+
+        <h2 id="disabledUniversityAdmins">
+          —
+        </h2>
+
+      </div>
+
+
+      <div class="metric-card">
+
+        <small>
+          Authentication
+        </small>
+
+        <h2>
+          MetaMask
+        </h2>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         ROLE INFORMATION
+    ====================================================== -->
+
+    <div class="grid grid-2">
+
+
+      <div class="card">
+
+        <h2>
+          Technical Administrator
+        </h2>
+
+        <p>
+          The Technical Administrator manages
+          administrator access to PeraSoul.
+        </p>
+
+        <div class="info-list">
+
+          <div class="info-item">
+            Create University Administrator accounts.
+          </div>
+
+          <div class="info-item">
+            Activate or disable University Administrators.
+          </div>
+
+          <div class="info-item">
+            Replace registered University Administrator wallets.
+          </div>
+
+          <div class="info-item">
+            Review authorized University Administrator accounts.
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card">
+
+        <h2>
+          University Administrator
+        </h2>
+
+        <p>
+          University Administrators perform student
+          Digital ID operations through the protected
+          University Administrator workspace.
+        </p>
+
+        <div class="info-list">
+
+          <div class="info-item">
+            Approve student registrations.
+          </div>
+
+          <div class="info-item">
+            Approve Digital Student ID requests.
+          </div>
+
+          <div class="info-item">
+            Mint PeraSoul identity tokens.
+          </div>
+
+          <div class="info-item">
+            Perform revocation and wallet replacement operations.
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         CREATE UNIVERSITY ADMIN
+    ====================================================== -->
+
+    <div
+      id="create-admin-section"
+      class="card"
+    >
+
+      <div class="table-header">
+
+        <div>
+
+          <h2>
+            Create University Administrator
+          </h2>
+
+          <p>
+            Register an authorized MetaMask public
+            wallet as a University Administrator.
+          </p>
+
+        </div>
+
+
+        <span class="badge badge-blue">
+          Access Management
+        </span>
+
+      </div>
+
+
+      <form id="createUniversityAdminForm">
+
+
+        <div class="grid grid-2">
+
+
+          <div class="form-group">
+
+            <label for="newAdminFullName">
+              Full Name
+            </label>
+
+            <input
+              type="text"
+              id="newAdminFullName"
+              required
+              minlength="2"
+              maxlength="150"
+              placeholder="Administrator full name"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="newAdminWallet">
+              MetaMask Wallet Address
+            </label>
+
+            <input
+              type="text"
+              id="newAdminWallet"
+              required
+              placeholder="0x..."
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="newAdminDesignation">
+              Designation
+            </label>
+
+            <input
+              type="text"
+              id="newAdminDesignation"
+              placeholder="Example: Senior Assistant Registrar"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="newAdminDepartment">
+              Department / Division
+            </label>
+
+            <input
+              type="text"
+              id="newAdminDepartment"
+              placeholder="Example: Faculty Administration"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="newAdminEmail">
+              Email
+            </label>
+
+            <input
+              type="email"
+              id="newAdminEmail"
+              placeholder="administrator@pdn.ac.lk"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="newAdminPhone">
+              Phone
+            </label>
+
+            <input
+              type="text"
+              id="newAdminPhone"
+              placeholder="Optional phone number"
+            >
+
+          </div>
+
+
+        </div>
+
+
+        <div class="form-actions">
+
+          <button
+            type="submit"
+            id="createAdminButton"
+            class="btn btn-primary"
+          >
+            Create University Administrator
+          </button>
+
+
+          <button
+            type="reset"
+            class="btn btn-outline"
+          >
+            Clear Form
+          </button>
+
+        </div>
+
+
+        <div
+          id="createAdminMessage"
+          class="status"
+          aria-live="polite"
+        ></div>
+
+      </form>
+
+    </div>
+
+
+    <!-- =====================================================
+         UNIVERSITY ADMINISTRATOR LIST
+    ====================================================== -->
+
+    <div
+      id="admin-list-section"
+      class="card dashboard-table-card"
+    >
+
+
+      <div class="table-header">
+
+        <div>
+
+          <h2>
+            University Administrators
+          </h2>
+
+          <p>
+            Manage University Administrator status
+            and registered MetaMask wallets.
+          </p>
+
+        </div>
+
+
+        <button
+          type="button"
+          id="refreshAdminsButton"
+          class="btn btn-outline"
+        >
+          Refresh
+        </button>
+
+      </div>
+
+
+      <div class="table-wrap">
+
+        <table class="table">
+
+          <thead>
+
+            <tr>
+
+              <th>
+                User ID
+              </th>
+
+              <th>
+                Administrator
+              </th>
+
+              <th>
+                Designation
+              </th>
+
+              <th>
+                Department
+              </th>
+
+              <th>
+                Wallet
+              </th>
+
+              <th>
+                Status
+              </th>
+
+              <th>
+                Actions
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody id="universityAdminsTableBody">
+
+            <tr>
+
+              <td colspan="7">
+                Loading University Administrators...
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         WALLET CHANGE SECTION
+    ====================================================== -->
+
+    <div
+      id="wallet-change-section"
+      class="card"
+    >
+
+      <div class="table-header">
+
+        <div>
+
+          <h2>
+            Change Administrator Wallet
+          </h2>
+
+          <p>
+            Replace the registered MetaMask wallet
+            for an existing University Administrator.
+          </p>
+
+        </div>
+
+
+        <span class="badge badge-warning">
+          Security Sensitive
+        </span>
+
+      </div>
+
+
+      <form id="changeAdminWalletForm">
+
+
+        <div class="grid grid-2">
+
+
+          <div class="form-group">
+
+            <label for="walletChangeAdminId">
+              University Administrator User ID
+            </label>
+
+            <input
+              type="number"
+              id="walletChangeAdminId"
+              min="1"
+              required
+              placeholder="Administrator user ID"
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="newAdminWalletAddress">
+              New MetaMask Wallet Address
+            </label>
+
+            <input
+              type="text"
+              id="newAdminWalletAddress"
+              required
+              placeholder="0x..."
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="form-actions">
+
+          <button
+            type="submit"
+            id="changeWalletButton"
+            class="btn btn-primary"
+          >
+            Update Administrator Wallet
+          </button>
+
+        </div>
+
+
+        <div
+          id="walletChangeMessage"
+          class="status"
+          aria-live="polite"
+        ></div>
+
+      </form>
+
+    </div>
+
+
+    <!-- =====================================================
+         SESSION INFORMATION
+    ====================================================== -->
+
+    <div class="card">
+
+
+      <div class="table-header">
+
+        <div>
+
+          <h2>
+            Technical Administrator Session
+          </h2>
+
+          <p>
+            Access is authenticated using a MetaMask
+            wallet signature and protected JWT session.
+          </p>
+
+        </div>
+
+
+        <span class="badge badge-blue">
+          MetaMask Authentication
+        </span>
+
+      </div>
+
+
+      <div class="grid grid-2">
+
+
+        <div>
+
+          <small>
+            Connected Technical Administrator Wallet
+          </small>
+
+          <p
+            id="technicalAdminWalletDisplay"
+            class="wallet-text"
+          >
+            Loading...
+          </p>
+
+        </div>
+
+
+        <div>
+
+          <small>
+            Administrator Role
+          </small>
+
+          <p>
+            Technical Administrator
+          </p>
+
+        </div>
+
+
+        <div>
+
+          <small>
+            Authentication Method
+          </small>
+
+          <p>
+            Wallet Signature + JWT Session
+          </p>
+
+        </div>
+
+
+        <div>
+
+          <small>
+            Blockchain Signing Key
+          </small>
+
+          <p>
+            Not exposed to browser administrators
+          </p>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+  </section>
+
+
+</main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+
+  <div class="footer-inner">
+
+
+    <div>
+
+      <h3>
+        PeraSoul Digital ID
+      </h3>
+
+      <p>
+        Blockchain-based university
+        Digital Student Identity System.
+      </p>
+
+    </div>
+
+
+    <div>
+
+      <h3>
+        Technical Administration
+      </h3>
+
+      <p>
+        Administrator account management
+      </p>
+
+      <p>
+        Role-based access control
+      </p>
+
+      <p>
+        Administrator wallet management
+      </p>
+
+    </div>
+
+
+    <div>
+
+      <h3>
+        Security
+      </h3>
+
+      <p>
+        MetaMask wallet authentication
+      </p>
+
+      <p>
+        JWT-protected administrator sessions
+      </p>
+
+      <p>
+        Separate blockchain signing service
+      </p>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="footer-bottom">
+    PeraSoul Digital Identity System |
+    Technical Administration
+  </div>
+
+
+</footer>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script src="../js/main.js"></script>
+
+<script src="../js/technical-admin-dashboard.js"></script>
+
+<script
+  src="../js/visuals.js"
+  defer
+></script>
+
+
+</body>
+
+</html>

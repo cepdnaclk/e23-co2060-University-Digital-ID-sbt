@@ -1,40 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Admin Dashboard | PeraSoul</title>
+  <title>University Admin Dashboard | PeraSoul</title>
 
-  <link rel="stylesheet" href="../css/styles.css">
+  <link
+    rel="stylesheet"
+    href="../css/styles.css"
+  >
+
+  <link
+    rel="icon"
+    href="../assets/favicon.svg"
+    type="image/svg+xml"
+  >
 </head>
 
-<body>
+
+<body class="page-admin-dashboard">
+
+
+<!-- =========================================================
+     TOP INFORMATION BAR
+========================================================= -->
 
 <div class="topbar">
+
   <div class="topbar-inner">
-    <span>University Digital Identity System</span>
-    <span>Faculty of Engineering | Blockchain Prototype</span>
+
+    <span>
+      PeraSoul Digital Student Identity System
+    </span>
+
+    <span>
+      University of Peradeniya | Ethereum Sepolia
+    </span>
+
   </div>
+
 </div>
 
+
+<!-- =========================================================
+     MAIN HEADER
+========================================================= -->
+
 <header class="site-header">
+
   <nav class="navbar">
 
-    <a class="brand" href="../index.html">
-      <div class="brand-mark">PS</div>
+    <a
+      class="brand"
+      href="../index.html"
+    >
+
+      <div class="brand-mark">
+        PS
+      </div>
 
       <div class="brand-text">
-        <strong>PeraSoul</strong>
-        <span>Digital Student Identity</span>
+
+        <strong>
+          PeraSoul
+        </strong>
+
+        <span>
+          Digital Student Identity
+        </span>
+
       </div>
+
     </a>
 
+
     <div class="nav-links">
-      <span id="loggedAdminName">Administrator</span>
+
+      <div class="admin-header-user">
+
+        <span id="loggedAdminName">
+          University Administrator
+        </span>
+
+        <small id="loggedAdminWallet">
+          Wallet not loaded
+        </small>
+
+      </div>
+
 
       <button
         type="button"
@@ -43,36 +102,64 @@
       >
         Logout
       </button>
+
     </div>
 
   </nav>
+
 </header>
 
+
+<!-- =========================================================
+     PAGE HERO
+========================================================= -->
+
 <section class="page-hero">
+
   <div class="page-hero-inner">
 
-    <h1>Administrator Dashboard</h1>
+    <span class="section-label">
+      PERASOUL / UNIVERSITY ADMINISTRATOR WORKSPACE
+    </span>
+
+    <h1>
+      University Administrator Dashboard
+    </h1>
 
     <p>
-      Review student registrations, manage token requests,
-      and monitor blockchain identity operations.
+      Review student registrations, manage digital identity
+      tokens, perform revocations and monitor blockchain
+      identity operations.
     </p>
 
   </div>
+
 </section>
+
+
+<!-- =========================================================
+     MAIN DASHBOARD
+========================================================= -->
 
 <main class="dashboard-wrap">
 
+
+  <!-- =======================================================
+       SIDEBAR
+  ======================================================== -->
+
   <aside class="sidebar">
 
-    <div class="sidebar-title">Admin Panel</div>
+    <div class="sidebar-title">
+      University Admin Panel
+    </div>
 
-    <a class="active" href="admin-dashboard.html">
+    <a href="admin-dashboard.html">
       📊 Overview
     </a>
 
     <a href="admin-requests.html">
-      📥 Student Requests
+      📥 Token Requests
     </a>
 
     <a href="admin-mint.html">
@@ -91,6 +178,14 @@
       🔁 Replace Wallet
     </a>
 
+    <a
+      href="../verify.html"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      ✅ Public Verification
+    </a>
+
     <button
       type="button"
       id="sidebarLogoutButton"
@@ -101,86 +196,195 @@
 
   </aside>
 
+
+  <!-- =======================================================
+       DASHBOARD CONTENT
+  ======================================================== -->
+
   <section class="dashboard-main">
+
+
+    <!-- =====================================================
+         DASHBOARD HEADER
+    ====================================================== -->
 
     <div class="dashboard-head">
 
       <div>
-        <h1>University Identity Control Center</h1>
+
+        <h1>
+          University Identity Control Center
+        </h1>
 
         <p>
-          Monitor students, token requests, revocations,
-          and blockchain transactions.
+          Monitor students, token requests,
+          revocations and blockchain transactions.
         </p>
+
       </div>
 
+
       <span class="badge badge-blue">
-        University Admin
+        University Administrator
       </span>
 
     </div>
 
-    <div id="dashboardMessage" class="status">
+
+    <!-- =====================================================
+         GLOBAL DASHBOARD MESSAGE
+    ====================================================== -->
+
+    <div
+      id="dashboardMessage"
+      class="status"
+    >
       Loading dashboard information...
     </div>
 
-    <div class="grid grid-4">
 
-      <div class="metric-card">
-        <small>Total Students</small>
-        <h2 id="totalStudents">0</h2>
-      </div>
-
-      <div class="metric-card">
-        <small>Pending Students</small>
-        <h2 id="pendingStudents">0</h2>
-      </div>
-
-      <div class="metric-card">
-        <small>Pending Token Requests</small>
-        <h2 id="pendingTokenRequests">0</h2>
-      </div>
-
-      <div class="metric-card">
-        <small>Active Tokens</small>
-        <h2 id="activeTokens">0</h2>
-      </div>
-
-    </div>
+    <!-- =====================================================
+         PRIMARY STATISTICS
+    ====================================================== -->
 
     <div class="grid grid-4">
 
-      <div class="metric-card">
-        <small>Active Students</small>
-        <h2 id="activeStudents">0</h2>
-      </div>
 
       <div class="metric-card">
-        <small>Minted Tokens</small>
-        <h2 id="mintedTokens">0</h2>
+
+        <small>
+          Total Students
+        </small>
+
+        <h2 id="totalStudents">
+          —
+        </h2>
+
       </div>
 
-      <div class="metric-card">
-        <small>Temporary Revocations</small>
-        <h2 id="temporaryRevocations">0</h2>
-      </div>
 
       <div class="metric-card">
-        <small>Total Blockchain Transactions</small>
-        <h2 id="totalTransactions">0</h2>
+
+        <small>
+          Pending Students
+        </small>
+
+        <h2 id="pendingStudents">
+          —
+        </h2>
+
       </div>
+
+
+      <div class="metric-card">
+
+        <small>
+          Pending Token Requests
+        </small>
+
+        <h2 id="pendingTokenRequests">
+          —
+        </h2>
+
+      </div>
+
+
+      <div class="metric-card">
+
+        <small>
+          Active Tokens
+        </small>
+
+        <h2 id="activeTokens">
+          —
+        </h2>
+
+      </div>
+
 
     </div>
+
+
+    <!-- =====================================================
+         SECONDARY STATISTICS
+    ====================================================== -->
+
+    <div class="grid grid-4">
+
+
+      <div class="metric-card">
+
+        <small>
+          Active Students
+        </small>
+
+        <h2 id="activeStudents">
+          —
+        </h2>
+
+      </div>
+
+
+      <div class="metric-card">
+
+        <small>
+          Minted Tokens
+        </small>
+
+        <h2 id="mintedTokens">
+          —
+        </h2>
+
+      </div>
+
+
+      <div class="metric-card">
+
+        <small>
+          Temporary Revocations
+        </small>
+
+        <h2 id="temporaryRevocations">
+          —
+        </h2>
+
+      </div>
+
+
+      <div class="metric-card">
+
+        <small>
+          Blockchain Transactions
+        </small>
+
+        <h2 id="totalTransactions">
+          —
+        </h2>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         QUICK MANAGEMENT ACTIONS
+    ====================================================== -->
 
     <div class="grid grid-2">
 
+
+      <!-- Student Approval -->
+
       <div class="card">
 
-        <h2>Student Registration Review</h2>
+        <h2>
+          Student Registration Review
+        </h2>
 
         <p>
-          Review students who have registered and are waiting
-          for university confirmation.
+          Review students who have registered and
+          are waiting for university confirmation.
         </p>
 
         <a
@@ -192,13 +396,18 @@
 
       </div>
 
+
+      <!-- Token Request -->
+
       <div class="card">
 
-        <h2>Token Request Review</h2>
+        <h2>
+          Token Request Review
+        </h2>
 
         <p>
-          Review approved students who have requested their
-          digital student identity token.
+          Review approved students who have requested
+          their blockchain-based Digital Student ID.
         </p>
 
         <a
@@ -210,13 +419,18 @@
 
       </div>
 
+
+      <!-- Temporary Revocation -->
+
       <div class="card">
 
-        <h2>Temporary Revocation</h2>
+        <h2>
+          Temporary Revocation
+        </h2>
 
         <p>
-          Temporarily invalidate a student's digital identity
-          for a selected period.
+          Temporarily invalidate a student's
+          digital identity for a selected period.
         </p>
 
         <a
@@ -228,39 +442,109 @@
 
       </div>
 
+
+      <!-- Permanent Revocation -->
+
       <div class="card">
 
-        <h2>Student Verification</h2>
+        <h2>
+          Permanent Revocation
+        </h2>
 
         <p>
-          Check whether a student's Soulbound Token is currently
-          valid on the blockchain.
+          Permanently revoke a student's current
+          digital identity and invalidate the
+          associated Soulbound Token.
+        </p>
+
+        <a
+          class="btn btn-dark"
+          href="admin-burn.html"
+        >
+          Open Permanent Revocation
+        </a>
+
+      </div>
+
+
+      <!-- Wallet Replacement -->
+
+      <div class="card">
+
+        <h2>
+          Wallet Replacement
+        </h2>
+
+        <p>
+          Replace a student's registered wallet
+          when the previous wallet is lost or
+          no longer accessible.
         </p>
 
         <a
           class="btn btn-primary"
-          href="verify.html"
+          href="admin-replace-wallet.html"
+        >
+          Open Wallet Replacement
+        </a>
+
+      </div>
+
+
+      <!-- Public Verification -->
+
+      <div class="card">
+
+        <h2>
+          Public Student Verification
+        </h2>
+
+        <p>
+          Verify the current blockchain status
+          of a PeraSoul Digital Student ID.
+        </p>
+
+        <a
+          class="btn btn-primary"
+          href="../verify.html"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Open Verification
         </a>
 
       </div>
 
+
     </div>
+
+
+    <!-- =====================================================
+         PENDING STUDENT REGISTRATIONS
+    ====================================================== -->
 
     <div
       id="pending-student-section"
       class="card dashboard-table-card"
     >
 
+
       <div class="table-header">
 
+
         <div>
-          <h2>Pending Student Registrations</h2>
+
+          <h2>
+            Pending Student Registrations
+          </h2>
+
           <p>
-            These student accounts require university approval.
+            These student accounts require
+            university approval.
           </p>
+
         </div>
+
 
         <button
           type="button"
@@ -270,53 +554,103 @@
           Refresh
         </button>
 
+
       </div>
+
 
       <div class="table-wrap">
 
+
         <table class="table">
 
+
           <thead>
+
             <tr>
-              <th>User ID</th>
-              <th>Student Number</th>
-              <th>Name</th>
-              <th>Department</th>
-              <th>Wallet</th>
-              <th>Status</th>
-              <th>Action</th>
+
+              <th>
+                User ID
+              </th>
+
+              <th>
+                Student Number
+              </th>
+
+              <th>
+                Name
+              </th>
+
+              <th>
+                Department
+              </th>
+
+              <th>
+                Wallet
+              </th>
+
+              <th>
+                Status
+              </th>
+
+              <th>
+                Action
+              </th>
+
             </tr>
+
           </thead>
+
 
           <tbody id="pendingStudentsTableBody">
 
+
             <tr>
+
               <td colspan="7">
                 Loading pending students...
               </td>
+
             </tr>
+
 
           </tbody>
 
+
         </table>
+
 
       </div>
 
+
     </div>
+
+
+    <!-- =====================================================
+         PENDING TOKEN REQUESTS
+    ====================================================== -->
 
     <div
       id="token-request-section"
       class="card dashboard-table-card"
     >
 
+
       <div class="table-header">
 
+
         <div>
-          <h2>Pending Token Requests</h2>
+
+          <h2>
+            Pending Token Requests
+          </h2>
+
           <p>
-            Approved students waiting for digital ID token issuance.
+            Approved students waiting for
+            Digital Student ID token issuance.
           </p>
+
         </div>
+
 
         <button
           type="button"
@@ -326,80 +660,350 @@
           Refresh
         </button>
 
+
       </div>
+
 
       <div class="table-wrap">
 
+
         <table class="table">
 
+
           <thead>
+
             <tr>
-              <th>Request ID</th>
-              <th>User ID</th>
-              <th>Wallet</th>
-              <th>Request Note</th>
-              <th>Status</th>
-              <th>Action</th>
+
+              <th>
+                Request ID
+              </th>
+
+              <th>
+                User ID
+              </th>
+
+              <th>
+                Wallet
+              </th>
+
+              <th>
+                Request Note
+              </th>
+
+              <th>
+                Status
+              </th>
+
+              <th>
+                Action
+              </th>
+
             </tr>
+
           </thead>
+
 
           <tbody id="tokenRequestsTableBody">
 
+
             <tr>
+
               <td colspan="6">
                 Loading token requests...
               </td>
+
             </tr>
+
 
           </tbody>
 
+
         </table>
+
 
       </div>
 
+
     </div>
+
+
+    <!-- =====================================================
+         DIGITAL IDENTITIES / TOKEN MANAGEMENT
+    ====================================================== -->
+
+    <div
+      id="active-token-section"
+      class="card dashboard-table-card"
+    >
+
+
+      <div class="table-header">
+
+
+        <div>
+
+          <h2>
+            Student Digital Identities
+          </h2>
+
+          <p>
+            View issued PeraSoul identities and
+            perform permanent revocation or
+            wallet replacement operations.
+          </p>
+
+        </div>
+
+
+        <button
+          type="button"
+          id="refreshActiveTokensButton"
+          class="btn btn-outline"
+        >
+          Refresh
+        </button>
+
+
+      </div>
+
+
+      <div class="table-wrap">
+
+
+        <table class="table">
+
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Student Number
+              </th>
+
+              <th>
+                Name
+              </th>
+
+              <th>
+                Department
+              </th>
+
+              <th>
+                Wallet
+              </th>
+
+              <th>
+                Token ID
+              </th>
+
+              <th>
+                Status
+              </th>
+
+              <th>
+                Actions
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody id="activeTokensTableBody">
+
+
+            <tr>
+
+              <td colspan="7">
+                Loading student identities...
+              </td>
+
+            </tr>
+
+
+          </tbody>
+
+
+        </table>
+
+
+      </div>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         UNIVERSITY ADMIN SESSION INFORMATION
+    ====================================================== -->
+
+    <div class="card">
+
+
+      <div class="table-header">
+
+        <div>
+
+          <h2>
+            University Administrator Session
+          </h2>
+
+          <p>
+            University Administrator access is verified
+            using the authorized MetaMask wallet and a
+            protected JWT session.
+          </p>
+
+        </div>
+
+        <span class="badge badge-blue">
+          MetaMask Authentication
+        </span>
+
+      </div>
+
+
+      <div class="grid grid-2">
+
+
+        <div>
+
+          <small>
+            Connected University Administrator Wallet
+          </small>
+
+          <p
+            id="adminWalletDisplay"
+            class="wallet-text"
+          >
+            Loading...
+          </p>
+
+        </div>
+
+
+        <div>
+
+          <small>
+            Authentication Method
+          </small>
+
+          <p>
+            Wallet Signature + JWT Session
+          </p>
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
 
   </section>
 
+
 </main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
 
 <footer class="footer">
 
+
   <div class="footer-inner">
 
+
     <div>
-      <h3>PeraSoul Digital ID</h3>
+
+      <h3>
+        PeraSoul Digital ID
+      </h3>
 
       <p>
-        A blockchain-based university digital student identity system.
+        A blockchain-based university
+        Digital Student Identity System.
       </p>
+
     </div>
+
 
     <div>
-      <h3>Administrator Features</h3>
 
-      <p>Student registration review</p>
-      <p>Token request management</p>
-      <p>Identity revocation</p>
+      <h3>
+        University Administrator Features
+      </h3>
+
+      <p>
+        Student registration review
+      </p>
+
+      <p>
+        Token request management
+      </p>
+
+      <p>
+        Identity revocation
+      </p>
+
+      <p>
+        Wallet replacement
+      </p>
+
     </div>
+
 
     <div>
-      <h3>System Status</h3>
 
-      <p>Backend integration active</p>
-      <p>Sepolia blockchain connected</p>
+      <h3>
+        System Status
+      </h3>
+
+      <p>
+        FastAPI backend integration
+      </p>
+
+      <p>
+        Ethereum Sepolia testnet
+      </p>
+
+      <p>
+        MetaMask administrator authentication
+      </p>
+
     </div>
+
 
   </div>
+
 
   <div class="footer-bottom">
+
     PeraSoul Digital Identity System
+
   </div>
+
 
 </footer>
 
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
 <script src="../js/main.js"></script>
+
 <script src="../js/admin-dashboard.js"></script>
 
+<script
+  src="../js/visuals.js"
+  defer
+></script>
+
 </body>
+
 </html>

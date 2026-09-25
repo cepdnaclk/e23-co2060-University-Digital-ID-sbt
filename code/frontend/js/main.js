@@ -1,62 +1,95 @@
+(() => {
+  "use strict";
 
-function showMessage(id, message, type = "success") {
-  const el = document.getElementById(id);
-  if (!el) return;
-  el.className = "status";
-  el.textContent = message;
-}
-
-function makeWallet() {
-  return "0x" + Math.random().toString(16).slice(2, 42).padEnd(40, "a");
-}
-
-function connectWallet(inputId, statusId = "status") {
-  const wallet = makeWallet();
-  const input = document.getElementById(inputId);
-  if (input) input.value = wallet;
-  localStorage.setItem("pera_wallet", wallet);
-  showMessage(statusId, "Wallet connected successfully: " + wallet.slice(0, 10) + "..." + wallet.slice(-6));
-}
-
-function registerStudent(event) {
-  event.preventDefault();
-  const wallet = document.getElementById("walletAddress")?.value;
-  if (!wallet) {
-    showMessage("status", "Please connect your wallet before submitting registration.");
-    return;
-  }
-  window.location.href = "registration-success.html";
-}
-
-function loginStudent(event) {
-  event.preventDefault();
-  window.location.href = "student-dashboard.html";
-}
-
-function loginAdmin(event) {
-  event.preventDefault();
-  window.location.href = "admin-dashboard.html";
-}
-
-function demoAction(id, action) {
-  showMessage(id, action + " completed in prototype mode. Smart contract and backend integration will be added later.");
-}
-
-function generateQR() {
-  const qr = document.getElementById("qrBox");
-  if (qr) qr.innerHTML = "PeraSoul<br>Verify";
-  demoAction("studentStatus", "QR generation");
-}
-
-function startCountdown() {
-  let seconds = Number(document.getElementById("countdownSeconds")?.value || 30);
-  const output = document.getElementById("countdownOutput");
-  const timer = setInterval(() => {
-    if (output) output.textContent = "Temporary revocation remaining: " + seconds + " seconds";
-    seconds -= 1;
-    if (seconds < 0) {
-      clearInterval(timer);
-      if (output) output.textContent = "Countdown finished. Token is valid again.";
+  function apiBaseUrl() {
+    if (typeof window.PERASOUL_API_BASE_URL === "string" &&
+        window.PERASOUL_API_BASE_URL.trim()) {
+      return window.PERASOUL_API_BASE_URL.replace(/\/+$/, "");
     }
-  }, 1000);
-}
+
+    const protocol =
+      window.location.protocol === "https:" ? "https:" : "http:";
+    const host = window.location.hostname || "127.0.0.1";
+
+    return `${protocol}//${host}:8000`;
+  }
+
+  function isEthereumAddress(value) {
+    return /^0x[a-fA-F0-9]{40}$/.test(String(value || "").trim());
+  }
+
+  function shortenValue(value, start = 8, end = 6) {
+    const text = String(value || "");
+    if (!text || text.length <= start + end + 3) {
+      return text || "-";
+    }
+    return `${text.slice(0, start)}...${text.slice(-end)}`;
+  }
+
+  function formatStatus(value) {
+    if (!value) return "Not Available";
+    return String(value)
+      .replaceAll("_", " ")
+      .replace(/\b\w/g, (ch) => ch.toUpperCase());
+  }
+
+  function escapeHtml(value) {
+    if (value === null || value === undefined) return "-";
+    return String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+  }
+
+  async function jsonResponse(response) {
+    let data = {};
+    try {
+      data = await response.json();
+    } catch (_) {
+      data = {};
+    }
+
+    if (!response.ok) {
+      const detail =
+        typeof data.detail === "string"
+          ? data.detail
+          : `Request failed with status ${response.status}.`;
+      throw new Error(detail);
+    }
+
+    return data;
+  }
+
+  function clearAdminSession() {
+    [
+      "adminAccessToken",
+      "adminUserId",
+      "adminUsername",
+      "adminRole",
+      "adminWallet",
+      "adminDisplayName"
+    ].forEach((key) => sessionStorage.removeItem(key));
+  }
+
+  function clearStudentSession() {
+    [
+      "studentWalletAddress",
+      "studentUserId",
+      "studentRole",
+      "studentAccountStatus"
+    ].forEach((key) => sessionStorage.removeItem(key));
+  }
+
+  window.PeraSoulUtils = Object.freeze({
+    apiBaseUrl,
+    isEthereumAddress,
+    shortenValue,
+    formatStatus,
+    escapeHtml,
+    jsonResponse,
+    clearAdminSession,
+    clearStudentSession
+  });
+})();

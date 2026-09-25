@@ -1,95 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Wallet Change Request</title>
-<link rel="stylesheet" href="../css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Wallet Replacement | PeraSoul</title>
+  <link rel="stylesheet" href="../css/styles.css">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 </head>
-<body>
-<div class="topbar">
-  <div class="topbar-inner">
-    <span>University Digital Identity Prototype</span>
-    <span>Faculty of Engineering | Blockchain MVP</span>
-  </div>
-</div>
-<header class="site-header">
-  <nav class="navbar">
-    <a class="brand" href="../index.html">
-      <div class="brand-mark">PS</div>
-      <div class="brand-text">
-        <strong>PeraSoul</strong>
-        <span>Digital Student Identity</span>
-      </div>
-    </a>
-    <div class="nav-links">
-      <a href="about.html">University</a>
-      <a href="contact.html">Contact</a>
-      <a href="feedback.html">Feedback</a>
-      <a href="student-register.html">Register</a>
-      <a href="student-login.html">Student Login</a>
-      <a class="btn btn-primary" href="admin-login.html">Admin Login</a>
-    </div>
-  </nav>
-</header>
+<body class="page-student-wallet-change">
+<div class="topbar"><div class="topbar-inner"><span>PeraSoul Digital Student Identity System</span><span>Student Portal | Controlled Wallet Recovery</span></div></div>
+<header class="site-header"><nav class="navbar">
+  <a class="brand" href="../index.html"><div class="brand-mark">PS</div><div class="brand-text"><strong>PeraSoul</strong><span>Digital Student Identity</span></div></a>
+  <div class="nav-links"><span id="loggedStudentName">Student</span><small id="loggedStudentWallet">Wallet not loaded</small><button type="button" id="topStudentLogoutButton" class="btn btn-outline">Logout</button></div>
+</nav></header>
 
+<section class="page-hero"><div class="page-hero-inner"><span class="section-label">PERASOUL / DIGITAL STUDENT IDENTITY</span>
+  <h1>Wallet Replacement Request</h1>
+  <p>Request a controlled replacement when the currently registered wallet is lost, compromised or no longer accessible.</p>
+</div></section>
 
-<section class="page-hero">
-  <div class="page-hero-inner">
-    <h1>Wallet Change Request</h1>
-    <p>Submit a request to replace your old wallet with a new wallet.</p>
-  </div>
-</section>
 <main class="dashboard-wrap">
+  <aside class="sidebar">
+    <div class="sidebar-title">Student Panel</div>
+    <a href="student-dashboard.html">👤 Profile Overview</a>
+    <a href="student-token.html">🪪 Token Details</a>
+    <a href="student-dashboard.html#digital-id-section">🎓 Digital Student ID</a>
+    <a href="student-qr.html">📱 QR Verification</a>
+    <a href="student-wallet-change.html">🔁 Wallet Replacement</a>
+    <a href="../verify.html" target="_blank" rel="noopener noreferrer">✅ Public Verification</a>
+    <button type="button" id="sidebarStudentLogoutButton" class="sidebar-logout">🚪 Logout</button>
+  </aside>
+  <section class="dashboard-main">
+    <a class="btn btn-outline back-link" href="student-dashboard.html">← Back to Dashboard</a>
 
-<aside class="sidebar">
-  <div class="sidebar-title">Student Panel</div>
-  <a href="student-dashboard.html">👤 Profile Overview</a>
-  <a href="student-token.html">🪪 Token Details</a>
-  <a href="student-qr.html">📱 QR Verification</a>
-  <a href="student-wallet-change.html">🔁 Wallet Change</a>
-  <a href="student-complaint.html">💬 Complaint</a>
-  <a href="../index.html">🚪 Logout</a>
-</aside>
+    <div class="grid grid-2">
+      <form class="card" id="walletRecoveryForm">
+        <h2>Replacement Request</h2>
 
-<section class="dashboard-main">
-  <a class="btn btn-outline back-link" href="student-dashboard.html">← Back to Dashboard</a>
-  <div class="card">
-    <h2>Request Wallet Replacement</h2>
-    <div class="form-group"><label>Current Wallet</label><input placeholder="0x old wallet address"></div>
-    <div class="form-group"><label>New Wallet</label><input placeholder="0x new wallet address"></div>
-    <div class="form-group"><label>Reason</label><textarea placeholder="Explain why you need to change your wallet"></textarea></div>
-    <button class="btn btn-primary" onclick="demoAction('walletStatus','Wallet change request')">Submit Request</button>
-    <div id="walletStatus" class="status">Wallet request status appears here.</div>
-  </div>
-</section>
+        <div class="form-group">
+          <label for="currentStudentWallet">Current Registered Wallet</label>
+          <input id="currentStudentWallet" type="text" readonly placeholder="Loaded from your session">
+        </div>
+
+        <div class="form-group">
+          <label for="replacementWalletAddress">Proposed New Wallet</label>
+          <input id="replacementWalletAddress" name="new_wallet_address" type="text" placeholder="0x..." required>
+        </div>
+
+        <div class="form-group">
+          <label for="walletRecoveryReason">Reason</label>
+          <textarea id="walletRecoveryReason" name="reason" maxlength="500" placeholder="Explain why the registered wallet needs to be replaced"></textarea>
+        </div>
+
+        <button type="submit" id="walletRecoveryButton" class="btn btn-primary">Validate Replacement Details</button>
+        <div id="walletRecoveryStatus" class="status" aria-live="polite">Load your student session to continue.</div>
+      </form>
+
+      <div class="card">
+        <h2>Security Process</h2>
+        <div class="info-list">
+          <div class="info-item">Submitting a request does not automatically move the identity.</div>
+          <div class="info-item">An authorized university administrator must review the request and confirm the student.</div>
+          <div class="info-item">A replacement operation invalidates the previous token and issues a new token to the approved new wallet.</div>
+          <div class="info-item">Never provide a private key or seed phrase as evidence.</div>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
-
-
 <footer class="footer">
   <div class="footer-inner">
     <div>
       <h3>PeraSoul Digital ID</h3>
-      <p>A university digital identity MVP using wallet-based authentication and Soulbound Token concepts.</p>
+      <p>A blockchain-based university digital student identity system using MetaMask authentication and non-transferable Soulbound Tokens.</p>
     </div>
     <div>
-      <h3>Quick Links</h3>
+      <h3>Core Services</h3>
       <p><a href="student-register.html">Student Registration</a></p>
-      <p><a href="student-login.html">Student Login</a></p>
-      <p><a href="admin-login.html">Administrator Login</a></p>
+      <p><a href="student-login.html">Student Wallet Login</a></p>
+      <p><a href="../verify.html">Public Verification</a></p>
     </div>
     <div>
-      <h3>Project Status</h3>
-      <p>MVP prototype interface</p>
-      <p>Smart contract integration planned</p>
+      <h3>System</h3>
+      <p>FastAPI + SQLite application layer</p>
+      <p>Ethereum Sepolia blockchain integration</p>
+      <p>MetaMask wallet authentication</p>
     </div>
   </div>
-  <div class="footer-bottom">PeraSoul Digital Identity System - MVP Prototype</div>
+  <div class="footer-bottom">PeraSoul Digital Student Identity System | University of Peradeniya</div>
 </footer>
 <script src="../js/main.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
-<script src="../js/blockchain.js"></script>
-
+<script src="../js/student-wallet-change.js"></script>
+<script src="../js/visuals.js" defer></script>
 </body>
 </html>

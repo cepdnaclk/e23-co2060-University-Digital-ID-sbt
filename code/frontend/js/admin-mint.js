@@ -1,61 +1,38 @@
-const API_BASE_URL = "http://127.0.0.1:8000";
+const API_BASE_URL = window.PeraSoulUtils.apiBaseUrl();
+const adminToken = sessionStorage.getItem("adminAccessToken");
 
-const adminToken =
-  sessionStorage.getItem("adminAccessToken");
-
-const mintPageMessage =
-  document.getElementById("mintPageMessage");
-
+const mintPageMessage = document.getElementById("mintPageMessage");
 const mintRequestsTableBody =
   document.getElementById("mintRequestsTableBody");
-
 const mintSelectedRequestButton =
   document.getElementById("mintSelectedRequestButton");
 
 let selectedRequest = null;
 
-
-function getAuthorizationHeaders() {
+function headers() {
   return {
     "Content-Type": "application/json",
     "Authorization": `Bearer ${adminToken}`
   };
 }
 
-
-function showMintPageMessage(message, type = "") {
+function pageMessage(message, type = "") {
+  if (!mintPageMessage) return;
   mintPageMessage.textContent = message;
   mintPageMessage.className = `status ${type}`;
 }
 
-
-function showMintStatus(message, type = "") {
-  const mintStatus =
-    document.getElementById("mintStatus");
-
-  mintStatus.textContent = message;
-  mintStatus.className = `status ${type}`;
+function mintStatus(message, type = "") {
+  const el = document.getElementById("mintStatus");
+  if (!el) return;
+  el.textContent = message;
+  el.className = `status ${type}`;
 }
-
-
-function shortenValue(value) {
-  if (!value || value.length < 16) {
-    return value || "-";
-  }
-
-  return `${value.slice(0, 8)}...${value.slice(-6)}`;
-}
-
 
 function logoutAdmin() {
-  sessionStorage.removeItem("adminAccessToken");
-  sessionStorage.removeItem("adminUserId");
-  sessionStorage.removeItem("adminUsername");
-  sessionStorage.removeItem("adminRole");
-
+  window.PeraSoulUtils.clearAdminSession();
   window.location.href = "admin-login.html";
 }
-
 
 async function verifyAdminSession() {
   if (!adminToken) {
@@ -64,324 +41,184 @@ async function verifyAdminSession() {
   }
 
   try {
-    const response = await fetch(
-      `${API_BASE_URL}/admin-auth/me`,
-      {
-        method: "GET",
-        headers: getAuthorizationHeaders()
-      }
-    );
+    const response = await fetch(`${API_BASE_URL}/admin-auth/me`, {
+      headers: headers()
+    });
+    const data = await window.PeraSoulUtils.jsonResponse(response);
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(
-        data.detail || "Invalid administrator session."
-      );
+    const name = document.getElementById("loggedAdminName");
+    if (name) {
+      name.textContent =
+        data.display_name ||
+        sessionStorage.getItem("adminDisplayName") ||
+        "University Administrator";
     }
 
-    document.getElementById("loggedAdminName").textContent =
-      data.username || "University Administrator";
-
     return true;
-
-  } catch (error) {
-    console.error("Admin session verification error:", error);
+  } catch (_) {
     logoutAdmin();
     return false;
   }
 }
 
-
-function clearSelectedRequest() {
+function clearSelection() {
   selectedRequest = null;
 
-  document.getElementById("selectedRequestId").textContent = "-";
-  document.getElementById("selectedStudentUserId").textContent = "-";
-  document.getElementById("selectedWalletAddress").textContent = "-";
-  document.getElementById("selectedWalletAddress").title = "";
-  document.getElementById("selectedRequestNote").textContent = "-";
+  [
+    ["selectedRequestId", "-"],
+    ["selectedStudentUserId", "-"],
+    ["selectedWalletAddress", "-"],
+    ["selectedRequestNote", "-"]
+  ].forEach(([id, value]) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = value;
+  });
 
-  const statusBadge =
-    document.getElementById("selectedRequestStatus");
+  const badge = document.getElementById("selectedRequestStatus");
+  if (badge) {
+    badge.textContent = "Not Selected";
+    badge.className = "badge badge-warning";
+  }
 
-  statusBadge.textContent = "Not Selected";
-  statusBadge.className = "badge badge-warning";
-
-  mintSelectedRequestButton.disabled = true;
-
-  showMintStatus(
-    "Select a pending token request."
-  );
+  if (mintSelectedRequestButton) mintSelectedRequestButton.disabled = true;
+  mintStatus("Select a pending token request.");
 }
 
-
-function selectTokenRequest(request) {
+function selectRequest(request) {
   selectedRequest = request;
 
-  document.getElementById("selectedRequestId").textContent =
-    request.id;
-
+  document.getElementById("selectedRequestId").textContent = request.id;
   document.getElementById("selectedStudentUserId").textContent =
     request.student_user_id;
 
-  const walletElement =
-    document.getElementById("selectedWalletAddress");
-
-  walletElement.textContent =
-    shortenValue(request.wallet_address);
-
-  walletElement.title =
-    request.wallet_address;
+  const wallet = document.getElementById("selectedWalletAddress");
+  wallet.textContent = window.PeraSoulUtils.shortenValue(
+    request.wallet_address
+  );
+  wallet.title = request.wallet_address;
 
   document.getElementById("selectedRequestNote").textContent =
     request.request_note || "-";
 
-  const statusBadge =
-    document.getElementById("selectedRequestStatus");
-
-  statusBadge.textContent =
-    request.request_status;
-
-  statusBadge.className =
-    "badge badge-warning";
+  const badge = document.getElementById("selectedRequestStatus");
+  badge.textContent = window.PeraSoulUtils.formatStatus(
+    request.request_status
+  );
+  badge.className = "badge badge-warning";
 
   mintSelectedRequestButton.disabled = false;
-
-  showMintStatus(
+  mintStatus(
     `Request ${request.id} selected. Review the details before minting.`,
     "success"
   );
 }
 
-
 async function loadPendingTokenRequests() {
-  clearSelectedRequest();
-
-  mintRequestsTableBody.innerHTML = `
-    <tr>
-      <td colspan="5">
-        Loading pending token requests...
-      </td>
-    </tr>
-  `;
+  clearSelection();
+  mintRequestsTableBody.innerHTML =
+    '<tr><td colspan="5">Loading pending token requests...</td></tr>';
 
   try {
-    const response = await fetch(
-      `${API_BASE_URL}/admin/token-requests`,
-      {
-        method: "GET",
-        headers: getAuthorizationHeaders()
-      }
-    );
+    const response = await fetch(`${API_BASE_URL}/admin/token-requests`, {
+      headers: headers()
+    });
+    const requests = await window.PeraSoulUtils.jsonResponse(response);
 
-    const requests = await response.json();
-
-    if (!response.ok) {
-      throw new Error(
-        requests.detail || "Unable to load token requests."
-      );
-    }
-
-    if (!Array.isArray(requests) || requests.length === 0) {
-      mintRequestsTableBody.innerHTML = `
-        <tr>
-          <td colspan="5">
-            No pending token requests.
-          </td>
-        </tr>
-      `;
-
-      showMintPageMessage(
-        "No pending token requests are available."
-      );
-
+    if (!Array.isArray(requests) || !requests.length) {
+      mintRequestsTableBody.innerHTML =
+        '<tr><td colspan="5">No pending token requests.</td></tr>';
+      pageMessage("No pending token requests are available.");
       return;
     }
 
-    mintRequestsTableBody.innerHTML =
-      requests.map((request, index) => `
-        <tr>
+    mintRequestsTableBody.innerHTML = requests.map((request, index) => `
+      <tr>
+        <td>${window.PeraSoulUtils.escapeHtml(request.id)}</td>
+        <td>${window.PeraSoulUtils.escapeHtml(request.student_user_id)}</td>
+        <td title="${window.PeraSoulUtils.escapeHtml(request.wallet_address)}">
+          ${window.PeraSoulUtils.escapeHtml(
+            window.PeraSoulUtils.shortenValue(request.wallet_address)
+          )}
+        </td>
+        <td><span class="badge badge-warning">${
+          window.PeraSoulUtils.escapeHtml(
+            window.PeraSoulUtils.formatStatus(request.request_status)
+          )
+        }</span></td>
+        <td>
+          <button type="button" class="btn btn-outline"
+            data-request-index="${index}">Select</button>
+        </td>
+      </tr>
+    `).join("");
 
-          <td>
-            ${request.id}
-          </td>
-
-          <td>
-            ${request.student_user_id}
-          </td>
-
-          <td title="${request.wallet_address}">
-            ${shortenValue(request.wallet_address)}
-          </td>
-
-          <td>
-            <span class="badge badge-warning">
-              ${request.request_status}
-            </span>
-          </td>
-
-          <td>
-            <button
-              type="button"
-              class="btn btn-outline"
-              data-request-index="${index}"
-            >
-              Select
-            </button>
-          </td>
-
-        </tr>
-      `).join("");
-
-    const selectButtons =
-      mintRequestsTableBody.querySelectorAll(
-        "[data-request-index]"
-      );
-
-    selectButtons.forEach((button) => {
-      button.addEventListener("click", () => {
-        const requestIndex =
-          Number(button.dataset.requestIndex);
-
-        selectTokenRequest(
-          requests[requestIndex]
-        );
+    mintRequestsTableBody
+      .querySelectorAll("[data-request-index]")
+      .forEach((button) => {
+        button.addEventListener("click", () => {
+          selectRequest(requests[Number(button.dataset.requestIndex)]);
+        });
       });
-    });
 
-    showMintPageMessage(
+    pageMessage(
       `${requests.length} pending token request(s) loaded.`,
       "success"
     );
-
   } catch (error) {
-    console.error("Token request loading error:", error);
-
-    mintRequestsTableBody.innerHTML = `
-      <tr>
-        <td colspan="5">
-          ${error.message || "Failed to load token requests."}
-        </td>
-      </tr>
-    `;
-
-    showMintPageMessage(
-      error.message || "Failed to load token requests.",
-      "error"
-    );
+    mintRequestsTableBody.innerHTML =
+      `<tr><td colspan="5">${window.PeraSoulUtils.escapeHtml(error.message)}</td></tr>`;
+    pageMessage(error.message, "error");
   }
 }
-
 
 async function mintSelectedRequest() {
   if (!selectedRequest) {
-    showMintStatus(
-      "Select a pending request first.",
-      "error"
-    );
-
+    mintStatus("Select a pending request first.", "error");
     return;
   }
 
-  const confirmed = window.confirm(
-    `Approve request ${selectedRequest.id} and mint the token to ${selectedRequest.wallet_address}?`
-  );
-
-  if (!confirmed) {
-    return;
-  }
+  if (!window.confirm(
+    `Mint a PeraSoul Digital Student ID for request ${selectedRequest.id}?`
+  )) return;
 
   mintSelectedRequestButton.disabled = true;
-  mintSelectedRequestButton.textContent =
-    "Submitting Blockchain Transaction...";
-
-  showMintStatus(
-    "Sending the token mint transaction to Sepolia..."
-  );
+  mintSelectedRequestButton.textContent = "Submitting Sepolia Transaction...";
 
   try {
+    mintStatus("Waiting for blockchain confirmation...");
+
     const response = await fetch(
       `${API_BASE_URL}/admin/approve-request/${selectedRequest.id}`,
-      {
-        method: "POST",
-        headers: getAuthorizationHeaders()
-      }
+      {method: "POST", headers: headers()}
     );
+    const data = await window.PeraSoulUtils.jsonResponse(response);
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(
-        data.detail || "Token minting failed."
-      );
-    }
-
-    showMintStatus(
-      `Token minted successfully. Transaction hash: ${data.tx_hash}`,
+    mintStatus(
+      `Token minted successfully. Transaction: ${data.tx_hash}`,
       "success"
     );
-
-    showMintPageMessage(
-      "Blockchain mint transaction completed successfully.",
-      "success"
-    );
-
-    selectedRequest = null;
+    pageMessage("Token issuance completed successfully.", "success");
 
     await loadPendingTokenRequests();
-
   } catch (error) {
-    console.error("Token minting error:", error);
-
-    showMintStatus(
-      error.message || "Unable to mint the token.",
-      "error"
-    );
-
+    mintStatus(error.message || "Token minting failed.", "error");
+    mintSelectedRequestButton.disabled = false;
   } finally {
-    mintSelectedRequestButton.textContent =
-      "Approve and Mint Token";
-
-    if (selectedRequest) {
-      mintSelectedRequestButton.disabled = false;
-    }
+    mintSelectedRequestButton.textContent = "Approve and Mint Token";
   }
 }
 
+document.getElementById("topLogoutButton")
+  ?.addEventListener("click", logoutAdmin);
+document.getElementById("sidebarLogoutButton")
+  ?.addEventListener("click", logoutAdmin);
+document.getElementById("refreshRequestsButton")
+  ?.addEventListener("click", loadPendingTokenRequests);
+mintSelectedRequestButton
+  ?.addEventListener("click", mintSelectedRequest);
 
-async function initializeMintPage() {
-  showMintPageMessage(
-    "Verifying administrator session..."
-  );
-
-  const validSession =
-    await verifyAdminSession();
-
-  if (!validSession) {
-    return;
-  }
-
+(async () => {
+  pageMessage("Verifying administrator session...");
+  if (!(await verifyAdminSession())) return;
   await loadPendingTokenRequests();
-}
-
-
-document
-  .getElementById("topLogoutButton")
-  .addEventListener("click", logoutAdmin);
-
-document
-  .getElementById("sidebarLogoutButton")
-  .addEventListener("click", logoutAdmin);
-
-document
-  .getElementById("refreshRequestsButton")
-  .addEventListener("click", loadPendingTokenRequests);
-
-mintSelectedRequestButton.addEventListener(
-  "click",
-  mintSelectedRequest
-);
-
-
-initializeMintPage();
+})();

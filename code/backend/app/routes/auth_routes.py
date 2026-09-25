@@ -55,6 +55,21 @@ def register_student(request: StudentRegisterRequest, db: Session = Depends(get_
             status_code=400,
             detail="Student number already registered"
         )
+
+    if request.email:
+        exisiting_email=(
+            db.query(StudentProfile)
+            .filter(
+                StudentProfile.email==request.email
+            )
+            .first()
+        )
+
+        if exisiting_email:
+            raise HTTPException(
+                status_code=400,
+                detail=("Email address already registered")
+            )
     
     new_user=User(
         wallet_address=wallet,

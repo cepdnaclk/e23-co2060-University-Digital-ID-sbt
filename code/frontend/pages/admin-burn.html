@@ -1,90 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Permanent Burn</title>
-<link rel="stylesheet" href="../css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Permanent Revocation | PeraSoul</title>
+  <link rel="stylesheet" href="../css/styles.css">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 </head>
-<body>
-<div class="topbar">
-  <div class="topbar-inner">
-    <span>University Digital Identity Prototype</span>
-    <span>Faculty of Engineering | Blockchain MVP</span>
-  </div>
-</div>
-<header class="site-header">
-  <nav class="navbar">
-    <a class="brand" href="../index.html">
-      <div class="brand-mark">PS</div>
-      <div class="brand-text">
-        <strong>PeraSoul</strong>
-        <span>Digital Student Identity</span>
-      </div>
-    </a>
-    <div class="nav-links">
-      <a href="about.html">University</a>
-      <a href="contact.html">Contact</a>
-      <a href="feedback.html">Feedback</a>
-      <a href="student-register.html">Register</a>
-      <a href="student-login.html">Student Login</a>
-      <a class="btn btn-primary" href="admin-login.html">Admin Login</a>
-    </div>
-  </nav>
-</header>
+<body class="page-admin-burn">
+<div class="topbar"><div class="topbar-inner"><span>PeraSoul Digital Student Identity System</span><span>University Administrator | Ethereum Sepolia</span></div></div>
+<header class="site-header"><nav class="navbar">
+  <a class="brand" href="../index.html"><div class="brand-mark">PS</div><div class="brand-text"><strong>PeraSoul</strong><span>Digital Student Identity</span></div></a>
+  <div class="nav-links"><span id="loggedAdminName">Administrator</span><small id="loggedAdminWallet">Wallet not loaded</small><button type="button" id="topLogoutButton" class="btn btn-outline">Logout</button></div>
+</nav></header>
 
+<section class="page-hero"><div class="page-hero-inner"><span class="section-label">PERASOUL / ADMINISTRATOR WORKSPACE</span>
+  <h1>Permanent Revocation</h1>
+  <p>Permanently invalidate a student's current PeraSoul identity. This operation is irreversible for the affected token.</p>
+</div></section>
 
-<section class="page-hero"><div class="page-hero-inner"><h1>Permanent Revoke / Burn</h1><p>Permanently revoke a token by burning it from the previous wallet.</p></div></section>
 <main class="dashboard-wrap">
+  <aside class="sidebar">
+    <div class="sidebar-title">Admin Panel</div>
+    <a href="admin-dashboard.html">📊 Overview</a>
+    <a href="admin-requests.html">📥 Token Requests</a>
+    <a href="admin-mint.html">🪪 Token Minting</a>
+    <a href="admin-temporary-revoke.html">⏳ Temporary Revoke</a>
+    <a href="admin-burn.html">🔥 Permanent Revoke</a>
+    <a href="admin-replace-wallet.html">🔁 Replace Wallet</a>
+    <a href="../verify.html" target="_blank" rel="noopener noreferrer">✅ Public Verification</a>
+    <button type="button" id="sidebarLogoutButton" class="sidebar-logout">🚪 Logout</button>
+  </aside>
+  <section class="dashboard-main">
+    <a class="btn btn-outline back-link" href="admin-dashboard.html">← Back to Admin Dashboard</a>
 
-<aside class="sidebar">
-  <div class="sidebar-title">Admin Panel</div>
-  <a href="admin-dashboard.html">📊 Overview</a>
-  <a href="admin-mint.html">🪪 Mint Token</a>
-  <a href="admin-temporary-revoke.html">⏳ Temporary Revoke</a>
-  <a href="admin-burn.html">🔥 Permanent Burn</a>
-  <a href="admin-replace-wallet.html">🔁 Replace Wallet</a>
-  <a href="admin-requests.html">📥 Requests</a>
-  <a href="../index.html">🚪 Logout</a>
-</aside>
+    <div id="permanentRevokeMessage" class="status" aria-live="polite">Verifying administrator session...</div>
 
-<section class="dashboard-main">
-  <a class="btn btn-outline back-link" href="admin-dashboard.html">← Back to Admin Dashboard</a>
-  <div class="card">
-    <h2>Burn Token Form</h2>
-    <div class="form-group"><label>Student Wallet Address</label><input placeholder="0x..."></div>
-    <div class="form-group"><label>Reason</label><textarea placeholder="Reason for permanent revocation"></textarea></div>
-    <button class="btn btn-danger" onclick="demoAction('burnStatus','Permanent revoke and burn')">Burn Token</button>
-    <div id="burnStatus" class="status">Burn status appears here.</div>
-  </div>
-</section>
+    <div class="grid grid-2">
+      <form class="card" id="permanentRevokeForm">
+        <h2>Permanent Revocation Form</h2>
+
+        <div class="form-group">
+          <label for="permanentRevokeStudentId">Student User ID</label>
+          <input id="permanentRevokeStudentId" name="student_user_id" type="number" min="1" placeholder="Student user ID" required>
+        </div>
+
+        <div class="form-group">
+          <label for="permanentRevokeWallet">Student Wallet</label>
+          <input id="permanentRevokeWallet" type="text" placeholder="Loaded from selected identity when available">
+        </div>
+
+        <div class="form-group">
+          <label for="permanentRevokeReason">Reason</label>
+          <textarea id="permanentRevokeReason" name="reason" minlength="3" maxlength="500" placeholder="Reason for permanent revocation" required></textarea>
+        </div>
+
+        <label class="checkbox-row">
+          <input id="permanentRevokeConfirm" type="checkbox" required>
+          I understand that this permanently invalidates the current token.
+        </label>
+
+        <button type="submit" id="permanentRevokeButton" class="btn btn-danger">Permanently Revoke Identity</button>
+      </form>
+
+      <div class="card">
+        <h2>Operation Result</h2>
+        <div class="profile-table">
+          <div class="profile-row"><strong>Token ID</strong><span id="permanentResultTokenId">-</span></div>
+          <div class="profile-row"><strong>Transaction Hash</strong><span id="permanentResultTxHash" class="wallet-value">-</span></div>
+          <div class="profile-row"><strong>Block</strong><span id="permanentResultBlock">-</span></div>
+          <div class="profile-row"><strong>Gas Used</strong><span id="permanentResultGas">-</span></div>
+          <div class="profile-row"><strong>Status</strong><span id="permanentResultStatus">Not submitted</span></div>
+        </div>
+        <div class="notice"><strong>Important:</strong> Permanent revocation is intended for identities that must no longer be accepted. Use temporary revocation for time-limited suspension.</div>
+      </div>
+    </div>
+  </section>
 </main>
-
-
 <footer class="footer">
   <div class="footer-inner">
     <div>
       <h3>PeraSoul Digital ID</h3>
-      <p>A university digital identity MVP using wallet-based authentication and Soulbound Token concepts.</p>
+      <p>A blockchain-based university digital student identity system using MetaMask authentication and non-transferable Soulbound Tokens.</p>
     </div>
     <div>
-      <h3>Quick Links</h3>
+      <h3>Core Services</h3>
       <p><a href="student-register.html">Student Registration</a></p>
-      <p><a href="student-login.html">Student Login</a></p>
-      <p><a href="admin-login.html">Administrator Login</a></p>
+      <p><a href="student-login.html">Student Wallet Login</a></p>
+      <p><a href="../verify.html">Public Verification</a></p>
     </div>
     <div>
-      <h3>Project Status</h3>
-      <p>MVP prototype interface</p>
-      <p>Smart contract integration planned</p>
+      <h3>System</h3>
+      <p>FastAPI + SQLite application layer</p>
+      <p>Ethereum Sepolia blockchain integration</p>
+      <p>MetaMask wallet authentication</p>
     </div>
   </div>
-  <div class="footer-bottom">PeraSoul Digital Identity System - MVP Prototype</div>
+  <div class="footer-bottom">PeraSoul Digital Student Identity System | University of Peradeniya</div>
 </footer>
 <script src="../js/main.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
-<script src="../js/blockchain.js"></script>
-
+<script src="../js/admin-permanent-revoke.js"></script>
+<script src="../js/visuals.js" defer></script>
 </body>
 </html>

@@ -1,199 +1,344 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Administrator Login | PeraSoul</title>
+  <title>
+    Administrator Wallet Login | PeraSoul
+  </title>
 
-  <link rel="stylesheet" href="../css/styles.css">
+  <link
+    rel="stylesheet"
+    href="../css/styles.css"
+  >
+
+  <link
+    rel="icon"
+    href="../assets/favicon.svg"
+    type="image/svg+xml"
+  >
 </head>
 
-<body>
 
-<div class="topbar">
-  <div class="topbar-inner">
-    <span>University Digital Identity Prototype</span>
-    <span>Faculty of Engineering | Blockchain MVP</span>
+<body class="page-admin-login">
+
+  <div class="topbar">
+
+    <div class="topbar-inner">
+
+      <span>
+        PeraSoul Digital Student Identity System
+      </span>
+
+      <span>
+        Authorized Administrator Access
+      </span>
+
+    </div>
+
   </div>
-</div>
 
-<header class="site-header">
-  <nav class="navbar">
 
-    <a class="brand" href="../index.html">
-      <div class="brand-mark">PS</div>
+  <header class="site-header">
 
-      <div class="brand-text">
-        <strong>PeraSoul</strong>
-        <span>Digital Student Identity</span>
-      </div>
-    </a>
-
-    <div class="nav-links">
-      <a href="../pages/about.html">University</a>
-      <a href="../pages/contact.html">Contact</a>
-      <a href="../pages/feedback.html">Feedback</a>
-      <a href="../pages/student-register.html">Register</a>
-      <a href="../pages/student-login.html">Student Login</a>
+    <nav class="navbar">
 
       <a
-        class="btn btn-primary"
-        href="../pages/admin-login.html"
+        class="brand"
+        href="../index.html"
       >
-        Admin Login
+
+        <div class="brand-mark">
+          PS
+        </div>
+
+        <div class="brand-text">
+
+          <strong>
+            PeraSoul
+          </strong>
+
+          <span>
+            Digital Student Identity
+          </span>
+
+        </div>
+
       </a>
-    </div>
 
-  </nav>
-</header>
 
-<section class="page-hero">
-  <div class="page-hero-inner">
+      <div class="nav-links">
 
-    <h1>Administrator Portal</h1>
+        <a href="about.html">
+          About PeraSoul
+        </a>
 
-    <p>
-      Access administrative controls for student approval,
-      token issuance, temporary revocation, and request review.
-    </p>
+        <a href="../verify.html">
+          Public Verification
+        </a>
 
-  </div>
-</section>
+        <a href="contact.html">
+          Contact
+        </a>
 
-<main class="container">
+        <a href="student-register.html">
+          Register
+        </a>
 
-  <div class="form-shell">
+        <a href="student-login.html">
+          Student Login
+        </a>
 
-    <aside class="info-panel">
+        <a
+          class="btn btn-primary"
+          href="admin-login.html"
+        >
+          Admin Login
+        </a>
 
-      <h2>Admin responsibilities</h2>
+      </div>
+
+    </nav>
+
+  </header>
+
+
+  <section class="page-hero">
+
+    <div class="page-hero-inner">
+
+      <span class="section-label">
+        PERASOUL / ADMINISTRATOR WORKSPACE
+      </span>
+
+      <h1>
+        Administrator Wallet Login
+      </h1>
 
       <p>
-        Authorized university administrators can review student
-        registrations, approve token requests, issue digital identities,
-        and manage temporary revocations.
+        Connect an authorized MetaMask wallet and
+        sign the server-generated challenge to access
+        the appropriate PeraSoul administration portal.
       </p>
 
-      <div class="info-list">
-        <div class="info-item">
-          Review and approve pending student registrations.
+    </div>
+
+  </section>
+
+
+  <main class="container">
+
+    <div class="form-shell">
+
+      <aside class="info-panel">
+
+        <h2>
+          Protected university access
+        </h2>
+
+        <p>
+          Administrative actions are restricted to
+          authorized PeraSoul administrator accounts.
+          University Administrators manage student
+          identity operations, while Technical
+          Administrators manage administrator access.
+        </p>
+
+
+        <div class="info-list">
+
+          <div class="info-item">
+            Connect a registered administrator MetaMask wallet.
+          </div>
+
+          <div class="info-item">
+            PeraSoul requests a unique nonce-based
+            login message from the backend.
+          </div>
+
+          <div class="info-item">
+            MetaMask signs the challenge locally;
+            the private key never leaves the wallet.
+          </div>
+
+          <div class="info-item">
+            The backend verifies the wallet signature
+            and creates a protected JWT session.
+          </div>
+
+          <div class="info-item">
+            Your assigned administrator role determines
+            which management dashboard you can access.
+          </div>
+
         </div>
 
-        <div class="info-item">
-          Review student token requests and mint identity tokens.
-        </div>
+      </aside>
 
-        <div class="info-item">
-          Temporarily revoke student identities when required.
-        </div>
 
-        <div class="info-item">
-          View blockchain transactions and system statistics.
-        </div>
-      </div>
-
-    </aside>
-
-    <form class="form-card" id="adminLoginForm">
-
-      <h2>Administrator Login</h2>
-
-      <div class="form-group">
-        <label for="adminUsername">Username</label>
-
-        <input
-          type="text"
-          id="adminUsername"
-          name="username"
-          placeholder="Enter administrator username"
-          autocomplete="username"
-          required
-        >
-      </div>
-
-      <div class="form-group">
-        <label for="adminPassword">Password</label>
-
-        <input
-          type="password"
-          id="adminPassword"
-          name="password"
-          placeholder="Enter administrator password"
-          autocomplete="current-password"
-          required
-        >
-      </div>
-
-      <div
-        id="loginMessage"
-        class="form-message"
-        aria-live="polite"
-      ></div>
-
-      <button
-        type="submit"
-        id="adminLoginButton"
-        class="btn btn-primary"
+      <form
+        class="form-card"
+        id="adminLoginForm"
       >
-        Enter Admin Dashboard
-      </button>
 
-    </form>
+        <h2>
+          Sign in with MetaMask
+        </h2>
 
-  </div>
 
-</main>
+        <div class="form-group">
 
-<footer class="footer">
+          <label for="adminWalletAddress">
+            Connected Administrator Wallet
+          </label>
 
-  <div class="footer-inner">
+          <input
+            type="text"
+            id="adminWalletAddress"
+            name="wallet_address"
+            readonly
+            placeholder="Connect your authorized MetaMask wallet"
+            required
+          >
 
-    <div>
-      <h3>PeraSoul Digital ID</h3>
+        </div>
 
-      <p>
-        A university digital identity system using secure authentication
-        and Soulbound Token technology.
-      </p>
+
+        <button
+          type="button"
+          id="connectAdminWalletButton"
+          class="btn btn-outline"
+        >
+          Connect MetaMask Wallet
+        </button>
+
+
+        <button
+          type="submit"
+          id="adminLoginButton"
+          class="btn btn-primary"
+          disabled
+        >
+          Sign Message and Login
+        </button>
+
+
+        <div
+          id="loginMessage"
+          class="status"
+          aria-live="polite"
+        >
+          Connect an authorized administrator wallet
+          to continue.
+        </div>
+
+
+        <p class="muted-text">
+          Only wallets registered as active
+          Technical Administrators or University
+          Administrators are permitted.
+        </p>
+
+      </form>
+
     </div>
 
-    <div>
-      <h3>Quick Links</h3>
+  </main>
 
-      <p>
-        <a href="student-register.html">Student Registration</a>
-      </p>
 
-      <p>
-        <a href="student-login.html">Student Login</a>
-      </p>
+  <footer class="footer">
 
-      <p>
-        <a href="admin-login.html">Administrator Login</a>
-      </p>
+    <div class="footer-inner">
+
+      <div>
+
+        <h3>
+          PeraSoul Digital ID
+        </h3>
+
+        <p>
+          A blockchain-based university digital
+          student identity system using MetaMask
+          authentication and non-transferable
+          Soulbound Tokens.
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h3>
+          Core Services
+        </h3>
+
+        <p>
+          <a href="student-register.html">
+            Student Registration
+          </a>
+        </p>
+
+        <p>
+          <a href="student-login.html">
+            Student Wallet Login
+          </a>
+        </p>
+
+        <p>
+          <a href="../verify.html">
+            Public Verification
+          </a>
+        </p>
+
+      </div>
+
+
+      <div>
+
+        <h3>
+          System
+        </h3>
+
+        <p>
+          FastAPI + SQLite application layer
+        </p>
+
+        <p>
+          Ethereum Sepolia blockchain integration
+        </p>
+
+        <p>
+          MetaMask wallet authentication
+        </p>
+
+      </div>
+
     </div>
 
-    <div>
-      <h3>Project Status</h3>
 
-      <p>Backend and blockchain integration active</p>
-      <p>Frontend demonstration interface</p>
+    <div class="footer-bottom">
+      PeraSoul Digital Student Identity System |
+      University of Peradeniya
     </div>
 
-  </div>
+  </footer>
 
-  <div class="footer-bottom">
-    PeraSoul Digital Identity System
-  </div>
 
-</footer>
+  <script src="../js/main.js"></script>
 
-<script src="../js/main.js"></script>
-<script src="../js/admin-login.js"></script>
+  <script src="../js/admin-login.js"></script>
+
+  <script
+    src="../js/visuals.js"
+    defer
+  ></script>
 
 </body>
+
 </html>

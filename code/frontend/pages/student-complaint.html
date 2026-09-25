@@ -1,94 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Student Complaint</title>
-<link rel="stylesheet" href="../css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Student Support | PeraSoul</title>
+  <link rel="stylesheet" href="../css/styles.css">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 </head>
-<body>
-<div class="topbar">
-  <div class="topbar-inner">
-    <span>University Digital Identity Prototype</span>
-    <span>Faculty of Engineering | Blockchain MVP</span>
-  </div>
-</div>
-<header class="site-header">
-  <nav class="navbar">
-    <a class="brand" href="../index.html">
-      <div class="brand-mark">PS</div>
-      <div class="brand-text">
-        <strong>PeraSoul</strong>
-        <span>Digital Student Identity</span>
-      </div>
-    </a>
-    <div class="nav-links">
-      <a href="about.html">University</a>
+<body class="page-student-complaint">
+<div class="topbar"><div class="topbar-inner"><span>PeraSoul Digital Student Identity System</span><span>Student Support</span></div></div>
+<header class="site-header"><nav class="navbar">
+  <a class="brand" href="../index.html"><div class="brand-mark">PS</div><div class="brand-text"><strong>PeraSoul</strong><span>Digital Student Identity</span></div></a>
+  <div class="nav-links">
+      <a href="about.html">About PeraSoul</a>
+      <a href="../verify.html">Public Verification</a>
       <a href="contact.html">Contact</a>
-      <a href="feedback.html">Feedback</a>
       <a href="student-register.html">Register</a>
       <a href="student-login.html">Student Login</a>
       <a class="btn btn-primary" href="admin-login.html">Admin Login</a>
     </div>
-  </nav>
-</header>
-
-
-<section class="page-hero">
-  <div class="page-hero-inner">
-    <h1>Submit Complaint</h1>
-    <p>Report issues related to token issuance, wallet login, profile data, or verification.</p>
-  </div>
-</section>
-<main class="dashboard-wrap">
-
-<aside class="sidebar">
-  <div class="sidebar-title">Student Panel</div>
-  <a href="student-dashboard.html">👤 Profile Overview</a>
-  <a href="student-token.html">🪪 Token Details</a>
-  <a href="student-qr.html">📱 QR Verification</a>
-  <a href="student-wallet-change.html">🔁 Wallet Change</a>
-  <a href="student-complaint.html">💬 Complaint</a>
-  <a href="../index.html">🚪 Logout</a>
-</aside>
-
-<section class="dashboard-main">
-  <a class="btn btn-outline back-link" href="student-dashboard.html">← Back to Dashboard</a>
+</nav></header>
+<section class="page-hero"><div class="page-hero-inner"><span class="section-label">PERASOUL / DIGITAL STUDENT IDENTITY</span><h1>Student Support</h1><p>The standalone complaint workflow is not part of the finalized identity MVP.</p></div></section>
+<main class="container"><div class="institution-banner"><img src="../assets/university.svg" alt="Conceptual university architecture"><div><span class="section-label">UNIVERSITY OF PERADENIYA</span><h2>Identity with<br>institutional roots.</h2><p>PeraSoul / Digital Student Identity</p></div></div>
   <div class="card">
-    <h2>Complaint Form</h2>
-    <div class="form-group"><label>Complaint Type</label><select><option>Token issue</option><option>Wallet issue</option><option>Profile issue</option><option>Other</option></select></div>
-    <div class="form-group"><label>Message</label><textarea placeholder="Explain your issue"></textarea></div>
-    <button class="btn btn-dark" onclick="demoAction('complaintStatus','Complaint submission')">Submit Complaint</button>
-    <div id="complaintStatus" class="status">Complaint status appears here.</div>
+    <h2>Need help with your identity?</h2>
+    <p>Return to your student dashboard for token status and wallet information. For registration, revocation or wallet-recovery issues, use the support guidance page and contact an authorized university administrator.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="student-dashboard.html">Open Student Dashboard</a>
+      <a class="btn btn-outline" href="contact.html">Support Information</a>
+    </div>
   </div>
-</section>
 </main>
-
-
 <footer class="footer">
   <div class="footer-inner">
     <div>
       <h3>PeraSoul Digital ID</h3>
-      <p>A university digital identity MVP using wallet-based authentication and Soulbound Token concepts.</p>
+      <p>A blockchain-based university digital student identity system using MetaMask authentication and non-transferable Soulbound Tokens.</p>
     </div>
     <div>
-      <h3>Quick Links</h3>
+      <h3>Core Services</h3>
       <p><a href="student-register.html">Student Registration</a></p>
-      <p><a href="student-login.html">Student Login</a></p>
-      <p><a href="admin-login.html">Administrator Login</a></p>
+      <p><a href="student-login.html">Student Wallet Login</a></p>
+      <p><a href="../verify.html">Public Verification</a></p>
     </div>
     <div>
-      <h3>Project Status</h3>
-      <p>MVP prototype interface</p>
-      <p>Smart contract integration planned</p>
+      <h3>System</h3>
+      <p>FastAPI + SQLite application layer</p>
+      <p>Ethereum Sepolia blockchain integration</p>
+      <p>MetaMask wallet authentication</p>
     </div>
   </div>
-  <div class="footer-bottom">PeraSoul Digital Identity System - MVP Prototype</div>
+  <div class="footer-bottom">PeraSoul Digital Student Identity System | University of Peradeniya</div>
 </footer>
 <script src="../js/main.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
-<script src="../js/blockchain.js"></script>
-
+<script src="../js/visuals.js" defer></script>
 </body>
 </html>

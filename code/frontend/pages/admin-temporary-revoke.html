@@ -11,14 +11,15 @@
   <title>Temporary Revoke | PeraSoul</title>
 
   <link rel="stylesheet" href="../css/styles.css">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 </head>
 
-<body>
+<body class="page-admin-temporary-revoke">
 
 <div class="topbar">
   <div class="topbar-inner">
-    <span>University Digital Identity System</span>
-    <span>Faculty of Engineering | Blockchain Prototype</span>
+    <span>PeraSoul Digital Student Identity System</span>
+    <span>University of Peradeniya | Ethereum Sepolia</span>
   </div>
 </div>
 
@@ -50,7 +51,7 @@
 </header>
 
 <section class="page-hero">
-  <div class="page-hero-inner">
+  <div class="page-hero-inner"><span class="section-label">PERASOUL / ADMINISTRATOR WORKSPACE</span>
 
     <h1>Temporary Revocation</h1>
 
@@ -65,46 +66,15 @@
 <main class="dashboard-wrap">
 
   <aside class="sidebar">
-
-    <div class="sidebar-title">
-      Admin Panel
-    </div>
-
-    <a href="admin-dashboard.html">
-      📊 Overview
-    </a>
-
-    <a href="admin-mint.html">
-      🪪 Mint Token
-    </a>
-
-    <a
-      class="active"
-      href="admin-temporary-revoke.html"
-    >
-      ⏳ Temporary Revoke
-    </a>
-
-    <a href="admin-burn.html">
-      🔥 Permanent Revoke
-    </a>
-
-    <a href="admin-replace-wallet.html">
-      🔁 Replace Wallet
-    </a>
-
-    <a href="admin-requests.html">
-      📥 Requests
-    </a>
-
-    <button
-      type="button"
-      id="sidebarLogoutButton"
-      class="sidebar-logout"
-    >
-      🚪 Logout
-    </button>
-
+    <div class="sidebar-title">Admin Panel</div>
+    <a href="admin-dashboard.html">📊 Overview</a>
+    <a href="admin-requests.html">📥 Token Requests</a>
+    <a href="admin-mint.html">🪪 Token Minting</a>
+    <a href="admin-temporary-revoke.html">⏳ Temporary Revoke</a>
+    <a href="admin-burn.html">🔥 Permanent Revoke</a>
+    <a href="admin-replace-wallet.html">🔁 Replace Wallet</a>
+    <a href="../verify.html" target="_blank" rel="noopener noreferrer">✅ Public Verification</a>
+    <button type="button" id="sidebarLogoutButton" class="sidebar-logout">🚪 Logout</button>
   </aside>
 
   <section class="dashboard-main">
@@ -368,5 +338,6 @@
 <script src="../js/main.js"></script>
 <script src="../js/admin-temporary-revoke.js"></script>
 
+<script src="../js/visuals.js" defer></script>
 </body>
 </html>

@@ -11,14 +11,15 @@
   <title>Admin Requests | PeraSoul</title>
 
   <link rel="stylesheet" href="../css/styles.css">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 </head>
 
-<body>
+<body class="page-admin-requests">
 
 <div class="topbar">
   <div class="topbar-inner">
-    <span>University Digital Identity System</span>
-    <span>Faculty of Engineering | Blockchain Prototype</span>
+    <span>PeraSoul Digital Student Identity System</span>
+    <span>University of Peradeniya | Ethereum Sepolia</span>
   </div>
 </div>
 
@@ -50,13 +51,12 @@
 </header>
 
 <section class="page-hero">
-  <div class="page-hero-inner">
+  <div class="page-hero-inner"><span class="section-label">PERASOUL / ADMINISTRATOR WORKSPACE</span>
 
-    <h1>Student Requests</h1>
+    <h1>Token & Identity Requests</h1>
 
     <p>
-      Review token issuance requests and monitor future
-      wallet-change and complaint workflows.
+      Review pending Digital Student ID token requests and continue to identity management when a wallet replacement or revocation is required.
     </p>
 
   </div>
@@ -65,46 +65,15 @@
 <main class="dashboard-wrap">
 
   <aside class="sidebar">
-
-    <div class="sidebar-title">
-      Admin Panel
-    </div>
-
-    <a href="admin-dashboard.html">
-      📊 Overview
-    </a>
-
-    <a href="admin-mint.html">
-      🪪 Mint Token
-    </a>
-
-    <a href="admin-temporary-revoke.html">
-      ⏳ Temporary Revoke
-    </a>
-
-    <a href="admin-burn.html">
-      🔥 Permanent Revoke
-    </a>
-
-    <a href="admin-replace-wallet.html">
-      🔁 Replace Wallet
-    </a>
-
-    <a
-      class="active"
-      href="admin-requests.html"
-    >
-      📥 Requests
-    </a>
-
-    <button
-      type="button"
-      id="sidebarLogoutButton"
-      class="sidebar-logout"
-    >
-      🚪 Logout
-    </button>
-
+    <div class="sidebar-title">Admin Panel</div>
+    <a href="admin-dashboard.html">📊 Overview</a>
+    <a href="admin-requests.html">📥 Token Requests</a>
+    <a href="admin-mint.html">🪪 Token Minting</a>
+    <a href="admin-temporary-revoke.html">⏳ Temporary Revoke</a>
+    <a href="admin-burn.html">🔥 Permanent Revoke</a>
+    <a href="admin-replace-wallet.html">🔁 Replace Wallet</a>
+    <a href="../verify.html" target="_blank" rel="noopener noreferrer">✅ Public Verification</a>
+    <button type="button" id="sidebarLogoutButton" class="sidebar-logout">🚪 Logout</button>
   </aside>
 
   <section class="dashboard-main">
@@ -124,45 +93,18 @@
       Loading administrator session...
     </div>
 
-    <div class="grid grid-3">
-
-      <a
-        class="card link-card"
-        href="#token-requests"
-      >
+    <div class="grid grid-2">
+      <a class="card link-card" href="#token-requests">
         <h2>Token Requests</h2>
-
-        <p>
-          Review pending student token issuance requests.
-        </p>
+        <p>Review pending Digital Student ID issuance requests.</p>
       </a>
-
-      <a
-        class="card link-card"
-        href="#wallet-requests"
-      >
-        <h2>Wallet Requests</h2>
-
-        <p>
-          Wallet replacement requests will be connected later.
-        </p>
+      <a class="card link-card" href="admin-dashboard.html#active-token-section">
+        <h2>Identity Management</h2>
+        <p>Open issued identities for permanent revocation or wallet replacement.</p>
       </a>
-
-      <a
-        class="card link-card"
-        href="#complaints"
-      >
-        <h2>Complaints</h2>
-
-        <p>
-          Complaint management will be connected later.
-        </p>
-      </a>
-
     </div>
 
-    <div
-      id="token-requests"
+    <div id="token-requests"
       class="card dashboard-table-card"
     >
 
@@ -217,129 +159,35 @@
       </div>
 
     </div>
-
-    <div
-      id="wallet-requests"
-      class="card"
-    >
-
-      <h2>Wallet Change Requests</h2>
-
-      <div class="notice">
-        <strong>Not connected yet:</strong>
-        The wallet-change request and wallet-replacement APIs
-        will be implemented after the demonstration.
-      </div>
-
-      <div class="table-wrap">
-
-        <table class="table">
-
-          <thead>
-            <tr>
-              <th>Request ID</th>
-              <th>Student</th>
-              <th>Old Wallet</th>
-              <th>New Wallet</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td colspan="5">
-                No backend integration available yet.
-              </td>
-            </tr>
-          </tbody>
-
-        </table>
-
-      </div>
-
-    </div>
-
-    <div
-      id="complaints"
-      class="card"
-    >
-
-      <h2>Complaints</h2>
-
-      <div class="notice">
-        <strong>Not connected yet:</strong>
-        Complaint submission and review APIs are planned for
-        a later development stage.
-      </div>
-
-      <div class="table-wrap">
-
-        <table class="table">
-
-          <thead>
-            <tr>
-              <th>Complaint ID</th>
-              <th>Student</th>
-              <th>Type</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              <td colspan="4">
-                No backend integration available yet.
-              </td>
-            </tr>
-          </tbody>
-
-        </table>
-
-      </div>
-
-    </div>
-
   </section>
 
 </main>
 
 <footer class="footer">
-
   <div class="footer-inner">
-
     <div>
       <h3>PeraSoul Digital ID</h3>
-
-      <p>
-        A blockchain-based university digital student identity system.
-      </p>
+      <p>A blockchain-based university digital student identity system using MetaMask authentication and non-transferable Soulbound Tokens.</p>
     </div>
-
     <div>
-      <h3>Administrator Features</h3>
-
-      <p>Student approval</p>
-      <p>Token request management</p>
-      <p>Blockchain token issuance</p>
+      <h3>Core Services</h3>
+      <p><a href="student-register.html">Student Registration</a></p>
+      <p><a href="student-login.html">Student Wallet Login</a></p>
+      <p><a href="../verify.html">Public Verification</a></p>
     </div>
-
     <div>
-      <h3>System Status</h3>
-
-      <p>FastAPI backend connected</p>
-      <p>Sepolia blockchain connected</p>
+      <h3>System</h3>
+      <p>FastAPI + SQLite application layer</p>
+      <p>Ethereum Sepolia blockchain integration</p>
+      <p>MetaMask wallet authentication</p>
     </div>
-
   </div>
-
-  <div class="footer-bottom">
-    PeraSoul Digital Identity System
-  </div>
-
+  <div class="footer-bottom">PeraSoul Digital Student Identity System | University of Peradeniya</div>
 </footer>
 
 <script src="../js/main.js"></script>
 <script src="../js/admin-requests.js"></script>
 
+<script src="../js/visuals.js" defer></script>
 </body>
 </html>

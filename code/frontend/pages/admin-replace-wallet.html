@@ -1,90 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Replace Wallet</title>
-<link rel="stylesheet" href="../css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Replace Student Wallet | PeraSoul</title>
+  <link rel="stylesheet" href="../css/styles.css">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 </head>
-<body>
-<div class="topbar">
-  <div class="topbar-inner">
-    <span>University Digital Identity Prototype</span>
-    <span>Faculty of Engineering | Blockchain MVP</span>
-  </div>
-</div>
-<header class="site-header">
-  <nav class="navbar">
-    <a class="brand" href="../index.html">
-      <div class="brand-mark">PS</div>
-      <div class="brand-text">
-        <strong>PeraSoul</strong>
-        <span>Digital Student Identity</span>
-      </div>
-    </a>
-    <div class="nav-links">
-      <a href="about.html">University</a>
-      <a href="contact.html">Contact</a>
-      <a href="feedback.html">Feedback</a>
-      <a href="student-register.html">Register</a>
-      <a href="student-login.html">Student Login</a>
-      <a class="btn btn-primary" href="admin-login.html">Admin Login</a>
-    </div>
-  </nav>
-</header>
+<body class="page-admin-replace-wallet">
+<div class="topbar"><div class="topbar-inner"><span>PeraSoul Digital Student Identity System</span><span>University Administrator | Ethereum Sepolia</span></div></div>
+<header class="site-header"><nav class="navbar">
+  <a class="brand" href="../index.html"><div class="brand-mark">PS</div><div class="brand-text"><strong>PeraSoul</strong><span>Digital Student Identity</span></div></a>
+  <div class="nav-links"><span id="loggedAdminName">Administrator</span><small id="loggedAdminWallet">Wallet not loaded</small><button type="button" id="topLogoutButton" class="btn btn-outline">Logout</button></div>
+</nav></header>
 
+<section class="page-hero"><div class="page-hero-inner"><span class="section-label">PERASOUL / ADMINISTRATOR WORKSPACE</span>
+  <h1>Replace Student Wallet</h1>
+  <p>Move an approved student's digital identity from a lost or inaccessible wallet to a verified replacement wallet.</p>
+</div></section>
 
-<section class="page-hero"><div class="page-hero-inner"><h1>Replace Student Wallet</h1><p>Burn the old wallet token and mint a new token for the new wallet.</p></div></section>
 <main class="dashboard-wrap">
+  <aside class="sidebar">
+    <div class="sidebar-title">Admin Panel</div>
+    <a href="admin-dashboard.html">📊 Overview</a>
+    <a href="admin-requests.html">📥 Token Requests</a>
+    <a href="admin-mint.html">🪪 Token Minting</a>
+    <a href="admin-temporary-revoke.html">⏳ Temporary Revoke</a>
+    <a href="admin-burn.html">🔥 Permanent Revoke</a>
+    <a href="admin-replace-wallet.html">🔁 Replace Wallet</a>
+    <a href="../verify.html" target="_blank" rel="noopener noreferrer">✅ Public Verification</a>
+    <button type="button" id="sidebarLogoutButton" class="sidebar-logout">🚪 Logout</button>
+  </aside>
+  <section class="dashboard-main">
+    <a class="btn btn-outline back-link" href="admin-dashboard.html">← Back to Admin Dashboard</a>
+    <div id="replaceWalletMessage" class="status" aria-live="polite">Verifying administrator session...</div>
 
-<aside class="sidebar">
-  <div class="sidebar-title">Admin Panel</div>
-  <a href="admin-dashboard.html">📊 Overview</a>
-  <a href="admin-mint.html">🪪 Mint Token</a>
-  <a href="admin-temporary-revoke.html">⏳ Temporary Revoke</a>
-  <a href="admin-burn.html">🔥 Permanent Burn</a>
-  <a href="admin-replace-wallet.html">🔁 Replace Wallet</a>
-  <a href="admin-requests.html">📥 Requests</a>
-  <a href="../index.html">🚪 Logout</a>
-</aside>
+    <div class="grid grid-2">
+      <form class="card" id="replaceWalletForm">
+        <h2>Wallet Replacement Form</h2>
 
-<section class="dashboard-main">
-  <a class="btn btn-outline back-link" href="admin-dashboard.html">← Back to Admin Dashboard</a>
-  <div class="card">
-    <h2>Wallet Replacement Form</h2>
-    <div class="form-group"><label>Previous Wallet</label><input placeholder="Old wallet address"></div>
-    <div class="form-group"><label>New Wallet</label><input placeholder="New wallet address"></div>
-    <button class="btn btn-primary" onclick="demoAction('replaceStatus','Wallet replacement')">Replace Wallet</button>
-    <div id="replaceStatus" class="status">Replace wallet status appears here.</div>
-  </div>
-</section>
+        <div class="form-group">
+          <label for="replaceStudentUserId">Student User ID</label>
+          <input id="replaceStudentUserId" name="student_user_id" type="number" min="1" placeholder="Student user ID" required>
+        </div>
+
+        <div class="form-group">
+          <label for="oldWalletAddress">Current Registered Wallet</label>
+          <input id="oldWalletAddress" type="text" placeholder="Current wallet address">
+        </div>
+
+        <div class="form-group">
+          <label for="newWalletAddress">New Wallet</label>
+          <input id="newWalletAddress" name="new_wallet" type="text" placeholder="0x..." required>
+        </div>
+
+        <div class="form-group">
+          <label for="walletReplacementReason">Reason</label>
+          <textarea id="walletReplacementReason" name="reason" minlength="3" maxlength="500" placeholder="Reason for replacing the registered wallet" required></textarea>
+        </div>
+
+        <button type="submit" id="replaceWalletButton" class="btn btn-primary">Replace Wallet and Reissue Identity</button>
+      </form>
+
+      <div class="card">
+        <h2>Replacement Result</h2>
+        <div class="profile-table">
+          <div class="profile-row"><strong>Old Token ID</strong><span id="oldTokenIdResult">-</span></div>
+          <div class="profile-row"><strong>New Token ID</strong><span id="newTokenIdResult">-</span></div>
+          <div class="profile-row"><strong>Old Wallet</strong><span id="oldWalletResult" class="wallet-value">-</span></div>
+          <div class="profile-row"><strong>New Wallet</strong><span id="newWalletResult" class="wallet-value">-</span></div>
+          <div class="profile-row"><strong>Transaction Hash</strong><span id="replacementTxHash" class="wallet-value">-</span></div>
+        </div>
+        <div class="notice"><strong>Controlled recovery:</strong> Verify the student's identity before replacing a wallet. The old token must no longer remain valid after a successful replacement.</div>
+      </div>
+    </div>
+  </section>
 </main>
-
-
 <footer class="footer">
   <div class="footer-inner">
     <div>
       <h3>PeraSoul Digital ID</h3>
-      <p>A university digital identity MVP using wallet-based authentication and Soulbound Token concepts.</p>
+      <p>A blockchain-based university digital student identity system using MetaMask authentication and non-transferable Soulbound Tokens.</p>
     </div>
     <div>
-      <h3>Quick Links</h3>
+      <h3>Core Services</h3>
       <p><a href="student-register.html">Student Registration</a></p>
-      <p><a href="student-login.html">Student Login</a></p>
-      <p><a href="admin-login.html">Administrator Login</a></p>
+      <p><a href="student-login.html">Student Wallet Login</a></p>
+      <p><a href="../verify.html">Public Verification</a></p>
     </div>
     <div>
-      <h3>Project Status</h3>
-      <p>MVP prototype interface</p>
-      <p>Smart contract integration planned</p>
+      <h3>System</h3>
+      <p>FastAPI + SQLite application layer</p>
+      <p>Ethereum Sepolia blockchain integration</p>
+      <p>MetaMask wallet authentication</p>
     </div>
   </div>
-  <div class="footer-bottom">PeraSoul Digital Identity System - MVP Prototype</div>
+  <div class="footer-bottom">PeraSoul Digital Student Identity System | University of Peradeniya</div>
 </footer>
 <script src="../js/main.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
-<script src="../js/blockchain.js"></script>
-
+<script src="../js/admin-replace-wallet.js"></script>
+<script src="../js/visuals.js" defer></script>
 </body>
 </html>

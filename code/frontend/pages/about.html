@@ -1,87 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>University Information</title>
-<link rel="stylesheet" href="../css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>About PeraSoul</title>
+  <link rel="stylesheet" href="../css/styles.css">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 </head>
-<body>
-
-<div class="topbar">
-  <div class="topbar-inner">
-    <span>University Digital Identity Prototype</span>
-    <span>Faculty of Engineering | Blockchain MVP</span>
-  </div>
-</div>
-<header class="site-header">
-  <nav class="navbar">
-    <a class="brand" href="../index.html">
-      <div class="brand-mark">PS</div>
-      <div class="brand-text">
-        <strong>PeraSoul</strong>
-        <span>Digital Student Identity</span>
-      </div>
-    </a>
-    <div class="nav-links">
-      <a href="../pages/about.html">University</a>
-      <a href="../pages/contact.html">Contact</a>
-      <a href="../pages/feedback.html">Feedback</a>
-      <a href="../pages/student-register.html">Register</a>
-      <a href="../pages/student-login.html">Student Login</a>
-      <a class="btn btn-primary" href="../pages/admin-login.html">Admin Login</a>
+<body class="page-about">
+<div class="topbar"><div class="topbar-inner"><span>PeraSoul Digital Student Identity System</span><span>University of Peradeniya | Ethereum Sepolia</span></div></div>
+<header class="site-header"><nav class="navbar">
+  <a class="brand" href="../index.html"><div class="brand-mark">PS</div><div class="brand-text"><strong>PeraSoul</strong><span>Digital Student Identity</span></div></a>
+  <div class="nav-links">
+      <a href="about.html">About PeraSoul</a>
+      <a href="../verify.html">Public Verification</a>
+      <a href="contact.html">Contact</a>
+      <a href="student-register.html">Register</a>
+      <a href="student-login.html">Student Login</a>
+      <a class="btn btn-primary" href="admin-login.html">Admin Login</a>
     </div>
-  </nav>
-</header>
+</nav></header>
 
+<section class="page-hero"><div class="page-hero-inner"><span class="section-label">PERASOUL / DIGITAL STUDENT IDENTITY</span>
+  <h1>About PeraSoul</h1>
+  <p>A university-controlled blockchain identity prototype for secure, non-transferable and publicly verifiable student identities.</p>
+</div></section>
 
-<section class="page-hero">
-  <div class="page-hero-inner">
-    <h1>University Information</h1>
-    <p>Official information, resources, and relevant pages can be linked here.</p>
-  </div>
-</section>
-
-<main class="container">
+<main class="container"><div class="institution-banner"><img src="../assets/university.svg" alt="Conceptual university architecture"><div><span class="section-label">UNIVERSITY OF PERADENIYA</span><h2>Identity with<br>institutional roots.</h2><p>PeraSoul / Digital Student Identity</p></div></div>
   <div class="section-head">
-    <div class="section-label">Institutional Resources</div>
-    <h2 class="section-title">Connect students with official university services</h2>
-    <p class="section-text">This page can later include official links to the university website, LMS, student portal, library, academic calendar, faculty pages, and department pages.</p>
+    <div class="section-label">System Overview</div>
+    <h2 class="section-title">Digital student identity without publishing personal data on-chain</h2>
+    <p class="section-text">
+      PeraSoul separates student profile information from blockchain identity state.
+      Personal and academic data are maintained by the application database while the
+      blockchain stores the token ownership and validity information needed for verification.
+    </p>
   </div>
 
   <div class="grid grid-3">
-    <div class="card feature-card"><div class="feature-icon">🏛️</div><h3>University Website</h3><p>Add the official university web portal and institutional pages.</p></div>
-    <div class="card feature-card"><div class="feature-icon">📚</div><h3>Student Resources</h3><p>Link LMS, library, notices, academic calendar, and student services.</p></div>
-    <div class="card feature-card"><div class="feature-icon">🧾</div><h3>Digital Services</h3><p>Future space for digital ID verification, token support, and help desk services.</p></div>
+    <div class="card feature-card"><div class="feature-icon">🧑‍🎓</div><h3>Students</h3><p>Register a wallet, authenticate with MetaMask, request a Digital Student ID, monitor token validity and access QR verification.</p></div>
+    <div class="card feature-card"><div class="feature-icon">🏛️</div><h3>University Administrators</h3><p>Approve registrations, review token requests, issue identities, revoke identities and perform controlled wallet replacement.</p></div>
+    <div class="card feature-card"><div class="feature-icon">🔎</div><h3>Public Verifiers</h3><p>Check whether an identity is currently valid using a QR verification link or token reference without accessing administrative data.</p></div>
+  </div>
+
+  <div class="grid grid-3" style="margin-top:24px;">
+    <div class="card"><h3>Application Layer</h3><p>HTML, CSS and JavaScript frontend communicating with a FastAPI backend and SQLAlchemy/SQLite database.</p></div>
+    <div class="card"><h3>Blockchain Layer</h3><p>PeraSoul and PeraSoulManager smart contracts deployed on Ethereum Sepolia and accessed through Web3.py.</p></div>
+    <div class="card"><h3>Security Model</h3><p>Wallet-signature authentication, JWT-protected administrator APIs, non-transferable tokens, role checks and auditable blockchain operations.</p></div>
   </div>
 </main>
-
-
 <footer class="footer">
   <div class="footer-inner">
     <div>
       <h3>PeraSoul Digital ID</h3>
-      <p>A university digital identity MVP using wallet-based authentication and Soulbound Token concepts.</p>
+      <p>A blockchain-based university digital student identity system using MetaMask authentication and non-transferable Soulbound Tokens.</p>
     </div>
     <div>
-      <h3>Quick Links</h3>
+      <h3>Core Services</h3>
       <p><a href="student-register.html">Student Registration</a></p>
-      <p><a href="student-login.html">Student Login</a></p>
-      <p><a href="admin-login.html">Administrator Login</a></p>
+      <p><a href="student-login.html">Student Wallet Login</a></p>
+      <p><a href="../verify.html">Public Verification</a></p>
     </div>
     <div>
-      <h3>Project Status</h3>
-      <p>MVP prototype interface</p>
-      <p>Smart contract integration planned</p>
+      <h3>System</h3>
+      <p>FastAPI + SQLite application layer</p>
+      <p>Ethereum Sepolia blockchain integration</p>
+      <p>MetaMask wallet authentication</p>
     </div>
   </div>
-  <div class="footer-bottom">PeraSoul Digital Identity System - MVP Prototype</div>
+  <div class="footer-bottom">PeraSoul Digital Student Identity System | University of Peradeniya</div>
 </footer>
-
 <script src="../js/main.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
-<script src="../js/blockchain.js"></script>
-
+<script src="../js/visuals.js" defer></script>
 </body>
 </html>

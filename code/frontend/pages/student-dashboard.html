@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -8,37 +10,89 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>Student Dashboard | PeraSoul</title>
+  <title>
+    Student Dashboard | PeraSoul
+  </title>
 
-  <link rel="stylesheet" href="../css/styles.css">
+  <link
+    rel="stylesheet"
+    href="../css/styles.css"
+  >
+
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 </head>
 
-<body>
+
+<body class="page-student-dashboard">
+
+
+<!-- =========================================================
+     TOP INFORMATION BAR
+========================================================= -->
 
 <div class="topbar">
+
   <div class="topbar-inner">
-    <span>University Digital Identity System</span>
-    <span>Faculty of Engineering | Blockchain Prototype</span>
+
+    <span>
+      PeraSoul Digital Student Identity System
+    </span>
+
+    <span>
+      University of Peradeniya | Ethereum Sepolia
+    </span>
+
   </div>
+
 </div>
 
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
 <header class="site-header">
+
   <nav class="navbar">
 
-    <a class="brand" href="../index.html">
-      <div class="brand-mark">PS</div>
+    <a
+      class="brand"
+      href="../index.html"
+    >
+
+      <div class="brand-mark">
+        PS
+      </div>
 
       <div class="brand-text">
-        <strong>PeraSoul</strong>
-        <span>Digital Student Identity</span>
+
+        <strong>
+          PeraSoul
+        </strong>
+
+        <span>
+          Digital Student Identity
+        </span>
+
       </div>
+
     </a>
+
 
     <div class="nav-links">
 
-      <span id="loggedStudentName">
-        Student
-      </span>
+      <div class="student-header-user">
+
+        <span id="loggedStudentName">
+          Student
+        </span>
+
+        <small id="loggedStudentWallet">
+          Wallet not loaded
+        </small>
+
+      </div>
+
 
       <button
         type="button"
@@ -51,75 +105,82 @@
     </div>
 
   </nav>
+
 </header>
 
-<section class="page-hero">
-  <div class="page-hero-inner">
 
-    <h1>Student Dashboard</h1>
+<!-- =========================================================
+     PAGE HERO
+========================================================= -->
+
+<section class="page-hero">
+
+  <div class="page-hero-inner"><span class="section-label">PERASOUL / DIGITAL STUDENT IDENTITY</span>
+
+    <h1>
+      Student Dashboard
+    </h1>
 
     <p>
-      View your student profile, account approval status,
-      token request, digital identity validity, and revocation status.
+      View your student profile, Digital Student ID,
+      blockchain verification status, revocation information
+      and wallet details.
     </p>
 
   </div>
+
 </section>
+
+
+<!-- =========================================================
+     DASHBOARD LAYOUT
+========================================================= -->
 
 <main class="dashboard-wrap">
 
+
+  <!-- =======================================================
+       SIDEBAR
+  ======================================================== -->
+
   <aside class="sidebar">
-
-    <div class="sidebar-title">
-      Student Panel
-    </div>
-
-    <a
-      class="active"
-      href="student-dashboard.html"
-    >
-      👤 Profile Overview
-    </a>
-
-    <a href="student-token.html">
-      🪪 Token Details
-    </a>
-
-    <a href="student-qr.html">
-      📱 QR Verification
-    </a>
-
-    <a href="student-wallet-change.html">
-      🔁 Wallet Change
-    </a>
-
-    <a href="student-complaint.html">
-      💬 Complaint
-    </a>
-
-    <button
-      type="button"
-      id="sidebarStudentLogoutButton"
-      class="sidebar-logout"
-    >
-      🚪 Logout
-    </button>
-
+    <div class="sidebar-title">Student Panel</div>
+    <a href="student-dashboard.html">👤 Profile Overview</a>
+    <a href="student-token.html">🪪 Token Details</a>
+    <a href="student-dashboard.html#digital-id-section">🎓 Digital Student ID</a>
+    <a href="student-qr.html">📱 QR Verification</a>
+    <a href="student-wallet-change.html">🔁 Wallet Replacement</a>
+    <a href="../verify.html" target="_blank" rel="noopener noreferrer">✅ Public Verification</a>
+    <button type="button" id="sidebarStudentLogoutButton" class="sidebar-logout">🚪 Logout</button>
   </aside>
+
+
+  <!-- =======================================================
+       MAIN DASHBOARD
+  ======================================================== -->
 
   <section class="dashboard-main">
 
+
+    <!-- =====================================================
+         DASHBOARD HEADER
+    ====================================================== -->
+
     <div class="dashboard-head">
 
+
       <div>
+
         <h1 id="studentWelcome">
           Welcome
         </h1>
 
         <p id="studentDashboardDescription">
-          Loading your digital student identity information...
+          Loading your Digital Student Identity information...
         </p>
+
       </div>
+
 
       <span
         id="accountStatusBadge"
@@ -128,7 +189,13 @@
         Loading
       </span>
 
+
     </div>
+
+
+    <!-- =====================================================
+         GLOBAL MESSAGE
+    ====================================================== -->
 
     <div
       id="studentDashboardMessage"
@@ -138,68 +205,189 @@
       Loading dashboard information...
     </div>
 
+
+    <!-- =====================================================
+         DASHBOARD METRICS
+    ====================================================== -->
+
     <div class="grid grid-4">
 
-      <div class="metric-card">
-        <small>Account Status</small>
-        <h2 id="accountStatusMetric">-</h2>
-      </div>
 
       <div class="metric-card">
-        <small>Token Request</small>
-        <h2 id="tokenRequestMetric">-</h2>
+
+        <small>
+          Account Status
+        </small>
+
+        <h2 id="accountStatusMetric">
+          -
+        </h2>
+
       </div>
 
-      <div class="metric-card">
-        <small>Token Status</small>
-        <h2 id="tokenStatusMetric">-</h2>
-      </div>
 
       <div class="metric-card">
-        <small>Blockchain Validity</small>
-        <h2 id="blockchainValidityMetric">-</h2>
+
+        <small>
+          Token Request
+        </small>
+
+        <h2 id="tokenRequestMetric">
+          -
+        </h2>
+
       </div>
+
+
+      <div class="metric-card">
+
+        <small>
+          Token Status
+        </small>
+
+        <h2 id="tokenStatusMetric">
+          -
+        </h2>
+
+      </div>
+
+
+      <div class="metric-card">
+
+        <small>
+          Blockchain Validity
+        </small>
+
+        <h2 id="blockchainValidityMetric">
+          -
+        </h2>
+
+      </div>
+
 
     </div>
 
-    <div id="profile" class="card">
 
-      <h2>Student Profile</h2>
+    <!-- =====================================================
+         STUDENT PROFILE
+    ====================================================== -->
+
+    <div
+      id="profile"
+      class="card"
+    >
+
+      <div class="table-header">
+
+        <div>
+
+          <h2>
+            Student Profile
+          </h2>
+
+          <p>
+            University information associated with
+            your PeraSoul account.
+          </p>
+
+        </div>
+
+        <span
+          id="profileStatusBadge"
+          class="badge badge-blue"
+        >
+          Student
+        </span>
+
+      </div>
+
 
       <div class="profile-table">
 
-        <div class="profile-row">
-          <strong>Name</strong>
-          <span id="profileFullName">-</span>
-        </div>
 
         <div class="profile-row">
-          <strong>Student Number</strong>
-          <span id="profileStudentNumber">-</span>
+
+          <strong>
+            Name
+          </strong>
+
+          <span id="profileFullName">
+            -
+          </span>
+
         </div>
 
-        <div class="profile-row">
-          <strong>Faculty</strong>
-          <span id="profileFaculty">-</span>
-        </div>
 
         <div class="profile-row">
-          <strong>Department</strong>
-          <span id="profileDepartment">-</span>
+
+          <strong>
+            Student Number
+          </strong>
+
+          <span id="profileStudentNumber">
+            -
+          </span>
+
         </div>
 
-        <div class="profile-row">
-          <strong>Batch</strong>
-          <span id="profileBatch">-</span>
-        </div>
 
         <div class="profile-row">
-          <strong>Academic Year</strong>
-          <span id="profileAcademicYear">-</span>
+
+          <strong>
+            Faculty
+          </strong>
+
+          <span id="profileFaculty">
+            -
+          </span>
+
         </div>
 
+
         <div class="profile-row">
-          <strong>Wallet Address</strong>
+
+          <strong>
+            Department
+          </strong>
+
+          <span id="profileDepartment">
+            -
+          </span>
+
+        </div>
+
+
+        <div class="profile-row">
+
+          <strong>
+            Batch
+          </strong>
+
+          <span id="profileBatch">
+            -
+          </span>
+
+        </div>
+
+
+        <div class="profile-row">
+
+          <strong>
+            Academic Year
+          </strong>
+
+          <span id="profileAcademicYear">
+            -
+          </span>
+
+        </div>
+
+
+        <div class="profile-row">
+
+          <strong>
+            Registered Wallet
+          </strong>
 
           <span
             id="profileWallet"
@@ -207,76 +395,158 @@
           >
             -
           </span>
+
         </div>
+
 
       </div>
 
     </div>
 
+
+    <!-- =====================================================
+         TOKEN REQUEST + IDENTITY STATUS
+    ====================================================== -->
+
     <div class="grid grid-2">
 
-      <div id="token" class="card">
 
-        <h2>Digital Student ID Request</h2>
+      <!-- ===================================================
+           TOKEN REQUEST
+      ==================================================== -->
+
+      <div
+        id="token"
+        class="card"
+      >
+
+        <h2>
+          Digital Student ID Request
+        </h2>
+
 
         <p class="muted-text">
-          Active students can request their Soulbound Token.
-          Each wallet can receive only one student identity token.
+          Approved students can request a PeraSoul
+          Soulbound Token representing their Digital Student ID.
+          Only one active identity token can be associated with
+          a student wallet.
         </p>
 
+
         <div class="form-group">
+
           <label for="tokenRequestNote">
             Request Note
           </label>
 
           <textarea
             id="tokenRequestNote"
-            placeholder="Example: Requesting my digital student identity token"
+            placeholder="Example: Requesting my Digital Student ID token"
           ></textarea>
+
         </div>
 
-        <button
-          type="button"
-          id="requestTokenButton"
-          class="btn btn-primary"
-        >
-          Request Digital Student ID
-        </button>
 
-        <a
-          class="btn btn-outline"
-          href="student-token.html"
-        >
-          View Token Details
-        </a>
+        <div class="button-group">
+
+          <button
+            type="button"
+            id="requestTokenButton"
+            class="btn btn-primary"
+          >
+            Request Digital Student ID
+          </button>
+
+
+          <a
+            class="btn btn-outline"
+            href="student-token.html"
+          >
+            View Token Details
+          </a>
+
+        </div>
+
 
         <div
           id="tokenRequestStatus"
           class="status"
+          aria-live="polite"
         >
           Token request information appears here.
         </div>
 
+
       </div>
 
-      <div id="identity-status" class="card">
 
-        <h2>Identity Verification Status</h2>
+      <!-- ===================================================
+           IDENTITY STATUS
+      ==================================================== -->
+
+      <div
+        id="identity-status"
+        class="card"
+      >
+
+        <h2>
+          Identity Verification Status
+        </h2>
+
+
+        <p class="muted-text">
+          This information reflects the current state
+          of your Digital Student ID and its blockchain validity.
+        </p>
+
 
         <div class="profile-table">
 
-          <div class="profile-row">
-            <strong>Blockchain Status</strong>
-            <span id="identityValidity">-</span>
-          </div>
 
           <div class="profile-row">
-            <strong>Remaining Revocation Time</strong>
-            <span id="remainingRevocationTime">-</span>
+
+            <strong>
+              Blockchain Status
+            </strong>
+
+            <span id="identityValidity">
+              -
+            </span>
+
           </div>
 
+
           <div class="profile-row">
-            <strong>Latest Transaction</strong>
+
+            <strong>
+              Token Status
+            </strong>
+
+            <span id="identityTokenStatus">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="profile-row">
+
+            <strong>
+              Remaining Revocation Time
+            </strong>
+
+            <span id="remainingRevocationTime">
+              -
+            </span>
+
+          </div>
+
+
+          <div class="profile-row">
+
+            <strong>
+              Latest Transaction
+            </strong>
 
             <span
               id="latestTransaction"
@@ -284,9 +554,12 @@
             >
               -
             </span>
+
           </div>
 
+
         </div>
+
 
         <a
           class="btn btn-primary"
@@ -295,91 +568,463 @@
           Open QR Verification
         </a>
 
+
       </div>
+
 
     </div>
 
+
+    <!-- =====================================================
+         DIGITAL STUDENT ID
+    ====================================================== -->
+
+    <div
+      id="digital-id-section"
+      class="card"
+    >
+
+
+      <div class="table-header">
+
+
+        <div>
+
+          <h2>
+            Digital Student ID
+          </h2>
+
+          <p>
+            Your blockchain-backed university
+            Digital Student Identity.
+          </p>
+
+        </div>
+
+
+        <span
+          id="digitalIdStatusBadge"
+          class="badge badge-blue"
+        >
+          Not Issued
+        </span>
+
+
+      </div>
+
+
+      <div class="grid grid-2">
+
+
+        <!-- =================================================
+             DIGITAL ID INFORMATION
+        ================================================== -->
+
+        <div>
+
+
+          <div class="profile-table">
+
+
+            <div class="profile-row">
+
+              <strong>
+                Student Name
+              </strong>
+
+              <span id="digitalIdName">
+                -
+              </span>
+
+            </div>
+
+
+            <div class="profile-row">
+
+              <strong>
+                Student Number
+              </strong>
+
+              <span id="digitalIdStudentNumber">
+                -
+              </span>
+
+            </div>
+
+
+            <div class="profile-row">
+
+              <strong>
+                Department
+              </strong>
+
+              <span id="digitalIdDepartment">
+                -
+              </span>
+
+            </div>
+
+
+            <div class="profile-row">
+
+              <strong>
+                Token ID
+              </strong>
+
+              <span id="digitalIdTokenId">
+                -
+              </span>
+
+            </div>
+
+
+            <div class="profile-row">
+
+              <strong>
+                Network
+              </strong>
+
+              <span id="digitalIdNetwork">
+                Ethereum Sepolia
+              </span>
+
+            </div>
+
+
+            <div class="profile-row">
+
+              <strong>
+                Wallet
+              </strong>
+
+              <span
+                id="digitalIdWallet"
+                class="wallet-value"
+              >
+                -
+              </span>
+
+            </div>
+
+
+            <div class="profile-row">
+
+              <strong>
+                Current Validity
+              </strong>
+
+              <span id="digitalIdValidity">
+                -
+              </span>
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             QR CODE
+        ================================================== -->
+
+        <div class="digital-id-qr">
+
+
+          <h3>
+            Verify Digital ID
+          </h3>
+
+
+          <p class="muted-text">
+            Scan this QR code to verify the current
+            status of this identity.
+          </p>
+
+
+          <div
+            id="digitalIdQrPlaceholder"
+            class="qr-placeholder"
+          >
+
+            <img
+              id="digitalIdQr"
+              alt="PeraSoul Digital Student ID Verification QR Code"
+              hidden
+            >
+
+
+            <p id="digitalIdQrMessage">
+              QR code will appear after your
+              Digital Student ID is issued.
+            </p>
+
+
+          </div>
+
+
+          <a
+            id="verificationLink"
+            class="btn btn-outline"
+            href="#"
+            target="_blank"
+            rel="noopener noreferrer"
+            hidden
+          >
+            Open Public Verification
+          </a>
+
+
+        </div>
+
+
+      </div>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         IDENTITY MANAGEMENT
+    ====================================================== -->
+
     <div class="grid grid-2">
+
+
+      <!-- ===================================================
+           WALLET REPLACEMENT
+      ==================================================== -->
 
       <div class="card">
 
-        <h2>Wallet Change Request</h2>
+
+        <h2>
+          Wallet Replacement
+        </h2>
+
 
         <p class="muted-text">
-          Wallet recovery and wallet replacement will be added
-          in the next development stage.
+          If access to your registered wallet is lost,
+          your university administrator can replace the
+          registered wallet after confirming your identity.
         </p>
+
+
+        <div class="profile-table">
+
+
+          <div class="profile-row">
+
+            <strong>
+              Current Wallet
+            </strong>
+
+            <span
+              id="currentWalletDisplay"
+              class="wallet-value"
+            >
+              -
+            </span>
+
+          </div>
+
+
+          <div class="profile-row">
+
+            <strong>
+              Wallet Status
+            </strong>
+
+            <span id="walletStatus">
+              Registered
+            </span>
+
+          </div>
+
+
+        </div>
+
 
         <a
           class="btn btn-outline"
           href="student-wallet-change.html"
         >
-          Open Wallet Change Page
+          Open Wallet Replacement
         </a>
 
+
       </div>
+
+
+      <!-- ===================================================
+           SECURITY INFORMATION
+      ==================================================== -->
 
       <div class="card">
 
-        <h2>Submit a Complaint</h2>
+
+        <h2>
+          Identity Security
+        </h2>
+
 
         <p class="muted-text">
-          Complaint submission will be connected to the backend
-          in a later development stage.
+          Your wallet private key is never sent to
+          PeraSoul. Authentication is performed by signing
+          a temporary login message using MetaMask.
         </p>
 
-        <a
-          class="btn btn-dark"
-          href="student-complaint.html"
-        >
-          Open Complaint Page
-        </a>
+
+        <div class="profile-table">
+
+
+          <div class="profile-row">
+
+            <strong>
+              Login Method
+            </strong>
+
+            <span>
+              MetaMask Signature
+            </span>
+
+          </div>
+
+
+          <div class="profile-row">
+
+            <strong>
+              Token Type
+            </strong>
+
+            <span>
+              Non-transferable SBT
+            </span>
+
+          </div>
+
+
+          <div class="profile-row">
+
+            <strong>
+              Blockchain
+            </strong>
+
+            <span>
+              Ethereum Sepolia
+            </span>
+
+          </div>
+
+
+        </div>
+
 
       </div>
 
+
     </div>
+
 
   </section>
 
+
 </main>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
 
 <footer class="footer">
 
+
   <div class="footer-inner">
 
+
     <div>
-      <h3>PeraSoul Digital ID</h3>
+
+      <h3>
+        PeraSoul Digital ID
+      </h3>
 
       <p>
-        A blockchain-based university digital student identity system.
+        A blockchain-based university
+        Digital Student Identity System.
       </p>
+
     </div>
+
 
     <div>
-      <h3>Student Features</h3>
 
-      <p>Wallet authentication</p>
-      <p>Token request management</p>
-      <p>Blockchain identity verification</p>
+      <h3>
+        Student Features
+      </h3>
+
+      <p>
+        MetaMask wallet authentication
+      </p>
+
+      <p>
+        Digital ID token request
+      </p>
+
+      <p>
+        QR-based identity verification
+      </p>
+
+      <p>
+        Wallet replacement support
+      </p>
+
     </div>
+
 
     <div>
-      <h3>System Status</h3>
 
-      <p>Backend integration active</p>
-      <p>Sepolia blockchain connected</p>
+      <h3>
+        System Status
+      </h3>
+
+      <p>
+        FastAPI backend integration
+      </p>
+
+      <p>
+        Ethereum Sepolia testnet
+      </p>
+
+      <p>
+        Soulbound Token verification
+      </p>
+
     </div>
+
 
   </div>
+
 
   <div class="footer-bottom">
     PeraSoul Digital Identity System
   </div>
 
+
 </footer>
 
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
 <script src="../js/main.js"></script>
+
 <script src="../js/student-dashboard.js"></script>
 
+
+<script src="../js/visuals.js" defer></script>
 </body>
+
 </html>

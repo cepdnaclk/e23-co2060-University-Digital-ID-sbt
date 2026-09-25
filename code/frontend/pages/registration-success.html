@@ -11,14 +11,15 @@
   <title>Registration Submitted | PeraSoul</title>
 
   <link rel="stylesheet" href="../css/styles.css">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 </head>
 
-<body>
+<body class="page-registration-success">
 
 <div class="topbar">
   <div class="topbar-inner">
-    <span>University Digital Identity System</span>
-    <span>Faculty of Engineering | Blockchain Prototype</span>
+    <span>PeraSoul Digital Student Identity System</span>
+    <span>University of Peradeniya | Ethereum Sepolia</span>
   </div>
 </div>
 
@@ -35,25 +36,19 @@
     </a>
 
     <div class="nav-links">
-      <a href="../pages/about.html">University</a>
-      <a href="../pages/contact.html">Contact</a>
-      <a href="../pages/feedback.html">Feedback</a>
-      <a href="../pages/student-register.html">Register</a>
-      <a href="../pages/student-login.html">Student Login</a>
-
-      <a
-        class="btn btn-primary"
-        href="../pages/admin-login.html"
-      >
-        Admin Login
-      </a>
+      <a href="about.html">About PeraSoul</a>
+      <a href="../verify.html">Public Verification</a>
+      <a href="contact.html">Contact</a>
+      <a href="student-register.html">Register</a>
+      <a href="student-login.html">Student Login</a>
+      <a class="btn btn-primary" href="admin-login.html">Admin Login</a>
     </div>
 
   </nav>
 </header>
 
 <section class="page-hero">
-  <div class="page-hero-inner">
+  <div class="page-hero-inner"><span class="section-label">PERASOUL / DIGITAL STUDENT IDENTITY</span>
 
     <h1>Registration Submitted</h1>
 
@@ -71,7 +66,7 @@
 
     <div class="success-icon">✓</div>
 
-    <h2>Student registration request created</h2>
+    <h2>Student registration submitted</h2>
 
     <p>
       Your details have been submitted to the university administration.
@@ -141,51 +136,30 @@
 </main>
 
 <footer class="footer">
-
   <div class="footer-inner">
-
     <div>
       <h3>PeraSoul Digital ID</h3>
-
-      <p>
-        A blockchain-based university digital identity system
-        using wallet authentication and Soulbound Tokens.
-      </p>
+      <p>A blockchain-based university digital student identity system using MetaMask authentication and non-transferable Soulbound Tokens.</p>
     </div>
-
     <div>
-      <h3>Quick Links</h3>
-
-      <p>
-        <a href="student-register.html">Student Registration</a>
-      </p>
-
-      <p>
-        <a href="student-login.html">Student Login</a>
-      </p>
-
-      <p>
-        <a href="admin-login.html">Administrator Login</a>
-      </p>
+      <h3>Core Services</h3>
+      <p><a href="student-register.html">Student Registration</a></p>
+      <p><a href="student-login.html">Student Wallet Login</a></p>
+      <p><a href="../verify.html">Public Verification</a></p>
     </div>
-
     <div>
-      <h3>System Status</h3>
-
-      <p>Backend integration active</p>
-      <p>University approval required</p>
+      <h3>System</h3>
+      <p>FastAPI + SQLite application layer</p>
+      <p>Ethereum Sepolia blockchain integration</p>
+      <p>MetaMask wallet authentication</p>
     </div>
-
   </div>
-
-  <div class="footer-bottom">
-    PeraSoul Digital Identity System
-  </div>
-
+  <div class="footer-bottom">PeraSoul Digital Student Identity System | University of Peradeniya</div>
 </footer>
 
 <script src="../js/main.js"></script>
 <script src="../js/registration-success.js"></script>
 
+<script src="../js/visuals.js" defer></script>
 </body>
 </html>

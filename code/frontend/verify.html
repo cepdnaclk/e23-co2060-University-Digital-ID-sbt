@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Public verification page for PeraSoul Digital Student IDs.">
+  <title>Verify Digital Student ID | PeraSoul</title>
+  <link rel="stylesheet" href="css/styles.css">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+</head>
+<body class="page-verify">
+<div class="topbar">
+  <div class="topbar-inner">
+    <span>PeraSoul Digital Student Identity System</span>
+    <span>Public Verification | Ethereum Sepolia</span>
+  </div>
+</div>
+<header class="site-header">
+  <nav class="navbar">
+    <a class="brand" href="index.html">
+      <div class="brand-mark">PS</div>
+      <div class="brand-text"><strong>PeraSoul</strong><span>Digital Student Identity</span></div>
+    </a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="pages/about.html">About PeraSoul</a>
+      <a href="pages/student-login.html">Student Login</a>
+      <a class="btn btn-primary" href="pages/admin-login.html">Admin Login</a>
+    </div>
+  </nav>
+</header>
+
+<section class="page-hero">
+  <div class="page-hero-inner"><span class="section-label">PERASOUL / DIGITAL STUDENT IDENTITY</span>
+    <h1>Verify a Digital Student ID</h1>
+    <p>Check the current status of a PeraSoul identity. Verification reflects the latest application and blockchain state.</p>
+  </div>
+</section>
+
+<main class="container">
+  <div class="form-shell">
+    <aside class="info-panel">
+      <h2>Privacy-preserving verification</h2>
+      <p>PeraSoul exposes only the minimum information required to confirm a student identity.</p>
+      <div class="info-list">
+        <div class="info-item">No verifier account is required.</div>
+        <div class="info-item">Revocation status is checked at verification time.</div>
+        <div class="info-item">QR codes contain a verification reference, not sensitive student data.</div>
+        <div class="info-item">A permanently revoked identity remains invalid.</div>
+      </div>
+    </aside>
+
+    <section class="form-card verification-card">
+      <h2>PeraSoul Identity Verification</h2>
+
+      <form id="publicVerificationForm">
+        <div class="form-group">
+          <label for="verificationTokenId">Token ID</label>
+          <input id="verificationTokenId" name="token_id" type="text" inputmode="numeric" placeholder="Enter token ID" autocomplete="off">
+        </div>
+        <button id="verifyIdentityButton" type="submit" class="btn btn-primary">Verify Identity</button>
+      </form>
+
+      <p id="verificationMessage" class="status" aria-live="polite">
+        Enter a token ID or open a QR verification link.
+      </p>
+
+      <div id="verificationResult" hidden>
+        <div class="profile-table">
+          <div class="profile-row"><strong>Status</strong><span id="verificationStatus"></span></div>
+          <div class="profile-row"><strong>Student</strong><span id="verifiedName"></span></div>
+          <div class="profile-row"><strong>Student Number</strong><span id="verifiedStudentNumber"></span></div>
+          <div class="profile-row"><strong>Department</strong><span id="verifiedDepartment"></span></div>
+          <div class="profile-row"><strong>Token ID</strong><span id="verifiedTokenId"></span></div>
+          <div class="profile-row"><strong>Wallet</strong><span id="verifiedWallet" class="wallet-value">-</span></div>
+          <div id="remainingTimeContainer" class="profile-row" hidden>
+            <strong>Remaining Suspension</strong><span id="remainingTime"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <h3>PeraSoul Digital ID</h3>
+      <p>A blockchain-based university digital student identity system using MetaMask authentication and non-transferable Soulbound Tokens.</p>
+    </div>
+    <div>
+      <h3>Core Services</h3>
+      <p><a href="pages/student-register.html">Student Registration</a></p>
+      <p><a href="pages/student-login.html">Student Wallet Login</a></p>
+      <p><a href="verify.html">Public Verification</a></p>
+    </div>
+    <div>
+      <h3>System</h3>
+      <p>FastAPI backend integration</p>
+      <p>Ethereum Sepolia testnet</p>
+      <p>Wallet-signature authentication</p>
+    </div>
+  </div>
+  <div class="footer-bottom">PeraSoul Digital Student Identity System | University of Peradeniya</div>
+</footer>
+<script src="js/main.js"></script>
+<script src="js/verify.js"></script>
+<script src="js/visuals.js" defer></script>
+</body>
+</html>

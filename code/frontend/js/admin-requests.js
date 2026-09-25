@@ -1,47 +1,28 @@
-const API_BASE_URL = "http://127.0.0.1:8000";
-
-const adminToken =
-  sessionStorage.getItem("adminAccessToken");
+const API_BASE_URL = window.PeraSoulUtils.apiBaseUrl();
+const adminToken = sessionStorage.getItem("adminAccessToken");
 
 const requestsPageMessage =
   document.getElementById("requestsPageMessage");
-
 const tokenRequestsTableBody =
   document.getElementById("tokenRequestsTableBody");
 
-
-function getAuthorizationHeaders() {
+function headers() {
   return {
     "Content-Type": "application/json",
     "Authorization": `Bearer ${adminToken}`
   };
 }
 
-
-function showRequestsMessage(message, type = "") {
+function showMessage(message, type = "") {
+  if (!requestsPageMessage) return;
   requestsPageMessage.textContent = message;
   requestsPageMessage.className = `status ${type}`;
 }
 
-
-function shortenValue(value) {
-  if (!value || value.length < 16) {
-    return value || "-";
-  }
-
-  return `${value.slice(0, 8)}...${value.slice(-6)}`;
-}
-
-
 function logoutAdmin() {
-  sessionStorage.removeItem("adminAccessToken");
-  sessionStorage.removeItem("adminUserId");
-  sessionStorage.removeItem("adminUsername");
-  sessionStorage.removeItem("adminRole");
-
+  window.PeraSoulUtils.clearAdminSession();
   window.location.href = "admin-login.html";
 }
-
 
 async function verifyAdminSession() {
   if (!adminToken) {
@@ -50,211 +31,120 @@ async function verifyAdminSession() {
   }
 
   try {
-    const response = await fetch(
-      `${API_BASE_URL}/admin-auth/me`,
-      {
-        method: "GET",
-        headers: getAuthorizationHeaders()
-      }
-    );
+    const response = await fetch(`${API_BASE_URL}/admin-auth/me`, {
+      headers: headers()
+    });
+    const data = await window.PeraSoulUtils.jsonResponse(response);
 
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(
-        data.detail || "Invalid administrator session."
-      );
+    const nameEl = document.getElementById("loggedAdminName");
+    if (nameEl) {
+      nameEl.textContent =
+        data.display_name ||
+        sessionStorage.getItem("adminDisplayName") ||
+        "University Administrator";
     }
-
-    document.getElementById("loggedAdminName").textContent =
-      data.username || "University Administrator";
-
     return true;
-
-  } catch (error) {
-    console.error("Admin session error:", error);
+  } catch (_) {
     logoutAdmin();
     return false;
   }
 }
 
-
 async function loadTokenRequests() {
-  tokenRequestsTableBody.innerHTML = `
-    <tr>
-      <td colspan="6">
-        Loading token requests...
-      </td>
-    </tr>
-  `;
+  tokenRequestsTableBody.innerHTML =
+    '<tr><td colspan="6">Loading token requests...</td></tr>';
 
   try {
-    const response = await fetch(
-      `${API_BASE_URL}/admin/token-requests`,
-      {
-        method: "GET",
-        headers: getAuthorizationHeaders()
-      }
-    );
+    const response = await fetch(`${API_BASE_URL}/admin/token-requests`, {
+      headers: headers()
+    });
+    const requests = await window.PeraSoulUtils.jsonResponse(response);
 
-    const requests = await response.json();
-
-    if (!response.ok) {
-      throw new Error(
-        requests.detail || "Unable to load token requests."
-      );
-    }
-
-    if (!Array.isArray(requests) || requests.length === 0) {
-      tokenRequestsTableBody.innerHTML = `
-        <tr>
-          <td colspan="6">
-            No pending token requests.
-          </td>
-        </tr>
-      `;
-
+    if (!Array.isArray(requests) || !requests.length) {
+      tokenRequestsTableBody.innerHTML =
+        '<tr><td colspan="6">No pending token requests.</td></tr>';
+      showMessage("No pending token requests are available.", "success");
       return;
     }
 
-    tokenRequestsTableBody.innerHTML =
-      requests.map((request) => `
-        <tr>
-
-          <td>
-            ${request.id}
-          </td>
-
-          <td>
-            ${request.student_user_id}
-          </td>
-
-          <td title="${request.wallet_address}">
-            ${shortenValue(request.wallet_address)}
-          </td>
-
-          <td>
-            ${request.request_note || "-"}
-          </td>
-
-          <td>
-            <span class="badge badge-warning">
-              ${request.request_status}
-            </span>
-          </td>
-
-          <td>
-            <button
-              type="button"
-              class="btn btn-primary"
-              onclick="approveAndMintToken(${request.id})"
-            >
-              Approve & Mint
-            </button>
-          </td>
-
-        </tr>
-      `).join("");
-
-  } catch (error) {
-    console.error("Token request loading error:", error);
-
-    tokenRequestsTableBody.innerHTML = `
+    tokenRequestsTableBody.innerHTML = requests.map((request) => `
       <tr>
-        <td colspan="6">
-          ${error.message || "Failed to load token requests."}
+        <td>${window.PeraSoulUtils.escapeHtml(request.id)}</td>
+        <td>${window.PeraSoulUtils.escapeHtml(request.student_user_id)}</td>
+        <td title="${window.PeraSoulUtils.escapeHtml(request.wallet_address)}">
+          ${window.PeraSoulUtils.escapeHtml(
+            window.PeraSoulUtils.shortenValue(request.wallet_address)
+          )}
+        </td>
+        <td>${window.PeraSoulUtils.escapeHtml(request.request_note || "-")}</td>
+        <td><span class="badge badge-warning">${
+          window.PeraSoulUtils.escapeHtml(
+            window.PeraSoulUtils.formatStatus(request.request_status)
+          )
+        }</span></td>
+        <td>
+          <button type="button" class="btn btn-primary"
+            data-approve-request="${Number(request.id)}">
+            Approve & Mint
+          </button>
         </td>
       </tr>
-    `;
+    `).join("");
 
-    showRequestsMessage(
-      error.message || "Failed to load token requests.",
-      "error"
-    );
-  }
-}
+    tokenRequestsTableBody
+      .querySelectorAll("[data-approve-request]")
+      .forEach((button) => {
+        button.addEventListener("click", () => {
+          approveAndMintToken(Number(button.dataset.approveRequest));
+        });
+      });
 
-
-async function approveAndMintToken(requestId) {
-  const confirmed = window.confirm(
-    `Approve token request ${requestId} and mint the Soulbound Token?`
-  );
-
-  if (!confirmed) {
-    return;
-  }
-
-  showRequestsMessage(
-    `Submitting blockchain mint transaction for request ${requestId}...`
-  );
-
-  try {
-    const response = await fetch(
-      `${API_BASE_URL}/admin/approve-request/${requestId}`,
-      {
-        method: "POST",
-        headers: getAuthorizationHeaders()
-      }
-    );
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(
-        data.detail || "Token minting failed."
-      );
-    }
-
-    showRequestsMessage(
-      `Token minted successfully. Transaction hash: ${data.tx_hash}`,
+    showMessage(
+      `${requests.length} pending token request(s) loaded.`,
       "success"
     );
-
-    await loadTokenRequests();
-
   } catch (error) {
-    console.error("Token minting error:", error);
+    tokenRequestsTableBody.innerHTML =
+      `<tr><td colspan="6">${window.PeraSoulUtils.escapeHtml(error.message)}</td></tr>`;
+    showMessage(error.message, "error");
+  }
+}
 
-    showRequestsMessage(
-      error.message || "Unable to mint the token.",
-      "error"
+async function approveAndMintToken(requestId) {
+  if (!window.confirm(
+    `Approve request ${requestId} and submit the token mint transaction?`
+  )) return;
+
+  try {
+    showMessage(
+      `Submitting blockchain mint transaction for request ${requestId}...`
     );
+
+    const response = await fetch(
+      `${API_BASE_URL}/admin/approve-request/${requestId}`,
+      {method: "POST", headers: headers()}
+    );
+    const data = await window.PeraSoulUtils.jsonResponse(response);
+
+    showMessage(
+      `Token minted successfully. Transaction: ${data.tx_hash}`,
+      "success"
+    );
+    await loadTokenRequests();
+  } catch (error) {
+    showMessage(error.message || "Token minting failed.", "error");
   }
 }
 
+document.getElementById("topLogoutButton")
+  ?.addEventListener("click", logoutAdmin);
+document.getElementById("sidebarLogoutButton")
+  ?.addEventListener("click", logoutAdmin);
+document.getElementById("refreshTokenRequestsButton")
+  ?.addEventListener("click", loadTokenRequests);
 
-async function initializeRequestsPage() {
-  showRequestsMessage(
-    "Verifying administrator session..."
-  );
-
-  const validSession =
-    await verifyAdminSession();
-
-  if (!validSession) {
-    return;
-  }
-
+(async () => {
+  showMessage("Verifying administrator session...");
+  if (!(await verifyAdminSession())) return;
   await loadTokenRequests();
-
-  showRequestsMessage(
-    "Token requests loaded successfully.",
-    "success"
-  );
-}
-
-
-document
-  .getElementById("topLogoutButton")
-  .addEventListener("click", logoutAdmin);
-
-document
-  .getElementById("sidebarLogoutButton")
-  .addEventListener("click", logoutAdmin);
-
-document
-  .getElementById("refreshTokenRequestsButton")
-  .addEventListener("click", loadTokenRequests);
-
-
-initializeRequestsPage();
+})();

@@ -11,14 +11,15 @@
   <title>Student Token Details | PeraSoul</title>
 
   <link rel="stylesheet" href="../css/styles.css">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 </head>
 
-<body>
+<body class="page-student-token">
 
 <div class="topbar">
   <div class="topbar-inner">
-    <span>University Digital Identity System</span>
-    <span>Faculty of Engineering | Blockchain Prototype</span>
+    <span>PeraSoul Digital Student Identity System</span>
+    <span>University of Peradeniya | Ethereum Sepolia</span>
   </div>
 </div>
 
@@ -50,7 +51,7 @@
 </header>
 
 <section class="page-hero">
-  <div class="page-hero-inner">
+  <div class="page-hero-inner"><span class="section-label">PERASOUL / DIGITAL STUDENT IDENTITY</span>
 
     <h1>Student Token Details</h1>
 
@@ -65,42 +66,14 @@
 <main class="dashboard-wrap">
 
   <aside class="sidebar">
-
-    <div class="sidebar-title">
-      Student Panel
-    </div>
-
-    <a href="student-dashboard.html">
-      👤 Profile Overview
-    </a>
-
-    <a
-      class="active"
-      href="student-token.html"
-    >
-      🪪 Token Details
-    </a>
-
-    <a href="student-qr.html">
-      📱 QR Verification
-    </a>
-
-    <a href="student-wallet-change.html">
-      🔁 Wallet Change
-    </a>
-
-    <a href="student-complaint.html">
-      💬 Complaint
-    </a>
-
-    <button
-      type="button"
-      id="sidebarStudentLogoutButton"
-      class="sidebar-logout"
-    >
-      🚪 Logout
-    </button>
-
+    <div class="sidebar-title">Student Panel</div>
+    <a href="student-dashboard.html">👤 Profile Overview</a>
+    <a href="student-token.html">🪪 Token Details</a>
+    <a href="student-dashboard.html#digital-id-section">🎓 Digital Student ID</a>
+    <a href="student-qr.html">📱 QR Verification</a>
+    <a href="student-wallet-change.html">🔁 Wallet Replacement</a>
+    <a href="../verify.html" target="_blank" rel="noopener noreferrer">✅ Public Verification</a>
+    <button type="button" id="sidebarStudentLogoutButton" class="sidebar-logout">🚪 Logout</button>
   </aside>
 
   <section class="dashboard-main">
@@ -324,5 +297,6 @@
 <script src="../js/main.js"></script>
 <script src="../js/student-token.js"></script>
 
+<script src="../js/visuals.js" defer></script>
 </body>
 </html>

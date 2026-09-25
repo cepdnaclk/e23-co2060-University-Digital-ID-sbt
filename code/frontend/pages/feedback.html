@@ -1,95 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Feedback</title>
-<link rel="stylesheet" href="../css/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Project Feedback | PeraSoul</title>
+  <link rel="stylesheet" href="../css/styles.css">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
 </head>
-<body>
-
-<div class="topbar">
-  <div class="topbar-inner">
-    <span>University Digital Identity Prototype</span>
-    <span>Faculty of Engineering | Blockchain MVP</span>
-  </div>
-</div>
-<header class="site-header">
-  <nav class="navbar">
-    <a class="brand" href="../index.html">
-      <div class="brand-mark">PS</div>
-      <div class="brand-text">
-        <strong>PeraSoul</strong>
-        <span>Digital Student Identity</span>
-      </div>
-    </a>
-    <div class="nav-links">
-      <a href="../pages/about.html">University</a>
-      <a href="../pages/contact.html">Contact</a>
-      <a href="../pages/feedback.html">Feedback</a>
-      <a href="../pages/student-register.html">Register</a>
-      <a href="../pages/student-login.html">Student Login</a>
-      <a class="btn btn-primary" href="../pages/admin-login.html">Admin Login</a>
+<body class="page-feedback">
+<div class="topbar"><div class="topbar-inner"><span>PeraSoul Digital Student Identity System</span><span>Project Evaluation</span></div></div>
+<header class="site-header"><nav class="navbar">
+  <a class="brand" href="../index.html"><div class="brand-mark">PS</div><div class="brand-text"><strong>PeraSoul</strong><span>Digital Student Identity</span></div></a>
+  <div class="nav-links">
+      <a href="about.html">About PeraSoul</a>
+      <a href="../verify.html">Public Verification</a>
+      <a href="contact.html">Contact</a>
+      <a href="student-register.html">Register</a>
+      <a href="student-login.html">Student Login</a>
+      <a class="btn btn-primary" href="admin-login.html">Admin Login</a>
     </div>
-  </nav>
-</header>
-
-
-<section class="page-hero">
-  <div class="page-hero-inner">
-    <h1>Feedback</h1>
-    <p>Share feedback about the PeraSoul digital identity MVP.</p>
-  </div>
-</section>
-
-<main class="container">
-  <div class="form-shell">
-    <aside class="info-panel">
-      <h2>Improve the system</h2>
-      <p>Feedback helps improve the user experience, security flow, and administrative workflow of the platform.</p>
-      <div class="info-list">
-        <div class="info-item">Student experience feedback</div>
-        <div class="info-item">Admin workflow feedback</div>
-        <div class="info-item">Technical improvement suggestions</div>
-      </div>
-    </aside>
-
-    <div class="form-card">
-      <div class="form-group"><label>Your Role</label><select><option>Student</option><option>Administrator</option><option>Lecturer</option><option>Visitor</option></select></div>
-      <div class="form-group"><label>Feedback Category</label><select><option>Interface</option><option>Security</option><option>Features</option><option>Other</option></select></div>
-      <div class="form-group"><label>Feedback</label><textarea placeholder="Write your feedback"></textarea></div>
-      <button class="btn btn-primary" onclick="demoAction('feedbackStatus','Feedback')">Submit Feedback</button>
-      <div id="feedbackStatus" class="status">Feedback status appears here.</div>
-    </div>
+</nav></header>
+<section class="page-hero"><div class="page-hero-inner"><span class="section-label">PERASOUL / DIGITAL STUDENT IDENTITY</span><h1>Project Feedback</h1><p>This page is retained for evaluation purposes and is not part of the identity transaction workflow.</p></div></section>
+<main class="container"><div class="institution-banner"><img src="../assets/university.svg" alt="Conceptual university architecture"><div><span class="section-label">UNIVERSITY OF PERADENIYA</span><h2>Identity with<br>institutional roots.</h2><p>PeraSoul / Digital Student Identity</p></div></div>
+  <div class="card">
+    <h2>Evaluation Feedback</h2>
+    <p>Feedback can be collected during demonstrations, usability testing and stakeholder review. The production identity workflow does not store feedback together with identity or blockchain records.</p>
+    <div class="notice"><strong>Privacy:</strong> Do not include wallet private keys, seed phrases, passwords or other secrets in feedback.</div>
+    <p style="margin-top:18px;"><a class="btn btn-outline" href="contact.html">Open Support Information</a></p>
   </div>
 </main>
-
-
 <footer class="footer">
   <div class="footer-inner">
     <div>
       <h3>PeraSoul Digital ID</h3>
-      <p>A university digital identity MVP using wallet-based authentication and Soulbound Token concepts.</p>
+      <p>A blockchain-based university digital student identity system using MetaMask authentication and non-transferable Soulbound Tokens.</p>
     </div>
     <div>
-      <h3>Quick Links</h3>
+      <h3>Core Services</h3>
       <p><a href="student-register.html">Student Registration</a></p>
-      <p><a href="student-login.html">Student Login</a></p>
-      <p><a href="admin-login.html">Administrator Login</a></p>
+      <p><a href="student-login.html">Student Wallet Login</a></p>
+      <p><a href="../verify.html">Public Verification</a></p>
     </div>
     <div>
-      <h3>Project Status</h3>
-      <p>MVP prototype interface</p>
-      <p>Smart contract integration planned</p>
+      <h3>System</h3>
+      <p>FastAPI + SQLite application layer</p>
+      <p>Ethereum Sepolia blockchain integration</p>
+      <p>MetaMask wallet authentication</p>
     </div>
   </div>
-  <div class="footer-bottom">PeraSoul Digital Identity System - MVP Prototype</div>
+  <div class="footer-bottom">PeraSoul Digital Student Identity System | University of Peradeniya</div>
 </footer>
-
 <script src="../js/main.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/ethers@6.13.4/dist/ethers.umd.min.js"></script>
-<script src="../js/blockchain.js"></script>
-
+<script src="../js/visuals.js" defer></script>
 </body>
 </html>
