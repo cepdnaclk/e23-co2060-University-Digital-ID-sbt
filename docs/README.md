@@ -2,246 +2,302 @@
 layout: home
 permalink: index.html
 
-# Please update this with your repository name and project title
 repository-name: e23-co2060-University-Digital-ID-sbt
-title: Blockchain-Based Digital Identity System Using Soulbound Tokens
+title: Blockchain-Based Digital University Student ID System Using Soulbound Tokens
 ---
 
-[comment]: # "This is the standard layout for the project, but you can clean this and use your own template, and add more information required for your own project"
+# PeraSoul
+## Blockchain-Based Digital University Student ID System Using Soulbound Tokens
 
-<!-- Once you fill the index.json file inside /docs/data, please make sure the syntax is correct. (You can use this tool to identify syntax errors)
+**CO2060 - Software Systems Design Project**
 
-Please include the "correct" email address of your supervisors. (You can find them from https://people.ce.pdn.ac.lk/ )
+Department of Computer Engineering  
+Faculty of Engineering  
+University of Peradeniya  
 
-Please include an appropriate cover page image ( cover_page.jpg ) and a thumbnail image ( thumbnail.jpg ) in the same folder as the index.json (i.e., /docs/data ). The cover page image must be cropped to 940×352 and the thumbnail image must be cropped to 640×360 . Use https://croppola.com/ for cropping and https://squoosh.app/ to reduce the file size.
-
-If your followed all the given instructions correctly, your repository will be automatically added to the department's project web site (Update daily)
-
-A HTML template integrated with the given GitHub repository templates, based on github.com/cepdnaclk/eYY-project-theme . If you like to remove this default theme and make your own web page, you can remove the file, docs/_config.yml and create the site using HTML. -->
-
-# Project Title
-Digital Student ID Using Soulbound Tokens
 ---
 
 ## Team
--  E/23/054, M.V.R. Dayananda, [email](e23054@eng.pdn.ac.lk)
 
-<!-- Image (photo/drawing of the final hardware) should be here -->
+- **E/23/054 - M.V.R. Dayananda**  
+  [e23054@eng.pdn.ac.lk](mailto:e23054@eng.pdn.ac.lk)
 
-<!-- This is a sample image, to show how to add images to your page. To learn more options, please refer [this](https://projects.ce.pdn.ac.lk/docs/faq/how-to-add-an-image/) -->
+### Supervisor
 
-<!-- ![Sample Image](./images/sample.png) -->
-
-#### Table of Contents
-1. [Introduction](#introduction)
-2. [Solution Architecture](#solution-architecture )
-3. [Software Designs](#hardware-and-software-designs)
-4. [Testing](#testing)
-5. [Conclusion](#conclusion)
-6. [Links](#links)
-
-## Introduction
-
-### Background
-In modern universities, student identity management is handled using centralized systems such as ID cards and databases. These systems are vulnerable to identity forgery, data breaches, lack of interoperability, and difficulty in verification across institutions.
-
-### Problem Statement
-Traditional identity systems:
-- Can be duplicated or forged  
-- Require manual verification  
-- Are controlled by a single authority (centralized risk)  
-- Do not provide ownership of identity to students  
-
-### Proposed Solution
-This project proposes a blockchain-based digital identity system using Soulbound Tokens (SBTs):
-- Each student is assigned a non-transferable token (NFT)  
-- Token contains verified academic identity data  
-- Stored securely on blockchain  
-- Cannot be sold or transferred  
-
-### Impact
-- Improved security and trust  
-- Instant identity verification  
-- Useful for academic and professional use  
-- Scalable beyond universities (jobs, certifications) 
-
-
-## Solution Architecture
-
-### 2.1 High-Level Overview
-The system consists of three main layers:
-
-1. **Frontend Layer**
-   - User interface for students and admins  
-   - Handles registration and identity viewing  
-
-2. **Backend Layer**
-   - Handles APIs and business logic  
-   - Connects frontend with blockchain  
-
-3. **Blockchain Layer**
-   - Stores Soulbound Tokens  
-   - Executes smart contracts  
+- **Dr. Chathura Vithanage**  
+  Department of Manufacturing and Industrial Engineering, University of Peradeniya  
+  [chathuraw@eng.pdn.ac.lk](mailto:chathuraw@eng.pdn.ac.lk)
 
 ---
 
-### 2.2 Core Components
-
-#### Frontend
-- Student Dashboard  
-- Admin Panel  
-- Wallet Integration (e.g., MetaMask)  
-
-#### Backend APIs
-- Token Issuance API  
-- Token Revocation API  
-- Token Verification API  
-- Token Information API  
-
-#### Blockchain Module
-- Mint Token Function  
-- Revoke Token Function  
-- Verify Token Function  
-- Ownership Check  
-- Transfer Restriction (SBT property)  
+![PeraSoul Project Cover](./data/cover_page.jpg)
 
 ---
 
-### 2.3 Data Flow
-1. Student registers in the system  
-2. Admin verifies student details  
-3. Token is minted for the student  
-4. Token is stored on blockchain  
-5. Identity can be verified using the token  
+## Table of Contents
+
+1. [Introduction](#1-introduction)
+2. [Problem Statement](#2-problem-statement)
+3. [Proposed Solution](#3-proposed-solution)
+4. [System Users](#4-system-users)
+5. [Solution Architecture](#5-solution-architecture)
+6. [System Design](#6-system-design)
+7. [Core Workflows](#7-core-workflows)
+8. [Smart Contract Design](#8-smart-contract-design)
+9. [Backend and API Design](#9-backend-and-api-design)
+10. [Database Design](#10-database-design)
+11. [Authentication and Security](#11-authentication-and-security)
+12. [QR-Based Public Verification](#12-qr-based-public-verification)
+13. [Testing and Validation](#13-testing-and-validation)
+14. [Final System Features](#14-final-system-features)
+15. [Limitations](#15-limitations)
+16. [Future Development](#16-future-development)
+17. [Conclusion](#17-conclusion)
+18. [Links](#18-links)
 
 ---
 
-## Software Designs
+# 1. Introduction
 
+## 1.1 Background
 
-### 3.1 System Design
-The system follows a layered architecture:
-- Presentation Layer (Frontend)  
-- Application Layer (Backend)  
-- Data Layer (Blockchain)  
+Universities traditionally use physical student identity cards together with centralized databases to identify students and provide access to university services.
 
----
+Physical student identity cards are simple to use, but they have several limitations. They can be lost, damaged, copied, altered, shared with another person, or remain visually valid even after the student's actual status changes.
 
-### 3.2 Data Structure Design
-Each Soulbound Token includes:
-- Name  
-- Registration Number  
-- Faculty  
-- Department  
-- Batch  
-- Email  
-- Mobile Number  
+Centralized digital identity systems improve accessibility but still depend completely on a central database and authentication infrastructure.
+
+PeraSoul investigates how blockchain technology and **Soulbound Tokens (SBTs)** can be used to provide a secure, non-transferable and verifiable Digital Student ID while still keeping personal student information under university control.
 
 ---
 
-### 3.3 Smart Contract Design
+## 1.2 Project Overview
 
-#### Functions
-- `mintToken(address, studentData)`  
-- `revokeToken(tokenId)`  
-- `verifyToken(tokenId)`  
-- `getTokenInfo(tokenId)`  
+**PeraSoul** is a blockchain-based Digital University Student ID System.
 
-#### Rules
-- One student = One token  
-- Tokens are non-transferable  
+Each approved student can receive a non-transferable ERC-721-based identity token associated with their registered Ethereum wallet.
 
----
+The system combines:
 
-### 3.4 API Design
+- A web-based frontend
+- A FastAPI backend
+- A relational database
+- MetaMask wallet authentication
+- Ethereum smart contracts
+- Ethereum Sepolia test network
+- Soulbound Token-based Digital Student IDs
+- Public identity verification
+- Short-lived secure QR verification
 
-| API Endpoint | Description |
-|-------------|------------|
-| POST /mint  | Issue a new token |
-| POST /revoke | Revoke an existing token |
-| GET /verify | Verify token validity |
-| GET /info | Retrieve token data |
+The blockchain is not used to store all student personal information.
 
----
+Instead, PeraSoul follows a **hybrid architecture**:
 
-### 3.5 UI/UX Design
-- Simple and user-friendly interface  
-- Student dashboard displaying identity  
-- Admin panel for verification  
-- QR-based identity verification system  
+- Student profile and university information remain in the university-controlled database.
+- Blockchain stores token ownership and the identity validity state required for verification.
+
+This prevents unnecessary personal information from being publicly exposed on Ethereum.
 
 ---
 
-### 3.6 Security Design
-- Blockchain ensures immutability  
-- Admin-only access for token issuance  
-- Encryption for sensitive data  
-- Non-transferable token enforcement  
+# 2. Problem Statement
+
+Traditional university identity systems have several limitations.
+
+## Physical Identity Card Problems
+
+- Cards can be lost or damaged.
+- Cards can be copied or altered.
+- Another person may attempt to use a stolen card.
+- Verification often depends only on visual inspection.
+- A physical card may continue to appear valid even when a student has been suspended.
+- Replacement normally requires administrative processing.
+
+## Centralized Digital Identity Problems
+
+- The central database becomes a single point of trust.
+- Unauthorized database modifications may affect identity records.
+- Different university divisions may maintain separate records.
+- External verification normally depends completely on university systems.
+
+## Ordinary NFT Limitation
+
+Traditional ERC-721 NFTs are transferable.
+
+A Digital Student ID must not be transferable because a university identity belongs to a particular student.
+
+## Authentication Problem
+
+Knowing a wallet address is not sufficient to prove ownership because wallet addresses are public information.
+
+The system therefore requires cryptographic proof that the user actually controls the registered wallet.
 
 ---
 
-## Testing
+# 3. Proposed Solution
 
-### 4.1 Testing Types
-- Unit Testing (Smart contracts and APIs)  
-- Integration Testing (Frontend ↔ Backend ↔ Blockchain)  
-- User Acceptance Testing  
+PeraSoul provides a university-controlled Digital Student ID represented using a **Soulbound Token**.
 
----
+The complete workflow is:
 
-### 4.2 Test Cases
+1. A student registers through the web application.
+2. The student connects a MetaMask wallet.
+3. The registration is stored with **Pending** status.
+4. A University Administrator reviews the student registration.
+5. The University Administrator approves the student.
+6. The approved student authenticates using a MetaMask signature.
+7. The student requests a Digital Student ID.
+8. A University Administrator reviews the token request.
+9. The backend submits the token-minting transaction to Ethereum Sepolia.
+10. A non-transferable identity token is issued to the student's wallet.
+11. The student can display their Digital Student ID and live verification QR.
+12. Third parties can verify the current identity status without administrator access.
 
-| Test Case | Expected Result |
-|----------|---------------|
-| Mint token | Token created successfully |
-| Duplicate student | Request rejected |
-| Verify token | Valid identity returned |
-| Revoke token | Token marked invalid |
+The university can also:
 
----
-
-### 4.3 Results Summary
-- Token issuance successful  
-- Verification accurate and fast  
-- Non-transferability enforced  
-- Minor UI improvements identified  
-
----
-
-## Conclusion
-
-### 5.1 Achievements
-- Developed a decentralized identity system  
-- Implemented Soulbound Token concept successfully  
-- Enabled secure and efficient identity verification  
+- Temporarily revoke an identity
+- Automatically restore validity after temporary revocation expires
+- Permanently revoke an identity
+- Replace a lost or compromised student wallet
+- Manage multiple University Administrator accounts
+- Maintain audit and transaction records
 
 ---
 
-### 5.2 Future Developments
-- Multi-university integration  
-- Mobile application support  
-- Biometric authentication  
-- Cross-platform verification systems  
+# 4. System Users
+
+PeraSoul contains four main user roles.
+
+## 4.1 Student
+
+A student can:
+
+- Register an account
+- Connect a MetaMask wallet
+- Authenticate using a wallet signature
+- View account status
+- View student profile
+- Request a Digital Student ID
+- View token status
+- View blockchain validity
+- Display a Digital Student ID
+- Generate live QR verification codes
+- Access wallet replacement information
+- Use public identity verification
+
+A student cannot mint or revoke their own identity.
 
 ---
 
-### 5.3 Commercialization Plans
-- Applicable in:
-  - Universities  
-  - Government ID systems  
-  - Recruitment platforms  
+## 4.2 University Administrator
 
-- Potential SaaS model:
-  - Identity-as-a-Service (IDaaS)  
+A University Administrator manages student identity operations.
+
+The role can:
+
+- Authenticate using an authorized MetaMask wallet
+- Review pending student registrations
+- Approve students
+- Review token requests
+- Mint Digital Student IDs
+- Monitor issued identities
+- Temporarily revoke identities
+- Permanently revoke identities
+- Replace student wallets
+- View system statistics
+- Monitor blockchain transaction information
 
 ---
 
-## Links
+## 4.3 Technical Administrator
 
-- [Project Repository](https://github.com/cepdnaclk/e23-co2060-University-Digital-ID-sbt/)
-- [Project Page](https://cepdnaclk.github.io/)
-- [Department of Computer Engineering](http://www.ce.pdn.ac.lk/)
-- [University of Peradeniya](https://eng.pdn.ac.lk/)
+The Technical Administrator manages administrator access rather than normal student identity operations.
 
-[//]: # (Please refer this to learn more about Markdown syntax)
-[//]: # (https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet)
+The role can:
+
+- Authenticate using MetaMask
+- Create University Administrator accounts
+- Register authorized administrator wallets
+- Activate University Administrators
+- Disable University Administrators
+- Change administrator wallet addresses
+- Monitor administrator access configuration
+
+The Technical Administrator does not normally approve students or mint student identity tokens.
+
+This creates separation between:
+
+**Technical access management**
+
+and
+
+**University identity operations**
+
+---
+
+## 4.4 Public Verifier
+
+A Public Verifier does not need to log in.
+
+Examples include:
+
+- University security officers
+- Lecturers
+- Examination supervisors
+- Library staff
+- Event organizers
+- Employers
+
+A verifier can check whether a student's Digital Student ID is currently valid using:
+
+- Token ID verification
+- Live QR verification
+
+Only the minimum information required for verification is displayed.
+
+---
+
+# 5. Solution Architecture
+
+PeraSoul uses a **four-layer architecture**.
+
+```text
++--------------------------------------------------+
+|               PRESENTATION LAYER                 |
+|                                                  |
+| Student Portal                                   |
+| Technical Administrator Portal                   |
+| University Administrator Portal                  |
+| Public Verification Interface                    |
+| MetaMask                                         |
++-------------------------+------------------------+
+                          |
+                          | HTTPS / REST
+                          v
++--------------------------------------------------+
+|                APPLICATION LAYER                 |
+|                                                  |
+| Python                                           |
+| FastAPI                                          |
+| Pydantic Validation                              |
+| Authentication / Authorization                   |
+| Business Logic                                   |
+| Web3.py Blockchain Service                       |
++-------------------+------------------------------+
+                    |
+          +---------+---------+
+          |                   |
+          v                   v
++------------------+   +----------------------------+
+|    DATA LAYER    |   |      BLOCKCHAIN LAYER      |
+|                  |   |                            |
+| SQLAlchemy       |   | PeraSoulManager            |
+| SQLite           |   | PeraSoul                   |
+| Users            |   | Soulbound Token            |
+| Profiles         |   |                            |
+| Token Requests   |   | Ethereum Sepolia           |
+| Token Records    |   |                            |
+| Revocation Logs  |   | Token Ownership            |
+| Transaction Logs |   | Validity / Revocation      |
+| Audit Logs       |   | Non-transferability        |
++------------------+   +----------------------------+
